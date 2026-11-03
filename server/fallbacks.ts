@@ -172,6 +172,47 @@ export function getTutoringFallback(tutorReq: any) {
       tutorMessage = "TCP establishes reliable connection state using the 3-Way Handshake: Client sends SYN -> Server responds with SYN-ACK -> Client confirms with ACK.\n\nService ports identify specific listener daemons: Port 80 for HTTP, 443 for HTTPS, 3306 for MySQL, and 5432 for PostgreSQL.";
       socraticQuestion = "If a client attempts to send database queries directly to HTTP port 80, why does the host daemon reject the connection with 'Connection refused'?";
       effectiveMode = visualizer_mode === 'Text Response' ? 'Text Response' : 'Flowchart';
+    } else if (workflow === 'CAD_LAB_TUTORING' || (workflow && workflow.includes('CAD'))) {
+      if (q.includes('dof') || q.includes('constraint') || q.includes('symmetry') || q.includes('tangent') || (execution_logs && execution_logs.includes('cad_constraint_error'))) {
+        identifiedGap = 'Under-constrained sketch geometry with free Degrees of Freedom (cad_constraint_error)';
+        issueType = 'cad_constraint_error';
+        effectiveMode = 'Diagrams';
+        if (currentTier === 1) {
+          tutorMessage = "Metacognitive Hint: In 2D parametric sketching, look at the color of your sketch entities. Blue entities still have free degrees of freedom and lack full topological constraints.";
+          socraticQuestion = "Which geometric relationships (such as Symmetry across the centerline or Tangency to the hub) are needed to eliminate the remaining free degrees of freedom?";
+        } else if (currentTier === 2) {
+          tutorMessage = "Conceptual Guidance: Every unconstrained point or curve introduces free translational or rotational movement. Extruding blue sketches is a hazardous trap (82% failure rate). A symmetric bracket must be balanced across the mid-plane, and the reinforcing web must maintain G1 slope continuity with the hub cylindrical wall.";
+          socraticQuestion = "How do the Symmetry and Rib Tangency constraints collaborate to reduce the system degrees of freedom to exactly 0?";
+        } else if (currentTier === 3) {
+          tutorMessage = "Socratic Micro-Drill: Your bracket currently exhibits positive degrees of freedom. Review the sketch constraints panel and check whether the symmetry toggle and the tangent transition toggle are active.";
+          socraticQuestion = "Toggle the missing constraints in your feature tree to lock all entity positions before advancing to dimensional validation.";
+        } else {
+          tutorMessage = "Direct Line Guidance: Your sketch is under-constrained because Symmetry and/or Rib Tangency are disabled. Activate both constraints so all sketch entities lock and render in black/emerald with 0 DOF.";
+          socraticQuestion = "Enable the symmetry and tangency constraints to establish 0 DOF.";
+        }
+      } else if (q.includes('tolerance') || q.includes('volume') || q.includes('d1') || q.includes('depth') || (execution_logs && execution_logs.includes('cad_tolerance_mismatch'))) {
+        identifiedGap = 'Base plate extrusion depth out of specification (cad_tolerance_mismatch)';
+        issueType = 'cad_tolerance_mismatch';
+        effectiveMode = 'Charts & Graphs';
+        if (currentTier === 1) {
+          tutorMessage = "Metacognitive Hint: While the sketch geometry is fully constrained, the computed solid volume does not match the engineering specification envelope.";
+          socraticQuestion = "Which driving extrusion parameter in your feature tree directly governs the base plate thickness and component total volume?";
+        } else if (currentTier === 2) {
+          tutorMessage = "Conceptual Guidance: In parametric solid modeling, total volume equals base plate volume minus fastener hole volumes plus hub and rib volumes. Changing the primary base extrusion depth shifts total mass and volume linearly.";
+          socraticQuestion = "Inspect your base extrusion depth parameter d1. How does altering the primary plate thickness adjust overall volumetric displacement toward the engineering specification envelope?";
+        } else if (currentTier === 3) {
+          tutorMessage = "Socratic Micro-Drill: Your current model volume has deviated from specification. Check the base extrusion parameter d1 in your parameter panel.";
+          socraticQuestion = "Adjust the base extrusion depth d1 closer to its nominal design target until the volumetric tolerance requirement is satisfied.";
+        } else {
+          tutorMessage = "Direct Line Guidance: Your base plate extrusion depth d1 is currently offset from nominal. Set base extrusion depth d1 = 12.0 mm to satisfy the tolerance envelope and reach 139.1 cm³.";
+          socraticQuestion = "Set parameter d1 to 12.0 mm and re-validate.";
+        }
+      } else {
+        identifiedGap = 'Parametric CAD Model Validation';
+        issueType = 'cad_constraint_error';
+        tutorMessage = "Let's review the bearing support bracket specification. Ensure all topological geometric constraints are applied first (DOF = 0), followed by accurate dimensional driving parameters.";
+        socraticQuestion = "Which constraint or parameter do you want to inspect first?";
+      }
     } else if (workflow === 'CODE_SANDBOX_TUTORING' && (execution_logs || code_snippet)) {
       if (q.includes('port') || q.includes('pdo') || q.includes('connection refused') || q.includes('2002')) {
         identifiedGap = 'Incorrect database port specified in PDO connection string (using HTTP port 80 instead of MySQL port 3306)';
@@ -230,7 +271,7 @@ export function getTutoringFallback(tutorReq: any) {
     },
     islm_updates: {
       updated_topic_mastery: {
-        [current_topic || 'Core_Concept']: Math.min(1.0, ((islm_profile?.topic_mastery?.[current_topic || ''] || 0.4) + 0.05)),
+        [current_topic || 'Core_Concept']: islm_profile?.topic_mastery?.[current_topic || ''] ?? islm_profile?.overall_mastery ?? 0.5,
       },
       memory_tree_node_status: {
         node_id: (current_topic || 'topic_core').toLowerCase().replace(/[^a-z0-9]/g, '_'),
@@ -291,6 +332,122 @@ export function getVideoFallback(topic?: string, misconception?: string) {
 }
 
 export function getMockTestFallback(track?: string) {
+  const isMech =
+    track === 'Mechanical Engineering (CAD)' ||
+    (track && (track.toLowerCase().includes('mech') || track.toLowerCase().includes('cad')));
+
+  if (isMech) {
+    return {
+      test_id: `MOCK_CAD_${Date.now()}`,
+      title: 'Mechanical Engineering (CAD) Adaptive Assessment',
+      time_limit_mins: 15,
+      total_questions: 5,
+      negative_marking_rate: 0.25,
+      questions: [
+        {
+          id: 'q_cad_1',
+          topic_id: 'cad_dof_2d',
+          topic_name: 'Degrees of Freedom in a 2D Sketch',
+          question: 'In Fusion 360 a sketch line is blue instead of black. What does this signify?',
+          options: [
+            'Under-constrained, still has free degrees of freedom',
+            'The sketch entity is fully constrained and ready for production extrusion',
+            'The entity is a construction reference line that does not define boundaries',
+            'An over-constraint or geometric conflict error has occurred',
+          ],
+          correct_option_index: 0,
+          explanation: 'In Fusion 360 and standard parametric CAD (SolidWorks, Inventor, NX), black curves indicate 0 remaining degrees of freedom (fully constrained). Blue curves signify under-constrained geometry that still has free translational or rotational DOF.',
+          distractor_explanations: [
+            'Correct: Blue lines indicate under-constrained geometry with free DOF.',
+            'Incorrect: Black curves represent fully constrained geometry.',
+            'Incorrect: Construction lines are formatted with dashed line fonts.',
+            'Incorrect: Over-constrained curves are highlighted in red/orange with a solver error.',
+          ],
+        },
+        {
+          id: 'q_cad_2',
+          topic_id: 'cad_geometric_constraints',
+          topic_name: 'Geometric Constraints',
+          question: 'Which geometric constraint must be applied between a linear edge and an arc to ensure smooth G1 slope continuity without forming a sharp cusp?',
+          options: [
+            'Tangent constraint',
+            'Coincident constraint',
+            'Concentric constraint',
+            'Collinear constraint',
+          ],
+          correct_option_index: 0,
+          explanation: 'A Tangent constraint equates the first derivative vectors of both curves at their junction point, providing G1 continuity and eliminating sharp stress risers.',
+          distractor_explanations: [
+            'Correct: Tangent enforces equal slope vectors at the junction.',
+            'Incorrect: Coincident ensures C0 point contact but allows discontinuous sharp corners.',
+            'Incorrect: Concentric aligns arc center points, not boundary curve continuity.',
+            'Incorrect: Collinear applies strictly between straight line segments.',
+          ],
+        },
+        {
+          id: 'q_cad_3',
+          topic_id: 'cad_driving_parameters',
+          topic_name: 'Dimensions and Driving Parameters',
+          question: 'Why is mixing mm and cm units considered a hazardous trap in CAD parametric modeling tables?',
+          options: [
+            'Entering a dimensionless scalar (e.g. 10) in a cm workspace evaluates to 100 mm instead of 10 mm, introducing a 10x scale error',
+            'CAD kernels immediately corrupt the solid database when cm are entered',
+            'CNC milling machines can only parse imperial inches and reject metric numbers',
+            'Parameters with cm units cannot be mirrored across symmetry planes',
+          ],
+          correct_option_index: 0,
+          explanation: 'ISO/ASME mechanical drafting standardizes on millimeters (mm). Entering dimensions without explicit unit tags into a centimeter-configured document inflates physical features by 10x.',
+          distractor_explanations: [
+            'Correct: Unit mismatches cause severe 10x or 1000x volumetric scaling bugs.',
+            'Incorrect: Modern CAD kernels handle units via unit conversion tables without corruption.',
+            'Incorrect: CNC G-code interprets G20 (inch) or G21 (mm) codes directly.',
+            'Incorrect: Symmetry operations are geometric transforms independent of length units.',
+          ],
+        },
+        {
+          id: 'q_cad_4',
+          topic_id: 'cad_material_mass_properties',
+          topic_name: 'Material, Volume and Mass Properties',
+          question: 'An extruded steel bracket has volume = 250,000 mm³. Given mild steel density = 7.85 g/cm³, what is its calculated mass?',
+          options: [
+            '1.96 kg (1,962.5 grams)',
+            '1,962.5 kg',
+            '250 grams',
+            '0.25 kg',
+          ],
+          correct_option_index: 0,
+          explanation: 'Convert mm³ to cm³: 250,000 mm³ / 1,000 = 250 cm³. Mass = 250 cm³ * 7.85 g/cm³ = 1,962.5 g = 1.9625 kg (~1.96 kg). Forgetting the 1,000 conversion factor causes a 1000x mass error.',
+          distractor_explanations: [
+            'Correct: 250 cm³ * 7.85 g/cm³ = 1,962.5 g = 1.96 kg.',
+            'Incorrect: Direct multiplication without mm³ -> cm³ conversion results in 1000x excessive mass.',
+            'Incorrect: 250 g confuses volume magnitude with physical mass.',
+            'Incorrect: Fails to multiply by material density.',
+          ],
+        },
+        {
+          id: 'q_cad_5',
+          topic_id: 'cad_stress_fos',
+          topic_name: 'Static Stress and Factor of Safety (FOS)',
+          question: 'A structural link made of 6061-T6 aluminum (yield strength = 276 MPa) exhibits peak Von Mises stress of 120 MPa in FEA. What is the Factor of Safety (FOS), and does it satisfy standard machinery criteria?',
+          options: [
+            'FOS = 2.30; satisfies criteria (target FOS >= 2.0)',
+            'FOS = 0.43; fails criteria because stress exceeds yield',
+            'FOS = 1.20; acceptable because FOS is greater than 1.0',
+            'FOS = 3.50; over-designed by 500%',
+          ],
+          correct_option_index: 0,
+          explanation: 'FOS = yield_strength / max_stress = 276 MPa / 120 MPa = 2.30. Because FOS >= 2.0, the component satisfies standard ductile static equipment design criteria.',
+          distractor_explanations: [
+            'Correct: FOS = 276 / 120 = 2.30 >= 2.0.',
+            'Incorrect: Inverted calculation (120 / 276 = 0.43).',
+            'Incorrect: FOS of 1.1-1.2 is dangerous for machinery due to lack of dynamic margin.',
+            'Incorrect: Arithmetic calculation error.',
+          ],
+        },
+      ],
+    };
+  }
+
   return {
     test_id: `MOCK_${Date.now()}`,
     title: `${track || 'CSE Core'} Comprehensive Adaptive Assessment`,
@@ -403,6 +560,58 @@ export function getMockTestFallback(track?: string) {
 }
 
 export function getLibraryVaultFallback(title?: string, track?: string) {
+  const isMech =
+    track === 'Mechanical Engineering (CAD)' ||
+    (track && (track.toLowerCase().includes('mech') || track.toLowerCase().includes('cad')));
+
+  if (isMech) {
+    return {
+      summary: `Comprehensive Mechanical Engineering & CAD technical reference covering ${title || 'Parametric Sketching, Geometric Constraints & Machine Design'}, detailing degrees of freedom, GD&T, and FEA factor of safety standards.`,
+      extracted_concepts: [
+        {
+          concept_id: 'cad_dof_2d',
+          name: '2D Sketch Degrees of Freedom & Unconstrained Geometry',
+          difficulty: 'BEGINNER',
+          prerequisites: ['Coordinate Systems', 'Planar Geometry'],
+          frequent_misconception: 'Extruding an under-constrained (blue) sketch assuming it is finished (frequency 82%).',
+        },
+        {
+          concept_id: 'cad_geometric_constraints',
+          name: 'Geometric Relationships & G1 Slope Tangency',
+          difficulty: 'INTERMEDIATE',
+          prerequisites: ['cad_dof_2d'],
+          frequent_misconception: 'Applying redundant dimensional callouts where geometric constraints already lock the sketch geometry.',
+        },
+        {
+          concept_id: 'cad_stress_fos',
+          name: 'Static Stress, Yield Criteria & Factor of Safety (FOS >= 2.0)',
+          difficulty: 'ADVANCED',
+          prerequisites: ['Material Mass Properties', 'Stress Tensors'],
+          frequent_misconception: 'Assuming a low Factor of Safety (e.g. FOS ~ 1.1) is acceptable in static machinery.',
+        },
+      ],
+      recommended_socratic_drills: [
+        {
+          drill_id: 'drill_cad_1',
+          prompt: 'In Fusion 360 a sketch line is blue instead of black. What does this signify regarding its degrees of freedom?',
+          concept_mapped: 'cad_dof_2d',
+          socratic_tier: 1,
+        },
+        {
+          drill_id: 'drill_cad_2',
+          prompt: 'Why must the internal shoulder of a rotating stepped shaft have a fillet radius rather than a sharp 90-degree corner?',
+          concept_mapped: 'cad_stress_fos',
+          socratic_tier: 2,
+        },
+      ],
+      suggested_video_topics: [
+        'Degrees of Freedom: Why Blue Sketches Break CAD Assemblies',
+        'Stress Risers & Fillets: Eliminating Infinite Notch Stress',
+        'Factor of Safety (FOS): Designing for Real-World Fatigue',
+      ],
+    };
+  }
+
   return {
     summary: `Comprehensive CSE reference covering ${title || 'Key Architectural Principles'}, detailing foundational mechanics, protocol specifications, and common failure modes in software engineering.`,
     extracted_concepts: [
@@ -449,3 +658,58 @@ export function getLibraryVaultFallback(title?: string, track?: string) {
     ],
   };
 }
+
+export function getVariantFallback(conceptId?: string, track?: string, language?: string) {
+  const isMech =
+    track === 'Mechanical Engineering (CAD)' ||
+    (conceptId && conceptId.startsWith('cad_'));
+
+  if (isMech) {
+    return {
+      id: `var_cad_${Date.now()}`,
+      conceptId: conceptId || 'cad_driving_parameters',
+      conceptName: 'Parametric Flanged Bearing Mount (Variant)',
+      title: 'Transfer Problem: Flanged Bracket Volumetric Envelope',
+      prompt: 'Construct a flanged bearing bracket variant with a new target envelope: adjust base extrusion depth d1 = 14.0 mm, lock midplane symmetry, and enforce tangent rib continuity to achieve 0 free DOF and exact target volume displacement.',
+      description: 'Independent transfer exercise testing CAD parametric constraint locking and volumetric tolerance adjustment on an alternate component envelope with AI hints locked.',
+      code: `// Independent CAD Transfer Task: Alternate Specification
+const target_d1 = 14.0; // mm
+const target_volume = 152.4; // cm³
+const target_dof = 0;
+`,
+      language: 'javascript' as const,
+      errorLog: 'Variant initial state: Extrusion depth and sketch constraints need independent configuration.',
+      starterCode: 'd1 = 10; symmetry = false; tangent = false;',
+    };
+  }
+
+  return {
+    id: `var_cse_${Date.now()}`,
+    conceptId: conceptId || 'dkm_node_1',
+    conceptName: 'Two-Sum Array Hash Map (Variant)',
+    title: 'Transfer Problem: Customer Order Pair Identifier',
+    prompt: 'Implement `solution(orders, targetReward)`: Given an array of order totals and a target reward sum, return the 0-indexed positions of the two distinct orders that sum up to targetReward in O(n) time and O(n) space.',
+    description: 'Independent transfer problem applying hash map complement lookup to an e-commerce reward matching scenario with different values and edge cases.',
+    code: `function solution(orders, targetReward) {
+  // Transfer Problem: Return indices [i, j] such that orders[i] + orders[j] === targetReward
+  const seen = new Map();
+  for (let i = 0; i < orders.length; i++) {
+    const complement = targetReward - orders[i];
+    if (seen.has(complement)) {
+      return [seen.get(complement), i];
+    }
+    seen.set(orders[i], i);
+  }
+  return [];
+}
+`,
+    language: 'javascript' as const,
+    hiddenTests: [
+      { input: [[15, 25, 40, 60], 65], expected: [1, 2], description: 'Find pair 25 + 40 = 65' },
+      { input: [[100, 200, 50], 150], expected: [0, 2], description: 'Find pair 100 + 50 = 150' },
+      { input: [[5, 5], 10], expected: [0, 1], description: 'Handle duplicate element values' },
+      { input: [[1, 2, 3], 99], expected: [], description: 'Return empty array when no pair sums to target' },
+    ],
+  };
+}
+

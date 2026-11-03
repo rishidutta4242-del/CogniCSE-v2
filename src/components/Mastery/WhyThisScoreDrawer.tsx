@@ -32,6 +32,9 @@ export const WhyThisScoreDrawer: React.FC<WhyThisScoreDrawerProps> = ({
       case 'Near Mastery':
       case 'Improving':
         return 'text-amber-400 bg-amber-950/60 border-amber-800';
+      case 'NOT_ASSESSED':
+      case 'Not Assessed':
+        return 'text-slate-400 bg-slate-900 border-slate-700';
       case 'Developing':
       case 'Needs Attention':
       case 'RED':
@@ -95,9 +98,11 @@ export const WhyThisScoreDrawer: React.FC<WhyThisScoreDrawerProps> = ({
             <div className="p-4 bg-slate-950 border border-slate-800 rounded-xl">
               <div className="text-[11px] font-medium text-slate-400">Current p(L) Probability</div>
               <div className="text-2xl font-mono font-bold text-slate-100 mt-1">
-                {(node.mastery * 100).toFixed(1)}%
+                {node.status === 'NOT_ASSESSED' || node.mastery === 0 ? 'Not Assessed' : `${(node.mastery * 100).toFixed(1)}%`}
               </div>
-              <div className="text-[10px] font-mono text-slate-400 mt-0.5">pL = {node.mastery.toFixed(4)}</div>
+              <div className="text-[10px] font-mono text-slate-400 mt-0.5">
+                {node.status === 'NOT_ASSESSED' ? 'Status: Unassessed' : `pL = ${node.mastery.toFixed(4)}`}
+              </div>
             </div>
 
             <div className="p-4 bg-slate-950 border border-slate-800 rounded-xl">

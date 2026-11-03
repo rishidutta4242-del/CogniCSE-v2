@@ -12,6 +12,10 @@ import {
   MockTestQuestion,
   ObservationInput,
   BKTTrace,
+  AttemptRecord,
+  AttemptKind,
+  VariantTask,
+  EvaluationOutcome,
 } from '../types';
 import { INITIAL_DKM_NODES, INITIAL_ISLM_PROFILE } from '../data/dkm';
 import {
@@ -32,6 +36,11 @@ import {
   applyObservationToNode,
   deriveNodeComposite,
 } from '../services/mastery';
+import {
+  calculateScaffoldingFadingIndex,
+  isTransferTaskUnlocked,
+  isRepeatedError,
+} from '../services/attempts';
 
 import { TutorContextType, AppWorkflow } from './tutorTypes';
 export type { TutorContextType, AppWorkflow };
@@ -54,6 +63,7 @@ export const TutorProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [chatSessions, setChatSessions] = useState<ChatSession[]>([DEFAULT_CHAT_SESSION]);
   const [currentChatSession, setCurrentChatSession] = useState<ChatSession>(DEFAULT_CHAT_SESSION);
   const [activeReviewQuestions, setActiveReviewQuestions] = useState<MockTestQuestion[] | null>(null);
+  const [attempts, setAttempts] = useState<AttemptRecord[]>([]);
 
   const [selectedNode, setSelectedNode] = useState<DKMNode>(INITIAL_DKM_NODES[0]);
   const [activeTrack, setActiveTrack] = useState<string>('All Tracks');
@@ -313,7 +323,7 @@ export const TutorProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     studentInput: string,
     codeSnippet?: string,
     executionLogs?: string,
-    workflow: 'CODE_SANDBOX_TUTORING' | 'CHATS' = 'CODE_SANDBOX_TUTORING'
+    workflow: 'CODE_SANDBOX_TUTORING' | 'CHATS' | 'CAD_LAB_TUTORING' = 'CODE_SANDBOX_TUTORING'
   ): Promise<TutoringResponse | null> => {
     setIsLoading(true);
     try {

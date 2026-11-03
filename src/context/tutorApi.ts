@@ -8,7 +8,7 @@ export interface TutoringParams {
   islm: ISLMProfile;
   codeSnippet?: string;
   executionLogs?: string;
-  workflow?: 'CODE_SANDBOX_TUTORING' | 'CHATS';
+  workflow?: 'CODE_SANDBOX_TUTORING' | 'CHATS' | 'CAD_LAB_TUTORING';
 }
 
 export async function requestTutoringApi(params: TutoringParams): Promise<TutoringResponse> {

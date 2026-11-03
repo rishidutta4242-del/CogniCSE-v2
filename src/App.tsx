@@ -15,6 +15,7 @@ import { TeacherDashboard } from './components/Dashboards/TeacherDashboard';
 import { DiagnosticPretestModal } from './components/Pretest/DiagnosticPretestModal';
 import { SecurityAuditModal } from './components/SecurityAudit/SecurityAuditModal';
 import { WhyThisScoreDrawer } from './components/Mastery/WhyThisScoreDrawer';
+import { CADLab } from './components/CADLab/CADLab';
 
 const MainApplication: React.FC = () => {
   const {
@@ -25,6 +26,7 @@ const MainApplication: React.FC = () => {
     activeDrawerNode,
     isWhyDrawerOpen,
     closeWhyScoreDrawer,
+    activeTrack,
   } = useTutor();
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isSecurityAuditOpen, setIsSecurityAuditOpen] = useState(false);
@@ -65,7 +67,7 @@ const MainApplication: React.FC = () => {
             </span>
             <span className="text-slate-500 hidden sm:inline">•</span>
             <span className="text-slate-400 font-mono text-[11px] hidden sm:inline">
-              Track: <strong className="text-blue-300">Systems & AI</strong>
+              Track: <strong className="text-blue-300">{activeTrack === 'All Tracks' ? 'All Engineering Tracks' : activeTrack}</strong>
             </span>
             <span className="text-slate-500 hidden md:inline">•</span>
             <span className="text-slate-400 font-mono text-[11px] hidden md:inline">
@@ -97,6 +99,11 @@ const MainApplication: React.FC = () => {
         {currentWorkflow === 'CODE_SANDBOX' && (
           <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full">
             <CodeSandbox />
+          </div>
+        )}
+        {currentWorkflow === 'CAD_LAB' && (
+          <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full">
+            <CADLab />
           </div>
         )}
         {currentWorkflow === 'MEMORY_TREE' && (

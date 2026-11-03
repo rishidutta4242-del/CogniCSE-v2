@@ -60,6 +60,34 @@ TCP offers reliable connection-oriented streams using 3-way handshakes (SYN, SYN
 UDP offers low-latency connectionless datagram delivery without acknowledgments.
 Port numbers serve as 16-bit address offsets, allowing thousands of distinct network sockets to coexist on a single IP address.`,
   },
+  {
+    id: 'doc_5',
+    title: 'Parametric CAD: 2D Sketch Degrees of Freedom, Geometric Constraints & Solid Extrusions',
+    category: 'Mechanical Engineering (CAD)',
+    uploadedBy: 'Prof. Marcus Vance',
+    pages: 42,
+    dateAdded: '2026-11-01',
+    tags: ['Mechanical Engineering (CAD)', 'Fusion 360', 'Degrees of Freedom', 'Geometric Constraints', 'Extrude'],
+    content: `Module 1: Parametric 2D Planar Constraints.
+In planar sketching, points have 2 translational DOF (X, Y). Lines have 4 DOF. Fully constrained sketches exhibit 0 DOF and turn black.
+Extruding blue under-constrained sketches is a known engineering trap (frequency 82%) that results in floating geometry during parametric rebuilds.
+Geometric constraints: Coincident locks points, Tangent locks G1 slope continuity, Concentric locks coaxial alignment, Symmetric mirrors features.
+Extrude operations sweep closed 2D profiles into manifold 3D solids. Profile micro-gaps prevent watertight boundary evaluation.`,
+  },
+  {
+    id: 'doc_6',
+    title: 'Machine Design & FEA: Coaxial Concentricity, Stress Concentrations & Factor of Safety',
+    category: 'Mechanical Engineering (CAD)',
+    uploadedBy: 'Dr. Clara Lindqvist',
+    pages: 36,
+    dateAdded: '2026-10-30',
+    tags: ['Mechanical Engineering (CAD)', 'Factor of Safety', 'FEA', 'GD&T', 'Concentricity', 'Fillets'],
+    content: `Module 5: Machine Reliability and GD&T Tolerances.
+Hub/Bore Concentricity: Coaxial mating locks rotational axes to prevent centrifugal unbalance forces (F = m * e * omega^2).
+Fillets & Chamfers: Sharp 90-degree internal corners produce theoretical infinite stress concentrations (Kt -> inf). Applying internal fillets (R >= 2.5mm) relieves peak Von Mises stresses.
+Factor of Safety: FOS = yield_strength / max_stress. Standard ductile machinery mandates target FOS >= 2.0. Assuming FOS ~ 1.1 is acceptable is a severe misconception.
+Mass Evaluation: Mass = density * volume. 1 cm³ = 1000 mm³. 1018 Steel ~ 7.85 g/cm³, 6061 Aluminum ~ 2.70 g/cm³.`,
+  },
 ];
 
 export const LibraryVault: React.FC = () => {

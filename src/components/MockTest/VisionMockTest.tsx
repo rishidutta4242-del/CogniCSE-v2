@@ -23,6 +23,8 @@ import {
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
+import { MECH_DIAGNOSTIC_QUESTIONS } from '../../data/dkmMechQuestions';
+
 export const VisionMockTest: React.FC = () => {
   const {
     userProfile,
@@ -31,16 +33,31 @@ export const VisionMockTest: React.FC = () => {
     dkmNodes,
     updateNodeStatus,
     recordObservation,
+    activeTrack,
   } = useTutor();
 
   // Wizard state: 'wizard_step1' | 'wizard_step2' | 'loading' | 'exam' | 'results'
   const [stage, setStage] = useState<'wizard_step1' | 'wizard_step2' | 'loading' | 'exam' | 'results'>('wizard_step1');
 
   // Step 1 Options
+  const isInitiallyMech =
+    activeTrack === 'Mechanical Engineering (CAD)' ||
+    activeTrack.toLowerCase().includes('mech') ||
+    activeTrack.toLowerCase().includes('cad');
+
   const [subjectSource, setSubjectSource] = useState<'dropdown' | 'file' | 'custom'>('dropdown');
-  const [selectedSubject, setSelectedSubject] = useState('Computer Science');
+  const [selectedSubject, setSelectedSubject] = useState(
+    isInitiallyMech ? 'Mechanical Engineering (CAD)' : 'Computer Science'
+  );
   const [customSubjectText, setCustomSubjectText] = useState('discrete mathematics');
   const [uploadedFileName, setUploadedFileName] = useState<string | null>(null);
+
+  // Sync when activeTrack changes
+  useEffect(() => {
+    if (activeTrack === 'Mechanical Engineering (CAD)') {
+      setSelectedSubject('Mechanical Engineering (CAD)');
+    }
+  }, [activeTrack]);
 
   // Loading animation items
   const [loadingStepIndex, setLoadingStepIndex] = useState(0);
@@ -193,6 +210,27 @@ export const VisionMockTest: React.FC = () => {
   const handleStartLoading = () => {
     setStage('loading');
     setLoadingStepIndex(0);
+
+    const isMech =
+      selectedSubject === 'Mechanical Engineering (CAD)' ||
+      activeTrack === 'Mechanical Engineering (CAD)' ||
+      (selectedSubject &&
+        (selectedSubject.toLowerCase().includes('mech') ||
+          selectedSubject.toLowerCase().includes('cad')));
+
+    if (isMech) {
+      const cadQuestions: MockTestQuestion[] = [
+        MECH_DIAGNOSTIC_QUESTIONS['cad_dof_2d'][0],
+        MECH_DIAGNOSTIC_QUESTIONS['cad_geometric_constraints'][0],
+        MECH_DIAGNOSTIC_QUESTIONS['cad_driving_parameters'][0],
+        MECH_DIAGNOSTIC_QUESTIONS['cad_extrude_operations'][0],
+        MECH_DIAGNOSTIC_QUESTIONS['cad_fillets_chamfers_g1'][0],
+        MECH_DIAGNOSTIC_QUESTIONS['cad_hub_bore_concentricity'][0],
+        MECH_DIAGNOSTIC_QUESTIONS['cad_material_mass_properties'][0],
+        MECH_DIAGNOSTIC_QUESTIONS['cad_stress_fos'][0],
+      ].filter(Boolean);
+      setExamQuestions(cadQuestions);
+    }
 
     const steps = [
       'Analyzing test configuration...',
@@ -379,6 +417,7 @@ export const VisionMockTest: React.FC = () => {
                     onChange={e => setSelectedSubject(e.target.value)}
                     className="w-full bg-[#0c1421] border border-[#1a273b] rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:ring-1 focus:ring-blue-500"
                   >
+                    <option value="Mechanical Engineering (CAD)">⚙️ Mechanical Engineering (CAD)</option>
                     <option value="Computer Science">Computer Science & Engineering</option>
                     <option value="discrete mathematics">Discrete Mathematics & Boolean Logic</option>
                     <option value="Physics">Physics</option>

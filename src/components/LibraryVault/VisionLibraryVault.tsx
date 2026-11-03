@@ -91,20 +91,55 @@ s.length() returns 4.`,
 - In PDO connection strings: mysql:host=localhost;port=3306;dbname=test
 - Supplying port 80 causes Connection Refused (SQLSTATE[HY000] [2002]).`,
   },
+  {
+    id: 'cad_parametric_design',
+    title: 'Parametric CAD Foundations: Degrees of Freedom, Constraints & Extrusion Manifolds',
+    category: 'Mechanical Engineering (CAD)',
+    uploadedBy: 'Prof. Marcus Vance',
+    dateAdded: 'Nov 01, 2026',
+    pages: 42,
+    tags: ['Mechanical Engineering (CAD)', 'Fusion 360', 'Degrees of Freedom', 'Geometric Constraints', 'Extrude'],
+    content: `Parametric CAD Principles:
+1. Degrees of Freedom (DOF): An unconstrained 2D point has 2 translational DOF (X, Y). Fully constrained geometry has 0 DOF and renders black. Extruding under-constrained blue sketches is an engineering anti-pattern (82% failure rate).
+2. Geometric Constraints: Coincident locks vertices; Tangent guarantees G1 slope continuity without cusps; Concentric aligns circular centers; Symmetric mirrors across a datum axis.
+3. Driving Dimensions & Units: ISO/ASME standardizes on millimeters (mm). Mixing mm and cm causes 10x scale errors.
+4. Extrude Operations: Requires closed, 2-manifold planar boundaries. Open profiles or self-intersecting loops fail to form watertight solid bodies.`,
+  },
+  {
+    id: 'cad_fea_gdnt',
+    title: 'Machine Component Design: GD&T Concentricity, Stress Concentrations & Factor of Safety',
+    category: 'Mechanical Engineering (CAD)',
+    uploadedBy: 'Dr. Clara Lindqvist',
+    dateAdded: 'Oct 30, 2026',
+    pages: 38,
+    tags: ['Mechanical Engineering (CAD)', 'FOS', 'FEA', 'GD&T', 'Fillets', 'Concentricity', 'Mass Properties'],
+    content: `Structural Design & GD&T Standards:
+1. Hub/Bore Concentricity: Rotating machinery demands coaxial datum alignment. Radial runout generates centrifugal unbalance forces proportional to omega^2.
+2. Fillets & Stress Relieving: Sharp 90-degree internal corners produce theoretical infinite stress concentrations (Kt -> inf). Applying transition fillets (R >= 2.5mm) creates G1 boundaries and prevents fatigue cracks.
+3. Factor of Safety (FOS): FOS = yield_strength / max_stress. Standard ductile machinery mandates target FOS >= 2.0 to provide margin against dynamic shock.
+4. Physical Mass Properties: Mass = density * volume (m = rho * V). 1 cm³ = 1000 mm³. 1018 Steel ~ 7.85 g/cm³, 6061-T6 Aluminum ~ 2.70 g/cm³.`,
+  },
 ];
 
 export const VisionLibraryVault: React.FC = () => {
-  const { setCurrentWorkflow, setActiveVideoStoryboard, setSelectedNode, dkmNodes } = useTutor();
+  const { setCurrentWorkflow, setActiveVideoStoryboard, setSelectedNode, dkmNodes, activeTrack } = useTutor();
 
   const [searchQuery, setSearchQuery] = useState('');
   const [activeFilter, setActiveFilter] = useState<'all' | 'my' | 'school'>('all');
+  const [selectedCategory, setSelectedCategory] = useState<string>(
+    activeTrack === 'Mechanical Engineering (CAD)' ? 'Mechanical Engineering (CAD)' : 'All'
+  );
   const [sortOption, setSortOption] = useState<'Recent' | 'Popular' | 'Liked'>('Recent');
   const [previewDoc, setPreviewDoc] = useState<LibraryDocument | null>(null);
 
-  const filteredDocs = RICH_LIBRARY_DOCUMENTS.filter(d =>
-    d.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    d.tags.some(t => t.toLowerCase().includes(searchQuery.toLowerCase()))
-  );
+  const filteredDocs = RICH_LIBRARY_DOCUMENTS.filter(d => {
+    const matchesCategory =
+      selectedCategory === 'All' || d.category === selectedCategory || d.tags.includes(selectedCategory);
+    const matchesSearch =
+      d.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      d.tags.some(t => t.toLowerCase().includes(searchQuery.toLowerCase()));
+    return matchesCategory && matchesSearch;
+  });
 
   const handleLaunchVideo = (doc: LibraryDocument) => {
     setActiveVideoStoryboard({
@@ -168,6 +203,23 @@ export const VisionLibraryVault: React.FC = () => {
             <span>Upload</span>
           </button>
         </div>
+      </div>
+
+      {/* Category Tabs including Mechanical Engineering (CAD) */}
+      <div className="flex items-center gap-1.5 overflow-x-auto pb-1">
+        {['All', 'Mechanical Engineering (CAD)', 'Question bank', 'Notes', 'Guide'].map(cat => (
+          <button
+            key={cat}
+            onClick={() => setSelectedCategory(cat)}
+            className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
+              selectedCategory === cat
+                ? 'bg-blue-600 text-white shadow-sm'
+                : 'bg-[#0c1421] text-slate-400 border border-[#1a273b] hover:text-white'
+            }`}
+          >
+            {cat === 'Mechanical Engineering (CAD)' ? '⚙️ Mechanical Engineering (CAD)' : cat}
+          </button>
+        ))}
       </div>
 
       {/* Filter bar & Search */}

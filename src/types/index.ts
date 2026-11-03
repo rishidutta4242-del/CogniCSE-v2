@@ -7,7 +7,7 @@ export type IssueType =
 
 export type Domain = 'cse' | 'mech';
 
-export type NodeStatus = 'GREEN' | 'YELLOW' | 'RED';
+export type NodeStatus = 'GREEN' | 'YELLOW' | 'RED' | 'NOT_ASSESSED';
 
 export type VisualizerMode =
   | 'Text Response'
@@ -93,7 +93,7 @@ export type EvidenceLabel =
   | 'Likely Misconception'
   | 'Confirmed through Repeated Evidence';
 
-export type MasteryStatus = 'Mastered' | 'Near Mastery' | 'Improving' | 'Developing' | 'Needs Attention';
+export type MasteryStatus = 'Mastered' | 'Near Mastery' | 'Improving' | 'Developing' | 'Needs Attention' | 'Not Assessed';
 
 export interface BKTTrace {
   id: string;
@@ -322,3 +322,56 @@ export interface LibraryDocument {
   content: string;
   pdfUrl?: string;
 }
+
+export type AttemptKind = 'quiz' | 'code_lab' | 'cad_lab' | 'web_lab' | 'independent';
+
+export interface AttemptRecord {
+  id: string;
+  studentId: string;
+  conceptId: string;
+  kind: AttemptKind;
+  passed: boolean;
+  tierUsed: number;
+  hintsRequested: number;
+  durationSec: number;
+  errorCategory?: string;
+  repeatedError: boolean;
+  ts: string;
+  codeSnippet?: string;
+  language?: string;
+  details?: string;
+}
+
+export interface VariantTask {
+  id: string;
+  conceptId: string;
+  conceptName: string;
+  title: string;
+  prompt: string;
+  description: string;
+  code: string;
+  language: SupportedLanguage;
+  errorLog?: string;
+  starterCode?: string;
+  hiddenTests?: Array<{
+    input: any[];
+    expected: any;
+    description: string;
+  }>;
+}
+
+export interface EvaluationOutcome {
+  attempt: AttemptRecord;
+  priorPL: number;
+  posteriorPL: number;
+  deltaPL: number;
+  passed: boolean;
+  tierUsed: number;
+  repeatedError: boolean;
+  nextTier: number;
+  isTransferUnlocked: boolean;
+  message: string;
+  label?: string;
+  consoleOutput?: string;
+}
+

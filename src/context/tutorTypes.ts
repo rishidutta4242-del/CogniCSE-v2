@@ -10,12 +10,17 @@ import {
   MockTestQuestion,
   ObservationInput,
   BKTTrace,
+  AttemptRecord,
+  AttemptKind,
+  VariantTask,
+  EvaluationOutcome,
 } from '../types';
 
 export type AppWorkflow =
   | 'CHATS'
   | 'MOCK_TEST'
   | 'CODE_SANDBOX'
+  | 'CAD_LAB'
   | 'MEMORY_TREE'
   | 'LIBRARY_VAULT'
   | 'AI_VIDEO'
@@ -42,6 +47,7 @@ export interface TutorContextType {
   activeReviewQuestions: MockTestQuestion[] | null;
   activeDrawerNode: DKMNode | null;
   isWhyDrawerOpen: boolean;
+  attempts: AttemptRecord[];
   setActiveReviewQuestions: (questions: MockTestQuestion[] | null) => void;
   setActiveTrack: (track: string) => void;
   setSelectedNode: (node: DKMNode) => void;
@@ -52,9 +58,21 @@ export interface TutorContextType {
     studentInput: string,
     codeSnippet?: string,
     executionLogs?: string,
-    workflow?: 'CODE_SANDBOX_TUTORING' | 'CHATS'
+    workflow?: 'CODE_SANDBOX_TUTORING' | 'CHATS' | 'CAD_LAB_TUTORING'
   ) => Promise<TutoringResponse | null>;
-  verifyIndependentFix: (fixedCode: string) => Promise<{ success: boolean; message: string }>;
+  recordAttempt: (params: {
+    conceptId: string;
+    kind: AttemptKind;
+    passed: boolean;
+    tierUsed: number;
+    hintsRequested: number;
+    durationSec: number;
+    errorCategory?: string;
+    codeSnippet?: string;
+    language?: string;
+    details?: string;
+  }) => Promise<EvaluationOutcome>;
+  fetchVariantTask: (conceptId: string, track?: string, language?: string) => Promise<VariantTask>;
   switchRole: (role: 'student' | 'teacher') => void;
   updateNodeStatus: (nodeId: string, status: 'GREEN' | 'YELLOW' | 'RED', masteryDelta?: number) => void;
   recordObservation: (input: ObservationInput) => { updatedNode: DKMNode; trace: BKTTrace };

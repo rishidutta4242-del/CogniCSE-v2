@@ -18,6 +18,7 @@ import {
   ChevronRight,
   ShieldCheck,
   Settings,
+  Box,
 } from 'lucide-react';
 
 interface VisionSidebarProps {
@@ -36,6 +37,8 @@ export const VisionSidebar: React.FC<VisionSidebarProps> = ({ onOpenProfile, onO
     currentChatSession,
     selectChatSession,
     createNewChatSession,
+    activeTrack,
+    setActiveTrack,
   } = useTutor();
 
   const [isDarkMode, setIsDarkMode] = useState(userProfile.theme !== 'light');
@@ -55,15 +58,23 @@ export const VisionSidebar: React.FC<VisionSidebarProps> = ({ onOpenProfile, onO
     setIsAuthenticated(false);
   };
 
+  const isMech =
+    activeTrack === 'All Tracks' ||
+    activeTrack === 'Mechanical Engineering (CAD)' ||
+    activeTrack.toLowerCase().includes('mech') ||
+    activeTrack.toLowerCase().includes('cad') ||
+    currentWorkflow === 'CAD_LAB';
+
   const navItems = [
     { id: 'CHATS', label: 'Chats', icon: MessageSquare },
     { id: 'MOCK_TEST', label: 'Mock Test', icon: FileCheck },
-    { id: 'CODE_SANDBOX', label: 'Code Sandbox', icon: Code2 },
+    ...(isMech ? [{ id: 'CAD_LAB', label: '3D CAD Lab', icon: Box }] : []),
+    { id: 'CODE_SANDBOX', label: isMech ? 'Parametric Scripting' : 'Code Sandbox', icon: Code2 },
     { id: 'MEMORY_TREE', label: 'Memory Tree', icon: GitBranch },
     { id: 'LIBRARY_VAULT', label: 'Library Vault', icon: BookOpen },
     { id: 'AI_VIDEO', label: '60s AI Video', icon: Video },
     { id: 'COMPARISON_STUDY', label: 'Empirical Study', icon: BarChart3 },
-  ] as const;
+  ];
 
   return (
     <aside className="w-64 bg-[#070c14] border-r border-[#1a273b] flex flex-col justify-between shrink-0 select-none z-30">
@@ -107,6 +118,28 @@ export const VisionSidebar: React.FC<VisionSidebarProps> = ({ onOpenProfile, onO
             );
           })}
         </nav>
+
+        {/* Domain Track Filter */}
+        <div className="pt-2 pb-1 border-t border-[#1a273b] space-y-1.5">
+          <div className="flex items-center justify-between text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider px-1">
+            <span>Track Filter</span>
+            <span className="text-[9px] px-1.5 py-0.5 bg-blue-950 text-blue-300 rounded border border-blue-800">
+              {activeTrack === 'Mechanical Engineering (CAD)' ? 'MECH' : 'CSE'}
+            </span>
+          </div>
+          <select
+            value={activeTrack}
+            onChange={e => setActiveTrack(e.target.value)}
+            className="w-full bg-[#0c1421] border border-[#1a273b] rounded-xl px-2.5 py-1.5 text-xs text-white focus:outline-none focus:ring-1 focus:ring-blue-500 cursor-pointer font-medium"
+          >
+            <option value="All Tracks">All Tracks</option>
+            <option value="Mechanical Engineering (CAD)">⚙️ Mechanical Engineering (CAD)</option>
+            <option value="Web Application Development">🌐 Web App Development</option>
+            <option value="Data Structures & Algorithms">🌳 Data Structures & Algorithms</option>
+            <option value="Operating Systems">⚡ Operating Systems</option>
+            <option value="Computer Networks">🔌 Computer Networks</option>
+          </select>
+        </div>
 
         {/* CHATS History Section matching the video */}
         <div className="pt-2 border-t border-[#1a273b] space-y-2">

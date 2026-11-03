@@ -198,6 +198,27 @@ export function getPracticalScoreForTier(tier: number = 1, isCorrect: boolean = 
  */
 export function deriveNodeComposite(node: DKMNode): CompositeMasteryBreakdown {
   const traces = node.bktTrace || [];
+  const isUnassessed =
+    node.status === 'NOT_ASSESSED' ||
+    (traces.length === 0 && node.mastery === 0 && node.solvedCount === 0 && node.errorCount === 0);
+
+  if (isUnassessed) {
+    return {
+      composite: 0,
+      conceptual: 0,
+      practical: 0,
+      independent: 0,
+      retention: null,
+      weights: {
+        conceptual: 0.3889,
+        practical: 0.3889,
+        independent: 0.2222,
+        retention: 0,
+      },
+      status: 'Not Assessed',
+      independentPassedCount: 0,
+    };
+  }
 
   // Conceptual traces: quiz, pretest, mock-test, micro-drill
   const conceptualTraces = traces.filter(t =>

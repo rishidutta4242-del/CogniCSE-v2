@@ -4,10 +4,28 @@ import {
   getVideoFallback,
   getMockTestFallback,
   getLibraryVaultFallback,
+  getVariantFallback,
 } from './fallbacks.ts';
 
 const geminiApiKey = process.env.GEMINI_API_KEY;
 let aiClient: GoogleGenAI | null = null;
+
+export function cleanErrorMessage(err: any): string {
+  if (!err) return 'Gemini API high load or offline; local Socratic fallback engaged';
+  const str = typeof err === 'string' ? err : err.message || String(err);
+  try {
+    const parsed = JSON.parse(str);
+    if (parsed.error?.message) {
+      return `Gemini API: ${parsed.error.message}`;
+    }
+  } catch {
+    // not json
+  }
+  if (str.includes('503') || str.includes('high demand') || str.includes('UNAVAILABLE')) {
+    return 'Gemini service high demand; local Socratic fallback engaged';
+  }
+  return str;
+}
 
 if (geminiApiKey && geminiApiKey !== 'MY_GEMINI_API_KEY' && geminiApiKey.trim().length > 10) {
   try {
@@ -24,18 +42,18 @@ if (geminiApiKey && geminiApiKey !== 'MY_GEMINI_API_KEY' && geminiApiKey.trim().
   }
 }
 
-// 25-second server-side timeout with single retry on failure
+// 10-second server-side timeout with single retry on failure
 async function callGeminiWithRetry<T>(
   prompt: string,
   systemInstruction?: string,
   responseSchema?: any,
-  timeoutMs = 25000
+  timeoutMs = 10000
 ): Promise<{ data: T | null; error: string | null }> {
   if (!aiClient) {
     return { data: null, error: 'GEMINI_API_KEY is not configured or invalid' };
   }
 
-  const model = process.env.GEMINI_MODEL || 'gemini-3.8-flash';
+  const model = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
 
   const singleAttempt = async (): Promise<T> => {
     const controller = new AbortController();
@@ -252,11 +270,11 @@ Your primary objective is to continuously diagnose student knowledge gaps, misco
 You must NEVER simply output direct solutions, complete written code blocks, final CAD dimensions, or full written assignments. You operate strictly as a real-time, empathetic, and highly structured technical tutor using hints, diagnostic questions, sandbox error mapping, and visual learning modes.
 
 CRITICAL RULES:
-1. 4-Tier Socratic Guardrails:
-   - Tier 1 (Metacognitive Hint): Point out the general area, degree of freedom, or logic flaw. Name the concept (e.g. "degrees of freedom", "coaxial datum", "shear stress"), NEVER target numerical values. Ask a reflective question.
-   - Tier 2 (Conceptual Guidance): Explain the underlying concept or engineering equation (e.g. m = rho * V, FOS = yield / max_stress >= 2.0, G1 tangency) and provide a generic, non-identical pattern. Do not reveal target values.
-   - Tier 3 (Socratic Micro-Drill): Provide a single-line diagnostic prompt or micro-quiz to isolate the missing constraint or step.
-   - Tier 4 (Direct Line Guidance - merged 5th hint ladder): Highlight the specific line, sketch entity, or parameter causing the issue and explain the exact mechanical/computational mechanism, but force the student to write/apply the actual fix themselves.
+1. 4-Tier Socratic Guardrails (Teacher-visible 5-hint ladders from the source are merged into 4 tiers; the old "full explanation" tier becomes Tier 4 direct-line guidance without the final answer):
+   - Tier 1 (Metacognitive Hint): Point out the general area, degree of freedom, or logic flaw. Hints must NAME THE CONCEPT (e.g. "degrees of freedom", "coaxial datum", "shear stress", "volume vs mass density", "FOS margin"), NEVER target numerical values. Ask a reflective question.
+   - Tier 2 (Conceptual Guidance): Explain the underlying concept or engineering relationship (e.g. m = rho * V with 1 cm³ = 1000 mm³, FOS = yield / max_stress >= 2.0, G1 slope tangency) and provide a generic, non-identical pattern. Do not reveal target values.
+   - Tier 3 (Socratic Micro-Drill): Provide a single-line diagnostic prompt or micro-quiz to isolate the missing constraint, unit factor, or geometry relationship.
+   - Tier 4 (Direct Line Guidance): Highlight the specific entity, sketch constraint, or parameter causing the issue and explain the exact mechanical/computational mechanism, but force the student to write/apply the actual fix themselves without giving the final answer or code.
 2. Anti-Answer Protocol:
    - If a student asks for the answer, complete code, exact dimension, or direct fix: REFUSE direct answers. State: "I'm here to help you master this step-by-step so you can solve it independently! Let's break down where you're currently stuck." Then provide a Tier 1 or Tier 2 hint.
 3. Diagnose issue_type into:
@@ -265,7 +283,12 @@ CRITICAL RULES:
    - 'PRACTICAL_EXECUTION_ERROR'
    - 'cad_constraint_error' (e.g. unconstrained blue sketch geometry with free DOF, over-constrained loops, missing tangency/coincidence)
    - 'cad_tolerance_mismatch' (e.g. hub/bore eccentric runout, unit scale mismatch mm vs cm, FOS < 2.0, confusing volume with mass)
-4. Output valid JSON matching the exact schema specified.`;
+4. Specific CAD Misconceptions & Corrective Strategies:
+   - Extruding an under-constrained (blue) sketch assuming it is finished (frequency 82%): In Fusion 360/SolidWorks, blue lines signify free translational or rotational degrees of freedom (0 DOF = black). Extruding blue sketches leads to unpredictable model distortion during parametric revisions. Guide student to anchor points to datum/origin with Coincident and apply non-redundant constraints.
+   - Confusing volume with mass: Mass = density * volume (m = rho * V). 1 cm³ = 1000 mm³. Differentiate geometric spatial volume from physical mass across materials (e.g. 1018 Steel 7.85 g/cm³ vs 6061 Aluminum 2.70 g/cm³).
+   - Assuming a low FOS is acceptable: FOS = yield_strength / max_stress. Engineering standards mandate target FOS >= 2.0 for ductile static machinery to prevent plastic deformation and account for dynamic shock. Adding internal transition fillets (R >= 2.5-3mm) relieves peak Von Mises stress concentrations.
+   - Mixing mm and cm units: Standardize on millimeters (mm) per ISO/ASME mechanical standards. Entering 10 without units into cm documents causes 10x scale errors.
+5. Output valid JSON matching the exact schema specified.`;
 
 export async function processTutoringRequest(tutorReq: any) {
   const isGreeting = /^(hi|hello|hey|greetings|howdy|good\s+(morning|afternoon|evening)|yo|hola|start|sup|welcome)(\s+.*)?$/i.test(
@@ -297,18 +320,18 @@ Diagnose student knowledge gaps and provide Socratic guidance adhering strictly 
   return {
     ...fallback,
     source: 'fallback' as const,
-    fallback_reason: error || 'Gemini model unavailable or response incomplete',
+    fallback_reason: cleanErrorMessage(error),
   };
 }
 
 export async function processVideoRequest(topic: string, misconception: string, track: string) {
-  const prompt = `Generate a 60-second animated educational video storyboard script for Computer Science students explaining "${topic || 'CSE Concept'}" (${track || 'CSE'}) and debunking the misconception: "${misconception || 'Common misconception'}".`;
+  const prompt = `Generate a 60-second animated educational video storyboard script for Computer Science or Mechanical Engineering (CAD) students explaining "${topic || 'Engineering Concept'}" (${track || 'Engineering'}) and debunking the misconception: "${misconception || 'Common misconception'}".`;
 
   const { data, error } = await callGeminiWithRetry<any>(
     prompt,
-    'You are an award-winning CSE pedagogical content animator creating concise, visually rich 60-second micro-learning video storyboards.',
+    'You are an award-winning CSE and Mechanical Engineering pedagogical content animator creating concise, visually rich 60-second micro-learning video storyboards.',
     VIDEO_RESPONSE_SCHEMA,
-    25000
+    10000
   );
 
   if (data && data.scenes) {
@@ -319,18 +342,23 @@ export async function processVideoRequest(topic: string, misconception: string, 
   return {
     ...fallback,
     source: 'fallback' as const,
-    fallback_reason: error || 'Gemini model unavailable',
+    fallback_reason: cleanErrorMessage(error),
   };
 }
 
 export async function processMockTestRequest(track: string, redNodes: string[], difficulty: string) {
-  const prompt = `Generate a 5-question adaptive assessment for Computer Science students on "${track || 'CSE Core'}" focusing on problematic topics: ${JSON.stringify(redNodes || [])} at difficulty: "${difficulty || 'INTERMEDIATE'}". Include deep distractor explanations.`;
+  const isMech =
+    track === 'Mechanical Engineering (CAD)' ||
+    (track && (track.toLowerCase().includes('mech') || track.toLowerCase().includes('cad')));
+  const subjectName = isMech ? 'Mechanical Engineering (CAD)' : (track || 'CSE Core');
+
+  const prompt = `Generate a 5-question adaptive assessment for ${subjectName} students focusing on problematic topics: ${JSON.stringify(redNodes || [])} at difficulty: "${difficulty || 'INTERMEDIATE'}". Include deep distractor explanations. If CAD, include topics like Degrees of Freedom (blue vs black sketches), geometric constraints, mm vs cm units, volume vs mass, and FOS >= 2.0.`;
 
   const { data, error } = await callGeminiWithRetry<any>(
     prompt,
-    'You are a senior CSE academic examiner producing rigorous, high-fidelity technical mock test items with deep distractor analyses.',
+    'You are a senior technical academic examiner producing rigorous, high-fidelity mock test items with deep distractor analyses.',
     MOCK_TEST_SCHEMA,
-    25000
+    10000
   );
 
   if (data && data.questions) {
@@ -341,12 +369,12 @@ export async function processMockTestRequest(track: string, redNodes: string[], 
   return {
     ...fallback,
     source: 'fallback' as const,
-    fallback_reason: error || 'Gemini model unavailable',
+    fallback_reason: cleanErrorMessage(error),
   };
 }
 
 export async function processLibraryRequest(documentTitle: string, textContent: string, subjectTrack: string) {
-  const prompt = `Analyze this Computer Science study document titled "${documentTitle || 'CSE Notes'}" (${subjectTrack || 'General CSE'}).
+  const prompt = `Analyze this engineering study document titled "${documentTitle || 'Engineering Notes'}" (${subjectTrack || 'General Engineering'}).
 Document excerpt:
 """
 ${(textContent || '').slice(0, 4000)}
@@ -356,9 +384,9 @@ Extract structured pedagogical insights for the Individual Student Learning Mode
 
   const { data, error } = await callGeminiWithRetry<any>(
     prompt,
-    'You are a CSE curriculum analyst extracting concept ontologies and cognitive traps for an adaptive intelligent tutoring system.',
+    'You are a curriculum analyst extracting concept ontologies and cognitive traps for an adaptive intelligent tutoring system.',
     LIBRARY_PROCESS_SCHEMA,
-    25000
+    10000
   );
 
   if (data && data.extracted_concepts) {
@@ -369,6 +397,47 @@ Extract structured pedagogical insights for the Individual Student Learning Mode
   return {
     ...fallback,
     source: 'fallback' as const,
-    fallback_reason: error || 'Gemini model unavailable',
+    fallback_reason: cleanErrorMessage(error),
   };
 }
+
+export async function processVariantRequest(
+  conceptId?: string,
+  conceptName?: string,
+  track?: string,
+  language?: string
+) {
+  const isMech =
+    track === 'Mechanical Engineering (CAD)' ||
+    (conceptId && conceptId.startsWith('cad_'));
+
+  const prompt = `Generate a transfer variant problem for the concept "${conceptName || conceptId || 'Core Concept'}" (${track || 'Engineering'}).
+The variant must evaluate the EXACT SAME skill or misconception, but with DIFFERENT parameters, numbers, or domain context so the student demonstrates independent mastery.
+Language: ${language || 'javascript'}.
+Return JSON containing title, prompt, description, code, and test cases.`;
+
+  const { data, error } = await callGeminiWithRetry<any>(
+    prompt,
+    'You are an intelligent tutoring assessment designer crafting transfer problems that test identical cognitive skills with fresh parameters.',
+    undefined,
+    10000
+  );
+
+  if (data && data.title && data.code) {
+    return {
+      ...data,
+      id: `var_${Date.now()}`,
+      conceptId: conceptId || data.conceptId || 'concept_variant',
+      source: 'gemini' as const,
+      fallback_reason: null,
+    };
+  }
+
+  const fallback = getVariantFallback(conceptId, track, language);
+  return {
+    ...fallback,
+    source: 'fallback' as const,
+    fallback_reason: cleanErrorMessage(error),
+  };
+}
+

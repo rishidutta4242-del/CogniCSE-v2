@@ -5,7 +5,7 @@ import { Clock, AlertTriangle, CheckCircle, XCircle, ArrowRight, ArrowLeft, Book
 import confetti from 'canvas-confetti';
 
 export const MockTestSimulator: React.FC = () => {
-  const { islm, dkmNodes, recordObservation, updateNodeStatus, setCurrentWorkflow, setSelectedNode } = useTutor();
+  const { islm, dkmNodes, recordObservation, updateNodeStatus, setCurrentWorkflow, setSelectedNode, activeTrack } = useTutor();
 
   const [testData, setTestData] = useState<MockTest | null>(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -30,7 +30,7 @@ export const MockTestSimulator: React.FC = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          track: islm.course_track,
+          track: activeTrack === 'All Tracks' ? islm.course_track : activeTrack,
           red_nodes: redNodes,
         }),
       });

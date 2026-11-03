@@ -15,6 +15,7 @@ import {
   processVideoRequest,
   processMockTestRequest,
   processLibraryRequest,
+  processVariantRequest,
 } from './server/gemini.ts';
 
 dotenv.config();
@@ -287,6 +288,89 @@ app.post('/api/library-vault/process', async (req: Request, res: Response) => {
     return res.json(result);
   } catch (err: any) {
     return res.status(500).json({ error: 'Library extraction failed', details: err?.message });
+  }
+});
+
+// Endpoint: AI Independent Variant Problem Generator
+app.post('/api/variant', async (req: Request, res: Response) => {
+  try {
+    const { conceptId, conceptName, track, language } = req.body;
+    const result = await processVariantRequest(conceptId, conceptName, track, language);
+    return res.json(result);
+  } catch (err: any) {
+    return res.status(500).json({ error: 'Variant generation failed', details: err?.message });
+  }
+});
+
+// Endpoint: Record and Evaluate Student Attempt
+app.post('/api/attempts', async (req: Request, res: Response) => {
+  try {
+    const attemptData = req.body;
+    const store = readStore();
+    const studentAttempts = (store.attempts || []).filter(
+      (a: any) => a.studentId === attemptData.studentId && a.conceptId === attemptData.conceptId
+    );
+
+    // Compute repeatedError: same category + concept seen before
+    const isRepeated = attemptData.errorCategory
+      ? studentAttempts.some((a: any) => a.errorCategory === attemptData.errorCategory)
+      : false;
+
+    const newAttempt = {
+      id: attemptData.id || `att_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
+      studentId: attemptData.studentId,
+      conceptId: attemptData.conceptId,
+      kind: attemptData.kind || 'code_lab',
+      passed: Boolean(attemptData.passed),
+      tierUsed: attemptData.tierUsed || 1,
+      hintsRequested: attemptData.hintsRequested || 0,
+      durationSec: attemptData.durationSec || 0,
+      errorCategory: attemptData.errorCategory,
+      repeatedError: isRepeated,
+      ts: attemptData.ts || new Date().toISOString(),
+      codeSnippet: attemptData.codeSnippet,
+      language: attemptData.language,
+      details: attemptData.details,
+    };
+
+    await writeStoreAtomically(s => {
+      if (!s.attempts) s.attempts = [];
+      s.attempts.push(newAttempt);
+    });
+
+    // Also append as pedagogical event
+    await appendEvent({
+      studentId: newAttempt.studentId,
+      type: 'ATTEMPT_EVALUATED',
+      conceptId: newAttempt.conceptId,
+      topicId: newAttempt.conceptId,
+      payload: newAttempt,
+      synthetic: false,
+    });
+
+    return res.json({ success: true, attempt: newAttempt });
+  } catch (err: any) {
+    console.error('Record attempt error:', err);
+    return res.status(500).json({ error: 'Failed to record attempt', details: err?.message });
+  }
+});
+
+// Endpoint: Fetch attempts for student
+app.get('/api/attempts', (req: Request, res: Response) => {
+  try {
+    const studentId = (req.query.studentId as string) || (req.headers['x-student-id'] as string);
+    const conceptId = req.query.conceptId as string;
+    const store = readStore();
+    let attempts = (store.attempts || []) as any[];
+    if (studentId) {
+      attempts = attempts.filter((a: any) => a.studentId === studentId);
+    }
+    if (conceptId) {
+      attempts = attempts.filter((a: any) => a.conceptId === conceptId);
+    }
+    return res.json({ attempts });
+  } catch (err: any) {
+    return res.status(500).json({ error: 'Failed to retrieve attempts', details: err?.message });
   }
 });
 
