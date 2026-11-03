@@ -5,7 +5,7 @@ import { Clock, AlertTriangle, CheckCircle, XCircle, ArrowRight, ArrowLeft, Book
 import confetti from 'canvas-confetti';
 
 export const MockTestSimulator: React.FC = () => {
-  const { islm, dkmNodes, updateNodeStatus, setCurrentWorkflow, setSelectedNode } = useTutor();
+  const { islm, dkmNodes, recordObservation, updateNodeStatus, setCurrentWorkflow, setSelectedNode } = useTutor();
 
   const [testData, setTestData] = useState<MockTest | null>(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -83,15 +83,20 @@ export const MockTestSimulator: React.FC = () => {
     testData.questions.forEach((q, idx) => {
       const userAns = selectedAnswers[idx];
       if (userAns !== undefined) {
-        if (userAns === q.correct_option_index) {
+        const isCorrect = userAns === q.correct_option_index;
+        if (isCorrect) {
           correctCount++;
-          // Upgrade or maintain green in memory tree
-          updateNodeStatus(q.topic_id, 'GREEN', 0.15);
         } else {
           wrongCount++;
-          // Downgrade to RED/YELLOW in memory tree
-          updateNodeStatus(q.topic_id, 'RED', -0.2);
         }
+        // Bayesian Knowledge Tracing update per question
+        recordObservation({
+          conceptId: q.topic_id,
+          isCorrect,
+          isIndependent: true,
+          source: 'mock-test',
+          errorCategory: isCorrect ? undefined : (q.distractor_explanations?.[userAns] || 'Conceptual Distractor Trap'),
+        });
       }
     });
 

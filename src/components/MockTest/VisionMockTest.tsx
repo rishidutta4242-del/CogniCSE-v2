@@ -30,6 +30,7 @@ export const VisionMockTest: React.FC = () => {
     setActiveReviewQuestions,
     dkmNodes,
     updateNodeStatus,
+    recordObservation,
   } = useTutor();
 
   // Wizard state: 'wizard_step1' | 'wizard_step2' | 'loading' | 'exam' | 'results'
@@ -229,9 +230,20 @@ export const VisionMockTest: React.FC = () => {
     const evaluatedQuestions = examQuestions.map((q, idx) => {
       const userChoice = selectedAnswers[idx];
       const isCorrect = userChoice === q.correct_option_index;
-      if (userChoice === undefined) unattempted++;
-      else if (isCorrect) correct++;
-      else wrong++;
+      if (userChoice === undefined) {
+        unattempted++;
+      } else {
+        if (isCorrect) correct++;
+        else wrong++;
+
+        recordObservation({
+          conceptId: q.topic_id || 'boolean_algebra',
+          isCorrect,
+          isIndependent: true,
+          source: 'mock-test',
+          errorCategory: isCorrect ? undefined : (q.distractor_explanations?.[userChoice] || 'Mock Test Misconception'),
+        });
+      }
 
       return {
         ...q,

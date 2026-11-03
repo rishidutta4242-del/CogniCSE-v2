@@ -14,6 +14,7 @@ import {
   ZoomIn,
   ZoomOut,
   Layers,
+  Calculator,
 } from 'lucide-react';
 
 interface TreeNode {
@@ -28,7 +29,7 @@ interface TreeNode {
 }
 
 export const VisionMemoryTree: React.FC = () => {
-  const { userProfile, setCurrentWorkflow, setSelectedNode, dkmNodes } = useTutor();
+  const { userProfile, setCurrentWorkflow, setSelectedNode, dkmNodes, openWhyScoreDrawer } = useTutor();
 
   const [aiPrompt, setAiPrompt] = useState('');
   const [hideBranches, setHideBranches] = useState(false);
@@ -288,6 +289,16 @@ export const VisionMemoryTree: React.FC = () => {
               60s Video
             </button>
           </div>
+          <button
+            onClick={() => {
+              const match = dkmNodes.find(n => n.name.toLowerCase().includes(selectedNodeDetails.name.toLowerCase())) || dkmNodes[0];
+              openWhyScoreDrawer(match);
+            }}
+            className="w-full py-1.5 bg-slate-900 hover:bg-slate-800 text-indigo-300 rounded-lg text-xs font-medium border border-indigo-900/60 flex items-center justify-center gap-1.5 cursor-pointer transition-colors"
+          >
+            <Calculator className="w-3.5 h-3.5" />
+            <span>Why this score?</span>
+          </button>
         </div>
       )}
 

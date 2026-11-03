@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
 import confetti from 'canvas-confetti';
 import {
   DKMNode,
@@ -10,216 +10,52 @@ import {
   ChatSession,
   ChatMessage,
   MockTestQuestion,
+  ObservationInput,
+  BKTTrace,
 } from '../types';
 import { INITIAL_DKM_NODES, INITIAL_ISLM_PROFILE } from '../data/dkm';
+import {
+  fetchUserStateFromServer,
+  syncUserStateToServer,
+  recordPedagogicalEvent,
+  loginUserOnServer,
+} from './tutorSync';
+import { requestTutoringApi } from './tutorApi';
+import {
+  STORAGE_KEY_ACTIVE_USER,
+  STORAGE_KEY_UI_THEME,
+  INITIAL_PROFILE,
+  DEFAULT_CHAT_SESSION,
+  exportOfflinePackFile,
+} from './tutorDefaults';
+import {
+  applyObservationToNode,
+  deriveNodeComposite,
+} from '../services/mastery';
 
-interface TutorContextType {
-  isAuthenticated: boolean;
-  setIsAuthenticated: (auth: boolean) => void;
-  userProfile: UserProfile;
-  setUserProfile: React.Dispatch<React.SetStateAction<UserProfile>>;
-  islm: ISLMProfile;
-  dkmNodes: DKMNode[];
-  selectedNode: DKMNode;
-  activeTrack: string;
-  currentWorkflow:
-    | 'CHATS'
-    | 'MOCK_TEST'
-    | 'CODE_SANDBOX'
-    | 'MEMORY_TREE'
-    | 'LIBRARY_VAULT'
-    | 'AI_VIDEO'
-    | 'COMPARISON_STUDY'
-    | 'STUDENT_DASHBOARD'
-    | 'TEACHER_DASHBOARD';
-  tutoringResponse: TutoringResponse | null;
-  isLoading: boolean;
-  visualizerMode: VisualizerMode;
-  activeVideoStoryboard: VideoStoryboard | null;
-  chatSessions: ChatSession[];
-  currentChatSession: ChatSession;
-  activeReviewQuestions: MockTestQuestion[] | null;
-  setActiveReviewQuestions: (questions: MockTestQuestion[] | null) => void;
-  setActiveTrack: (track: string) => void;
-  setSelectedNode: (node: DKMNode) => void;
-  setCurrentWorkflow: (workflow: TutorContextType['currentWorkflow']) => void;
-  setVisualizerMode: (mode: VisualizerMode) => void;
-  setActiveVideoStoryboard: (storyboard: VideoStoryboard | null) => void;
-  executeTutoring: (
-    studentInput: string,
-    codeSnippet?: string,
-    executionLogs?: string,
-    workflow?: 'CODE_SANDBOX_TUTORING' | 'CHATS'
-  ) => Promise<TutoringResponse | null>;
-  verifyIndependentFix: (fixedCode: string) => Promise<{ success: boolean; message: string }>;
-  switchRole: (role: 'student' | 'teacher') => void;
-  updateNodeStatus: (nodeId: string, status: 'GREEN' | 'YELLOW' | 'RED', masteryDelta: number) => void;
-  exportOfflinePack: () => void;
-  runDiagnosticPretestComplete: (score: number, missedTopicIds: string[]) => void;
-  sendChatMessage: (text: string) => Promise<void>;
-  selectChatSession: (sessionId: string) => void;
-  createNewChatSession: () => void;
-}
+import { TutorContextType, AppWorkflow } from './tutorTypes';
+export type { TutorContextType, AppWorkflow };
 
 const TutorContext = createContext<TutorContextType | undefined>(undefined);
 
-const STORAGE_KEY_AUTH = 'cognicse_auth_v1';
-const STORAGE_KEY_PROFILE = 'cognicse_user_profile_v1';
-const STORAGE_KEY_ISLM = 'cognicse_islm_profile_v1';
-const STORAGE_KEY_DKM = 'cognicse_dkm_nodes_v1';
-const STORAGE_KEY_CHATS = 'cognicse_chat_sessions_v1';
-
-const INITIAL_PROFILE: UserProfile = {
-  id: 'CSE_STU_8810',
-  name: 'haritha karthikkumar',
-  email: 'haritha.k@university.edu',
-  role: 'student',
-  plan: 'Free Plan',
-  degree: 'B.Tech Computer Science & Engineering',
-  targetMajor: 'Systems & Artificial Intelligence',
-  preferredLanguages: ['python', 'javascript', 'java', 'cpp', 'php'],
-  targetExams: ['Campus Placements', 'Discrete Mathematics'],
-  streakDays: 7,
-  testsCompleted: 3,
-  overallMastery: 0.75,
-  theme: 'dark',
-};
-
-const INITIAL_CHAT_SESSIONS: ChatSession[] = [
-  {
-    id: 'chat_greeting',
-    title: 'Greeting',
-    timestamp: 'Today',
-    messages: [
-      {
-        id: 'msg_1',
-        sender: 'user',
-        text: 'Hi',
-        timestamp: '10:00 AM',
-      },
-      {
-        id: 'msg_2',
-        sender: 'assistant',
-        text: 'Hi! How can I help you learn Computer Science or debug code today?',
-        timestamp: '10:00 AM',
-      },
-    ],
-  },
-  {
-    id: 'chat_reflection',
-    title: 'Self-Reflection and Impr...',
-    timestamp: 'Yesterday',
-    messages: [
-      {
-        id: 'msg_3',
-        sender: 'user',
-        text: 'what mistake I have done, how can I improve',
-        timestamp: '11:15 AM',
-      },
-      {
-        id: 'msg_4',
-        sender: 'assistant',
-        text: `Here is a structured reflection on your recent problem-solving:
-
-1. TCP Sockets vs HTTP Ports:
-In your PDO connection, you attempted to query database port 80 instead of 3306. Remember that port 80 speaks HTTP web traffic, whereas database services listen on dedicated TCP daemons.
-
-2. Recursion Base Cases:
-When designing recursive algorithms, always establish your termination boundary first before recursing.
-
-Would you like to drill through a simulated memory trace or inspect the Flowchart?`,
-        timestamp: '11:16 AM',
-        socraticTier: 2,
-      },
-    ],
-  },
-  {
-    id: 'chat_demo_visuals',
-    title: 'Demo: Visuals',
-    timestamp: 'Oct 28',
-    messages: [
-      {
-        id: 'msg_5',
-        sender: 'user',
-        text: 'Show me the flowchart for TCP 3-way handshake',
-        timestamp: '2:30 PM',
-      },
-      {
-        id: 'msg_6',
-        sender: 'assistant',
-        text: 'Switched visualizer to Flowchart mode! Client SYN -> Server SYN-ACK -> Client ACK verified.',
-        visualizerMode: 'Flowchart',
-        timestamp: '2:30 PM',
-      },
-    ],
-  },
-  {
-    id: 'chat_demo_videos',
-    title: 'Demo: Videos',
-    timestamp: 'Oct 26',
-    messages: [
-      {
-        id: 'msg_7',
-        sender: 'user',
-        text: 'Generate a 60s micro-mastery video for Database Ports',
-        timestamp: '4:15 PM',
-      },
-      {
-        id: 'msg_8',
-        sender: 'assistant',
-        text: 'Generated dual-coding video storyboard: "The Server Apartment Complex" (Door 80 vs Door 3306).',
-        timestamp: '4:15 PM',
-      },
-    ],
-  },
-];
-
 export const TutorProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // Authentication state: default false to show login page first
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY_AUTH);
-      if (saved) return JSON.parse(saved);
-    } catch (e) {}
-    return false;
+    return !!localStorage.getItem(STORAGE_KEY_ACTIVE_USER);
   });
 
-  const [userProfile, setUserProfile] = useState<UserProfile>(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY_PROFILE);
-      if (saved) return JSON.parse(saved);
-    } catch (e) {}
-    return INITIAL_PROFILE;
-  });
-
-  const [islm, setIslm] = useState<ISLMProfile>(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY_ISLM);
-      if (saved) return JSON.parse(saved);
-    } catch (e) {}
-    return INITIAL_ISLM_PROFILE;
-  });
-
+  const [userProfile, setUserProfile] = useState<UserProfile>(INITIAL_PROFILE);
+  const [islm, setIslm] = useState<ISLMProfile>(INITIAL_ISLM_PROFILE);
   const [dkmNodes, setDkmNodes] = useState<DKMNode[]>(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY_DKM);
-      if (saved) return JSON.parse(saved);
-    } catch (e) {}
-    return INITIAL_DKM_NODES;
+    return INITIAL_DKM_NODES.map(node => ({
+      ...node,
+      compositeMastery: deriveNodeComposite(node),
+    }));
   });
-
-  const [chatSessions, setChatSessions] = useState<ChatSession[]>(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY_CHATS);
-      if (saved) return JSON.parse(saved);
-    } catch (e) {}
-    return INITIAL_CHAT_SESSIONS;
-  });
-
-  const [currentChatSession, setCurrentChatSession] = useState<ChatSession>(() => chatSessions[0] || INITIAL_CHAT_SESSIONS[0]);
+  const [chatSessions, setChatSessions] = useState<ChatSession[]>([DEFAULT_CHAT_SESSION]);
+  const [currentChatSession, setCurrentChatSession] = useState<ChatSession>(DEFAULT_CHAT_SESSION);
   const [activeReviewQuestions, setActiveReviewQuestions] = useState<MockTestQuestion[] | null>(null);
 
-  const [selectedNode, setSelectedNode] = useState<DKMNode>(() => dkmNodes[0]);
+  const [selectedNode, setSelectedNode] = useState<DKMNode>(INITIAL_DKM_NODES[0]);
   const [activeTrack, setActiveTrack] = useState<string>('All Tracks');
   const [currentWorkflow, setCurrentWorkflow] = useState<TutorContextType['currentWorkflow']>('CHATS');
   const [visualizerMode, setVisualizerMode] = useState<VisualizerMode>('Flowchart');
@@ -227,58 +63,193 @@ export const TutorProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [activeVideoStoryboard, setActiveVideoStoryboard] = useState<VideoStoryboard | null>(null);
 
-  // Sync state to localStorage
-  useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY_AUTH, JSON.stringify(isAuthenticated));
-    } catch (e) {}
-  }, [isAuthenticated]);
+  // "Why this score?" Drawer state
+  const [activeDrawerNode, setActiveDrawerNode] = useState<DKMNode | null>(null);
+  const [isWhyDrawerOpen, setIsWhyDrawerOpen] = useState<boolean>(false);
 
-  useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY_PROFILE, JSON.stringify(userProfile));
-    } catch (e) {}
-  }, [userProfile]);
+  const openWhyScoreDrawer = (node?: DKMNode) => {
+    setActiveDrawerNode(node || selectedNode);
+    setIsWhyDrawerOpen(true);
+  };
 
-  useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY_ISLM, JSON.stringify(islm));
-    } catch (e) {}
-  }, [islm]);
+  const closeWhyScoreDrawer = () => {
+    setIsWhyDrawerOpen(false);
+  };
 
-  useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY_DKM, JSON.stringify(dkmNodes));
-    } catch (e) {}
-  }, [dkmNodes]);
+  const isInitialSyncDone = useRef(false);
 
+  // Read-Through Cache: Hydrate state from server on startup or authentication
   useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY_CHATS, JSON.stringify(chatSessions));
-    } catch (e) {}
-  }, [chatSessions]);
+    const savedUserId = localStorage.getItem(STORAGE_KEY_ACTIVE_USER);
+    if (!savedUserId) return;
 
-  // Chat Session Management
-  const selectChatSession = (sessionId: string) => {
-    const session = chatSessions.find(s => s.id === sessionId);
-    if (session) {
-      setCurrentChatSession(session);
+    fetchUserStateFromServer(savedUserId, userProfile.role).then(state => {
+      if (state && state.user) {
+        setUserProfile(state.user);
+        if (state.islm) setIslm(state.islm);
+        if (state.dkmNodes && state.dkmNodes.length > 0) setDkmNodes(state.dkmNodes);
+        if (state.sessions && state.sessions.length > 0) {
+          setChatSessions(state.sessions);
+          setCurrentChatSession(state.sessions[0]);
+        }
+      }
+      isInitialSyncDone.current = true;
+    });
+  }, []);
+
+  // Sync to server store on user changes (read-through cache write-back)
+  const syncTimerRef = useRef<any>(null);
+  useEffect(() => {
+    if (!isAuthenticated || !userProfile.id || !isInitialSyncDone.current) return;
+
+    clearTimeout(syncTimerRef.current);
+    syncTimerRef.current = setTimeout(() => {
+      syncUserStateToServer({
+        studentId: userProfile.id,
+        userProfile,
+        islm,
+        dkmNodes,
+        sessions: chatSessions,
+      });
+    }, 1000);
+
+    return () => clearTimeout(syncTimerRef.current);
+  }, [userProfile, islm, dkmNodes, chatSessions, isAuthenticated]);
+
+  const loginWithServer = async (params: {
+    email: string;
+    name?: string;
+    role?: 'student' | 'teacher';
+    degree?: string;
+    id?: string;
+  }) => {
+    const state = await loginUserOnServer(params);
+    setUserProfile(state.user);
+    if (state.islm) setIslm(state.islm);
+    if (state.dkmNodes && state.dkmNodes.length > 0) setDkmNodes(state.dkmNodes);
+    if (state.sessions && state.sessions.length > 0) {
+      setChatSessions(state.sessions);
+      setCurrentChatSession(state.sessions[0]);
     }
+    localStorage.setItem(STORAGE_KEY_ACTIVE_USER, state.user.id);
+    setIsAuthenticated(true);
+    isInitialSyncDone.current = true;
+  };
+
+  const selectChatSession = (sessionId: string) => {
+    const found = chatSessions.find(s => s.id === sessionId);
+    if (found) setCurrentChatSession(found);
   };
 
   const createNewChatSession = () => {
     const newSession: ChatSession = {
       id: `chat_${Date.now()}`,
-      title: 'New Conversation',
+      title: 'New Technical Inquiry',
       timestamp: 'Just now',
-      messages: [],
+      messages: [
+        {
+          id: `msg_init_${Date.now()}`,
+          sender: 'assistant',
+          text: 'What Computer Science problem or code error can we explore together?',
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          source: 'gemini',
+          fallback_reason: null,
+        },
+      ],
     };
-    setChatSessions([newSession, ...chatSessions]);
+    setChatSessions(prev => [newSession, ...prev]);
     setCurrentChatSession(newSession);
-    setCurrentWorkflow('CHATS');
+  };
+
+  /**
+   * Central Bayesian Knowledge Tracing & Event Logging Pipeline
+   */
+  const recordObservation = (input: ObservationInput): { updatedNode: DKMNode; trace: BKTTrace } => {
+    let targetNode = dkmNodes.find(n => n.id === input.conceptId) || selectedNode;
+    const { updatedNode, trace } = applyObservationToNode(targetNode, input);
+
+    setDkmNodes(prev => prev.map(n => (n.id === updatedNode.id ? updatedNode : n)));
+    if (selectedNode.id === updatedNode.id) {
+      setSelectedNode(updatedNode);
+    }
+    if (activeDrawerNode && activeDrawerNode.id === updatedNode.id) {
+      setActiveDrawerNode(updatedNode);
+    }
+
+    setIslm(prev => {
+      const updatedTopicMastery = {
+        ...prev.topic_mastery,
+        [updatedNode.id]: updatedNode.mastery,
+      };
+      const values = Object.values(updatedTopicMastery);
+      const overall = values.reduce((a, b) => a + b, 0) / (values.length || 1);
+
+      const recentMisconceptions = !input.isCorrect && input.errorCategory
+        ? [input.errorCategory, ...prev.recent_misconceptions.filter(m => m !== input.errorCategory)].slice(0, 5)
+        : prev.recent_misconceptions;
+
+      return {
+        ...prev,
+        topic_mastery: updatedTopicMastery,
+        overall_mastery: +overall.toFixed(2),
+        independent_solves: input.isIndependent && input.isCorrect ? prev.independent_solves + 1 : prev.independent_solves,
+        error_count: !input.isCorrect ? prev.error_count + 1 : prev.error_count,
+        scaffolding_fading_index: input.isCorrect
+          ? Math.min(1.0, +(prev.scaffolding_fading_index + 0.05).toFixed(2))
+          : Math.max(0.1, +(prev.scaffolding_fading_index - 0.05).toFixed(2)),
+        recent_misconceptions: recentMisconceptions,
+        history: [
+          {
+            id: `hist_${Date.now()}`,
+            timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            topic_id: updatedNode.id,
+            topic_name: updatedNode.name,
+            tier_used: input.tierUsed || prev.scaffolding_tier_required || 1,
+            issue_type: input.isCorrect ? 'PRACTICAL_EXECUTION_ERROR' : 'CONCEPTUAL_GAP',
+            resolved_independently: input.isIndependent && input.isCorrect,
+            notes: `BKT transition: prior ${trace.prior} -> posterior ${trace.posterior} (${input.source})`,
+          },
+          ...prev.history,
+        ],
+      };
+    });
+
+    recordPedagogicalEvent({
+      studentId: userProfile.id,
+      type: 'OBSERVATION_RECORDED',
+      conceptId: input.conceptId,
+      topicId: updatedNode.name,
+      payload: {
+        isCorrect: input.isCorrect,
+        isIndependent: input.isIndependent,
+        source: input.source,
+        prior: trace.prior,
+        posterior: trace.posterior,
+        errorCategory: input.errorCategory,
+        tierUsed: input.tierUsed,
+      },
+      synthetic: false,
+    });
+
+    return { updatedNode, trace };
+  };
+
+  /**
+   * Refactored updateNodeStatus: routes through Bayesian Knowledge Tracing
+   */
+  const updateNodeStatus = (nodeId: string, status: 'GREEN' | 'YELLOW' | 'RED', masteryDelta?: number) => {
+    const isCorrect = status === 'GREEN' || (masteryDelta !== undefined && masteryDelta > 0);
+    recordObservation({
+      conceptId: nodeId,
+      isCorrect,
+      isIndependent: false,
+      source: 'manual-update',
+    });
   };
 
   const sendChatMessage = async (text: string) => {
+    if (!text.trim()) return;
+
     const userMsg: ChatMessage = {
       id: `msg_u_${Date.now()}`,
       sender: 'user',
@@ -287,29 +258,22 @@ export const TutorProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     };
 
     const updatedMessages = [...currentChatSession.messages, userMsg];
-    const isNew = currentChatSession.messages.length === 0;
-    const title = isNew ? text.slice(0, 24) + (text.length > 24 ? '...' : '') : currentChatSession.title;
-
-    const updatedSession = {
+    const interimSession = {
       ...currentChatSession,
-      title,
+      title: currentChatSession.messages.length <= 2 ? text.slice(0, 26) + '...' : currentChatSession.title,
       messages: updatedMessages,
     };
 
-    setCurrentChatSession(updatedSession);
-    setChatSessions(prev =>
-      prev.map(s => (s.id === updatedSession.id ? updatedSession : s))
-    );
+    setCurrentChatSession(interimSession);
+    setChatSessions(prev => prev.map(s => (s.id === interimSession.id ? interimSession : s)));
 
-    // Call Socratic backend with CHATS workflow (no starter PDO code logs!)
     const tutorData = await executeTutoring(text, undefined, undefined, 'CHATS');
 
-    // Only attach visualizerMode badge if a diagram mode was explicitly returned/used
     const respMode = tutorData?.visualizer_data?.mode;
-    const effectiveVisualizer = (respMode && respMode !== 'Text Response') ? respMode : undefined;
+    const effectiveVisualizer = respMode && respMode !== 'Text Response' ? respMode : undefined;
 
-    // Only display refusalReason if an actual anti-answer refusal occurred
-    const isRefusal = tutorData?.scaffolding_response?.refusal_reason &&
+    const isRefusal =
+      tutorData?.scaffolding_response?.refusal_reason &&
       /direct\s+code|solution\s+withheld|anti-answer/i.test(tutorData.scaffolding_response.refusal_reason);
 
     const assistantMsg: ChatMessage = {
@@ -322,17 +286,17 @@ export const TutorProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       visualizerMode: effectiveVisualizer,
       socraticTier: tutorData?.scaffolding_response?.current_tier || 1,
       refusalReason: isRefusal ? tutorData?.scaffolding_response?.refusal_reason : undefined,
+      source: tutorData?.source || 'fallback',
+      fallback_reason: tutorData?.fallback_reason || null,
     };
 
     const finalizedSession = {
-      ...updatedSession,
+      ...interimSession,
       messages: [...updatedMessages, assistantMsg],
     };
 
     setCurrentChatSession(finalizedSession);
-    setChatSessions(prev =>
-      prev.map(s => (s.id === finalizedSession.id ? finalizedSession : s))
-    );
+    setChatSessions(prev => prev.map(s => (s.id === finalizedSession.id ? finalizedSession : s)));
   };
 
   const switchRole = (role: 'student' | 'teacher') => {
@@ -345,38 +309,6 @@ export const TutorProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   };
 
-  const updateNodeStatus = (nodeId: string, status: 'GREEN' | 'YELLOW' | 'RED', masteryDelta: number) => {
-    setDkmNodes(prev =>
-      prev.map(node => {
-        if (node.id === nodeId) {
-          const newMastery = Math.min(1.0, Math.max(0.1, +(node.mastery + masteryDelta).toFixed(2)));
-          return {
-            ...node,
-            status,
-            mastery: newMastery,
-            solvedCount: masteryDelta > 0 ? node.solvedCount + 1 : node.solvedCount,
-          };
-        }
-        return node;
-      })
-    );
-
-    setIslm(prev => {
-      const updatedTopicMastery = {
-        ...prev.topic_mastery,
-        [nodeId]: Math.min(1.0, Math.max(0.1, +((prev.topic_mastery[nodeId] || 0.4) + masteryDelta).toFixed(2))),
-      };
-      const values = Object.values(updatedTopicMastery);
-      const overall = values.reduce((a, b) => a + b, 0) / (values.length || 1);
-      return {
-        ...prev,
-        topic_mastery: updatedTopicMastery,
-        overall_mastery: +overall.toFixed(2),
-        scaffolding_fading_index: Math.min(1.0, +(prev.scaffolding_fading_index + 0.05).toFixed(2)),
-      };
-    });
-  };
-
   const executeTutoring = async (
     studentInput: string,
     codeSnippet?: string,
@@ -385,105 +317,33 @@ export const TutorProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   ): Promise<TutoringResponse | null> => {
     setIsLoading(true);
     try {
-      const isSandbox = workflow === 'CODE_SANDBOX_TUTORING';
-      const payload = {
+      const data = await requestTutoringApi({
+        studentInput,
+        studentId: userProfile.id,
+        selectedNode,
+        visualizerMode,
+        islm,
+        codeSnippet,
+        executionLogs,
         workflow,
-        student_id: userProfile.id,
-        course_track: selectedNode.track,
-        current_topic: selectedNode.name,
-        visualizer_mode: visualizerMode,
-        islm_profile: {
-          overall_mastery: islm.overall_mastery,
-          topic_mastery: islm.topic_mastery,
-          recent_misconceptions: islm.recent_misconceptions,
-          scaffolding_tier_required: islm.scaffolding_tier_required,
-        },
-        student_input: studentInput,
-        // Crucial fix: Only pass code snippets/error logs in Code Sandbox mode, never in general Chat!
-        code_snippet: isSandbox ? (codeSnippet || selectedNode.starterCodeSnippet) : (codeSnippet || ''),
-        execution_logs: isSandbox ? (executionLogs || selectedNode.starterErrorLog) : (executionLogs || ''),
-      };
+      });
 
-      // 4-second client timeout to guarantee zero UI hanging
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 4000);
-
-      const response = await fetch('/api/tutoring', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-        signal: controller.signal,
-      }).finally(() => clearTimeout(timeoutId));
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data: TutoringResponse = await response.json();
       setTutoringResponse(data);
-
       if (data.content_hooks?.video_script_storyboard) {
         setActiveVideoStoryboard(data.content_hooks.video_script_storyboard);
       }
-
       return data;
-    } catch (err) {
-      console.warn('Tutoring engine network Notice (engaging immediate Socratic fallback):', err);
-      // Resilient fallback for immediate sub-10ms response
-      const isGreeting = /^(hi|hello|hey|greetings|howdy|good\s+(morning|afternoon|evening)|yo|hola|start|sup|welcome)(\s+.*)?$/i.test(studentInput.trim());
-
-      const fallback: TutoringResponse = {
-        workflow,
-        diagnosis: {
-          issue_type: 'CONCEPTUAL_GAP',
-          identified_gap: isGreeting ? 'CSE Technical Orientation' : 'Core Concept Inquiry',
-          confidence_score: 0.98,
-        },
-        scaffolding_response: {
-          current_tier: 1,
-          refusal_reason: '',
-          tutor_message: isGreeting
-            ? "Hello! I am your CogniCSE Technical Tutor. How can I help you master Computer Science & Engineering today? We can explore core topics like Data Structures & Algorithms, Operating Systems, Computer Networks, or dive into debugging in the Code Sandbox!"
-            : `Let's break down this question from first principles: "${studentInput}". What part of this system or algorithm behavior seems most counter-intuitive right now?`,
-          socratic_question: isGreeting
-            ? "Which CSE track or concept would you like to explore first?"
-            : "What initial hypothesis do you have about how the program or system should behave here?",
-        },
-        visualizer_data: {
-          mode: 'Text Response',
-          structure: { nodes: [], edges: [] },
-        },
-        islm_updates: {
-          updated_topic_mastery: { [selectedNode.name]: islm.overall_mastery },
-          memory_tree_node_status: {
-            node_id: selectedNode.id,
-            node_name: selectedNode.name,
-            status: 'GREEN',
-          },
-          increment_error_count: false,
-          next_scaffolding_tier: 1,
-        },
-        content_hooks: {
-          trigger_ai_video: false,
-          flag_for_mock_test: false,
-        },
-        research_telemetry: {
-          scaffolding_fading_index: islm.scaffolding_fading_index,
-          estimated_time_to_resolution_mins: 2,
-          error_recurrence_drop: '25%',
-        },
-      };
-
-      setTutoringResponse(fallback);
-      return fallback;
     } finally {
       setIsLoading(false);
     }
   };
 
+  /**
+   * Refactored verifyIndependentFix: uses BKT observation rather than unconditional delta
+   */
   const verifyIndependentFix = async (fixedCode: string): Promise<{ success: boolean; message: string }> => {
     setIsLoading(true);
-    await new Promise(r => setTimeout(r, 500));
+    await new Promise(r => setTimeout(r, 450));
 
     confetti({
       particleCount: 80,
@@ -491,64 +351,54 @@ export const TutorProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       origin: { y: 0.6 },
     });
 
-    updateNodeStatus(selectedNode.id, 'GREEN', 0.25);
+    const { updatedNode } = recordObservation({
+      conceptId: selectedNode.id,
+      isCorrect: true,
+      isIndependent: true,
+      source: 'sandbox',
+      tierUsed: islm.scaffolding_tier_required || 1,
+    });
+
     setIslm(prev => ({
       ...prev,
-      independent_solves: prev.independent_solves + 1,
       scaffolding_tier_required: 1,
-      scaffolding_fading_index: Math.min(1.0, +(prev.scaffolding_fading_index + 0.1).toFixed(2)),
     }));
 
     setIsLoading(false);
     return {
       success: true,
-      message: 'Independent problem-solving verified! The fix cleared all assertions without direct code assistance.',
+      message: `Independent problem-solving verified! Bayesian p(L) updated to ${(updatedNode.mastery * 100).toFixed(1)}%.`,
     };
   };
 
+  /**
+   * Refactored runDiagnosticPretestComplete: uses individual BKT observations
+   */
   const runDiagnosticPretestComplete = (score: number, missedTopicIds: string[]) => {
-    const accuracy = score / 5;
-    setDkmNodes(prev =>
-      prev.map(node => {
-        if (missedTopicIds.includes(node.id)) {
-          return { ...node, status: 'RED', mastery: Math.min(node.mastery, 0.3) };
-        }
-        return { ...node, status: 'GREEN', mastery: Math.max(node.mastery, 0.8) };
-      })
-    );
+    // Record an observation for every tested topic based on individual test outcome
+    dkmNodes.forEach(node => {
+      const isMissed = missedTopicIds.includes(node.id);
+      recordObservation({
+        conceptId: node.id,
+        isCorrect: !isMissed,
+        isIndependent: true,
+        source: 'pretest',
+        errorCategory: isMissed ? 'Diagnostic Pretest Gap' : undefined,
+      });
+    });
 
-    setIslm(prev => ({
-      ...prev,
-      overall_mastery: +accuracy.toFixed(2),
-      scaffolding_fading_index: +(accuracy * 0.5).toFixed(2),
-    }));
+    recordPedagogicalEvent({
+      studentId: userProfile.id,
+      type: 'DIAGNOSTIC_PRETEST_COMPLETED',
+      conceptId: 'pretest',
+      topicId: 'diagnostic',
+      payload: { score, missedTopicIds, accuracy: score / 5 },
+      synthetic: false,
+    });
   };
 
   const exportOfflinePack = () => {
-    const reportData = {
-      system: 'CogniCSE Pedagogical 1-on-1 Socratic Learning Support Matrix',
-      export_date: new Date().toISOString(),
-      student_profile: userProfile,
-      islm_model: islm,
-      domain_knowledge_tree: dkmNodes.map(n => ({
-        id: n.id,
-        name: n.name,
-        track: n.track,
-        status: n.status,
-        mastery: `${(n.mastery * 100).toFixed(0)}%`,
-        keyConcept: n.keyConcept,
-        typicalTrap: n.typicalTrap,
-      })),
-      recommended_offline_study_topics: dkmNodes.filter(n => n.status === 'RED').map(n => n.name),
-    };
-
-    const blob = new Blob([JSON.stringify(reportData, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `CogniCSE_Matrix_Pack_${userProfile.name.replace(/[^a-z0-9]/gi, '_')}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
+    exportOfflinePackFile(userProfile, islm, dkmNodes);
   };
 
   return (
@@ -570,6 +420,8 @@ export const TutorProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         chatSessions,
         currentChatSession,
         activeReviewQuestions,
+        activeDrawerNode,
+        isWhyDrawerOpen,
         setActiveReviewQuestions,
         setActiveTrack,
         setSelectedNode,
@@ -580,11 +432,15 @@ export const TutorProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         verifyIndependentFix,
         switchRole,
         updateNodeStatus,
+        recordObservation,
+        openWhyScoreDrawer,
+        closeWhyScoreDrawer,
         exportOfflinePack,
         runDiagnosticPretestComplete,
         sendChatMessage,
         selectChatSession,
         createNewChatSession,
+        loginWithServer,
       }}
     >
       {children}

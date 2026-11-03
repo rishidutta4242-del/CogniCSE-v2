@@ -55,6 +55,19 @@ export interface ChatMessage {
   socraticTier?: number;
   codeSnippet?: string;
   refusalReason?: string;
+  source?: 'gemini' | 'fallback';
+  fallback_reason?: string | null;
+}
+
+export interface PedagogicalEvent {
+  id: string;
+  ts: string;
+  studentId: string;
+  type: string;
+  conceptId: string;
+  topicId: string;
+  payload: Record<string, any>;
+  synthetic: boolean;
 }
 
 export interface ChatSession {
@@ -64,6 +77,55 @@ export interface ChatSession {
   messages: ChatMessage[];
   relatedTopicId?: string;
   associatedQuestions?: MockTestQuestion[];
+}
+
+export type EvidenceLabel =
+  | 'Insufficient Evidence'
+  | 'Possible Difficulty'
+  | 'Likely Misconception'
+  | 'Confirmed through Repeated Evidence';
+
+export type MasteryStatus = 'Mastered' | 'Near Mastery' | 'Improving' | 'Developing' | 'Needs Attention';
+
+export interface BKTTrace {
+  id: string;
+  conceptId: string;
+  prior: number;
+  observed: boolean;
+  posterior: number;
+  pLObserved?: number;
+  isCorrect: boolean;
+  isIndependent: boolean;
+  source: string;
+  timestamp: string;
+  errorCategory?: string;
+  tierUsed?: number;
+}
+
+export interface CompositeMasteryBreakdown {
+  composite: number; // 0-100 scale (rounded integer)
+  conceptual: number; // 0-100 scale
+  practical: number; // 0-100 scale
+  independent: number; // 0-100 scale
+  retention: number | null; // 0-100 scale or null if none exists yet
+  weights: {
+    conceptual: number;
+    practical: number;
+    independent: number;
+    retention: number;
+  };
+  status: MasteryStatus;
+  independentPassedCount: number;
+}
+
+export interface ObservationInput {
+  conceptId: string;
+  isCorrect: boolean;
+  isIndependent: boolean;
+  source: 'quiz' | 'pretest' | 'sandbox' | 'mock-test' | 'micro-drill' | 'transfer-task' | 'recheck' | string;
+  errorCategory?: string;
+  tierUsed?: number; // 1 (100), 2 (85), 3 (70), 4 (50)
+  score?: number; // 0-100 override if applicable
 }
 
 export interface DKMNode {
@@ -79,9 +141,12 @@ export interface DKMNode {
   starterErrorLog: string;
   prerequisites: string[];
   status: NodeStatus;
-  mastery: number; // 0.0 to 1.0
+  mastery: number; // 0.0 to 1.0 (pL)
   errorCount: number;
   solvedCount: number;
+  bktTrace?: BKTTrace[];
+  evidenceLabel?: EvidenceLabel;
+  compositeMastery?: CompositeMasteryBreakdown;
 }
 
 export interface ISLMProfile {
@@ -152,6 +217,8 @@ export interface TutoringResponse {
     estimated_time_to_resolution_mins: number;
     error_recurrence_drop: string;
   };
+  source?: 'gemini' | 'fallback';
+  fallback_reason?: string | null;
 }
 
 export interface VideoScene {

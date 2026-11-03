@@ -3,27 +3,13 @@ import { useTutor } from '../../context/TutorContext';
 import { Visualizers } from './Visualizers';
 import { SyntaxCodeEditor } from './SyntaxCodeEditor';
 import {
-  Play,
-  CheckCircle2,
-  RefreshCw,
-  Sparkles,
-  AlertOctagon,
-  Terminal,
-  HelpCircle,
-  Video,
-  Eye,
-  Send,
-  Lock,
-  Code2,
-  ChevronDown,
-  Search,
-  Cpu,
-  Layers,
-  BookOpen,
-  Check,
+  Play, CheckCircle2, RefreshCw, Sparkles, AlertOctagon,
+  Terminal, HelpCircle, Video, Eye, Send, Lock,
+  Code2, ChevronDown, Search, Cpu, Layers, BookOpen, Check, Calculator
 } from 'lucide-react';
 import { VisualizerMode, SupportedLanguage } from '../../types';
 import { SUPPORTED_LANGUAGES, LanguageConfig } from '../../data/languages';
+import { LanguageSelectorDropdown } from './LanguageSelectorDropdown';
 
 export const CodeSandbox: React.FC = () => {
   const {
@@ -33,6 +19,8 @@ export const CodeSandbox: React.FC = () => {
     setVisualizerMode,
     executeTutoring,
     verifyIndependentFix,
+    recordObservation,
+    openWhyScoreDrawer,
     tutoringResponse,
     isLoading,
     setCurrentWorkflow,
@@ -46,8 +34,6 @@ export const CodeSandbox: React.FC = () => {
   const [drillAnswer, setDrillAnswer] = useState('');
   const [verificationFeedback, setVerificationFeedback] = useState<{ success: boolean; message: string } | null>(null);
   const [executionStatus, setExecutionStatus] = useState<'idle' | 'running' | 'error' | 'success'>('error');
-  const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
-  const [langSearchQuery, setLangSearchQuery] = useState('');
 
   const currentLangConfig: LanguageConfig = useMemo(() => {
     return SUPPORTED_LANGUAGES.find(l => l.id === currentLangId) || SUPPORTED_LANGUAGES[0];
@@ -63,15 +49,6 @@ export const CodeSandbox: React.FC = () => {
     setDrillAnswer('');
   }, [currentLangConfig]);
 
-  // Filter languages in dropdown
-  const filteredLanguages = useMemo(() => {
-    if (!langSearchQuery.trim()) return SUPPORTED_LANGUAGES;
-    const q = langSearchQuery.toLowerCase();
-    return SUPPORTED_LANGUAGES.filter(
-      l => l.name.toLowerCase().includes(q) || l.extension.toLowerCase().includes(q) || l.id.toLowerCase().includes(q)
-    );
-  }, [langSearchQuery]);
-
   // Handle Simulated Code Execution
   const handleRunCode = () => {
     setExecutionStatus('running');
@@ -85,6 +62,14 @@ export const CodeSandbox: React.FC = () => {
         );
         setExecutionStatus('success');
       } else {
+        recordObservation({
+          conceptId: selectedNode.id,
+          isCorrect: false,
+          isIndependent: false,
+          source: 'sandbox',
+          errorCategory: 'Compilation / Runtime Error',
+          tierUsed: islm.scaffolding_tier_required || 1,
+        });
         setLogs(currentLangConfig.buggyPreset.errorLog);
         setExecutionStatus('error');
       }
@@ -110,6 +95,14 @@ export const CodeSandbox: React.FC = () => {
       });
       setExecutionStatus('success');
     } else {
+      recordObservation({
+        conceptId: selectedNode.id,
+        isCorrect: false,
+        isIndependent: true,
+        source: 'sandbox',
+        errorCategory: 'Independent Verification Logic Bug',
+        tierUsed: islm.scaffolding_tier_required || 1,
+      });
       setVerificationFeedback({
         success: false,
         message: result.feedback,
@@ -152,64 +145,11 @@ export const CodeSandbox: React.FC = () => {
         {/* Right Action buttons */}
         <div className="flex items-center gap-2.5 shrink-0 flex-wrap">
           {/* Prominent Language Selector Dropdown */}
-          <div className="relative">
-            <button
-              onClick={() => setShowLanguageDropdown(!showLanguageDropdown)}
-              className="px-4 py-2.5 bg-gradient-to-r from-[#101b2d] to-[#15233a] hover:from-[#142238] hover:to-[#1a2c48] text-white rounded-xl text-xs font-bold flex items-center gap-2.5 border border-[#223652] transition-all cursor-pointer shadow-md"
-            >
-              <Code2 className="w-4 h-4 text-indigo-400" />
-              <span>Language: {currentLangConfig.name}</span>
-              <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
-            </button>
-
-            {showLanguageDropdown && (
-              <div className="absolute right-0 top-full mt-2 w-64 bg-[#0a111e] border border-[#1e2f47] rounded-2xl p-2.5 shadow-2xl z-40 space-y-2">
-                {/* Search in dropdown */}
-                <div className="relative">
-                  <Search className="w-3.5 h-3.5 text-slate-500 absolute left-2.5 top-2.5" />
-                  <input
-                    type="text"
-                    value={langSearchQuery}
-                    onChange={e => setLangSearchQuery(e.target.value)}
-                    placeholder="Search languages..."
-                    className="w-full bg-[#050911] border border-[#1a273b] rounded-lg pl-8 pr-2 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                  />
-                </div>
-
-                <div className="text-[10px] font-mono text-slate-500 px-1 uppercase tracking-wider">
-                  Supported Runtimes ({filteredLanguages.length})
-                </div>
-
-                {/* Language list */}
-                <div className="max-h-64 overflow-y-auto space-y-1 pr-1">
-                  {filteredLanguages.map(lang => {
-                    const isSelected = currentLangId === lang.id;
-                    return (
-                      <button
-                        key={lang.id}
-                        onClick={() => {
-                          setCurrentLangId(lang.id);
-                          setShowLanguageDropdown(false);
-                          setLangSearchQuery('');
-                        }}
-                        className={`w-full text-left px-3 py-2 rounded-xl text-xs flex items-center justify-between cursor-pointer transition-all ${
-                          isSelected
-                            ? 'bg-blue-600 text-white font-bold shadow-md shadow-blue-600/30'
-                            : 'text-slate-300 hover:bg-[#121d2f]'
-                        }`}
-                      >
-                        <div className="flex items-center gap-2">
-                          <span>{lang.name}</span>
-                          <span className="text-[10px] opacity-70 font-mono">.{lang.extension}</span>
-                        </div>
-                        {isSelected && <Check className="w-3.5 h-3.5 text-white" />}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </div>
+          <LanguageSelectorDropdown
+            currentLangConfig={currentLangConfig}
+            currentLangId={currentLangId}
+            onSelectLanguage={setCurrentLangId}
+          />
 
           <button
             onClick={() => setCurrentWorkflow('AI_VIDEO')}
@@ -217,6 +157,15 @@ export const CodeSandbox: React.FC = () => {
           >
             <Video className="w-4 h-4" />
             <span>60s Video</span>
+          </button>
+
+          <button
+            onClick={() => openWhyScoreDrawer(selectedNode)}
+            className="px-3 py-2.5 bg-slate-900 hover:bg-slate-800 text-indigo-300 border border-indigo-900/60 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer"
+            title="Inspect Bayesian Knowledge Tracing & Composite Mastery calculation"
+          >
+            <Calculator className="w-4 h-4 text-indigo-400" />
+            <span>Why this score?</span>
           </button>
         </div>
       </div>
@@ -371,11 +320,25 @@ export const CodeSandbox: React.FC = () => {
           <div className="bg-[#0c1421] border border-[#1a273b] rounded-2xl p-5 shadow-lg space-y-4">
             {/* Scaffolding Tier Badge */}
             <div className="flex items-center justify-between pb-3 border-b border-[#1a273b]">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 flex-wrap">
                 <Sparkles className="w-4 h-4 text-blue-400" />
                 <span className="text-xs font-bold text-white uppercase tracking-wider">
                   CogniCSE Socratic Engine
                 </span>
+                {tutoringResponse?.source === 'gemini' ? (
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 text-[10px] font-mono font-bold">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    LIVE AI
+                  </span>
+                ) : (
+                  <span
+                    className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-amber-950/80 border border-amber-500/50 text-amber-300 text-[10px] font-mono font-bold"
+                    title={tutoringResponse?.fallback_reason || 'Local Socratic Fallback'}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                    FALLBACK
+                  </span>
+                )}
               </div>
               <div className="flex items-center gap-1.5">
                 {[1, 2, 3, 4].map(tier => (

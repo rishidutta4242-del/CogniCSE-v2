@@ -14,9 +14,18 @@ import { StudentDashboard } from './components/Dashboards/StudentDashboard';
 import { TeacherDashboard } from './components/Dashboards/TeacherDashboard';
 import { DiagnosticPretestModal } from './components/Pretest/DiagnosticPretestModal';
 import { SecurityAuditModal } from './components/SecurityAudit/SecurityAuditModal';
+import { WhyThisScoreDrawer } from './components/Mastery/WhyThisScoreDrawer';
 
 const MainApplication: React.FC = () => {
-  const { isAuthenticated, currentWorkflow } = useTutor();
+  const {
+    isAuthenticated,
+    currentWorkflow,
+    setCurrentWorkflow,
+    setSelectedNode,
+    activeDrawerNode,
+    isWhyDrawerOpen,
+    closeWhyScoreDrawer,
+  } = useTutor();
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isSecurityAuditOpen, setIsSecurityAuditOpen] = useState(false);
   const [isPretestOpen, setIsPretestOpen] = useState(false);
@@ -134,6 +143,15 @@ const MainApplication: React.FC = () => {
       <DiagnosticPretestModal
         isOpen={isPretestOpen}
         onClose={() => setIsPretestOpen(false)}
+      />
+      <WhyThisScoreDrawer
+        node={activeDrawerNode}
+        isOpen={isWhyDrawerOpen}
+        onClose={closeWhyScoreDrawer}
+        onOpenSandbox={node => {
+          setSelectedNode(node);
+          setCurrentWorkflow('CODE_SANDBOX');
+        }}
       />
     </div>
   );

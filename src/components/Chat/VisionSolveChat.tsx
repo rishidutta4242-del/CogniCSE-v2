@@ -167,11 +167,30 @@ export const VisionSolveChat: React.FC = () => {
                         : 'bg-[#0c1421] border border-[#1a273b] text-slate-200 rounded-bl-none shadow-lg'
                     }`}
                   >
-                    {/* Visualizer Mode Badge if present */}
-                    {!isUser && msg.visualizerMode && msg.visualizerMode !== 'Text Response' && (
-                      <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-[#111b2b] border border-[#1e2f47] text-[10px] text-blue-400 font-mono font-semibold mb-2">
-                        <Layers className="w-3 h-3" />
-                        <span>Mode: {msg.visualizerMode}</span>
+                    {/* Provenance Badge & Visualizer Mode Badge */}
+                    {!isUser && (
+                      <div className="flex items-center gap-2 mb-2 flex-wrap">
+                        {msg.source === 'gemini' ? (
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 text-[10px] font-mono font-bold">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                            LIVE AI
+                          </span>
+                        ) : (
+                          <span
+                            className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-amber-950/80 border border-amber-500/50 text-amber-300 text-[10px] font-mono font-bold"
+                            title={msg.fallback_reason || 'Local Socratic Engine fallback'}
+                          >
+                            <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                            FALLBACK
+                          </span>
+                        )}
+
+                        {msg.visualizerMode && msg.visualizerMode !== 'Text Response' && (
+                          <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#111b2b] border border-[#1e2f47] text-[10px] text-blue-400 font-mono font-semibold">
+                            <Layers className="w-3 h-3" />
+                            <span>Mode: {msg.visualizerMode}</span>
+                          </div>
+                        )}
                       </div>
                     )}
 

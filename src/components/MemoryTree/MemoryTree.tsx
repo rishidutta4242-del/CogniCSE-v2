@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTutor } from '../../context/TutorContext';
 import { DKMNode } from '../../types';
-import { Search, Filter, GitGraph, Video, Terminal, CheckCircle2, AlertTriangle, AlertCircle, ArrowRight, BookOpen, Layers } from 'lucide-react';
+import { Search, Filter, GitGraph, Video, Terminal, CheckCircle2, AlertTriangle, AlertCircle, ArrowRight, BookOpen, Layers, Calculator } from 'lucide-react';
 
 export const MemoryTree: React.FC = () => {
   const {
@@ -12,6 +12,7 @@ export const MemoryTree: React.FC = () => {
     activeTrack,
     setActiveTrack,
     islm,
+    openWhyScoreDrawer,
   } = useTutor();
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -194,11 +195,18 @@ export const MemoryTree: React.FC = () => {
                   <div className="text-rose-200 text-[11px] leading-relaxed font-mono">{node.typicalTrap}</div>
                 </div>
 
-                {/* Mastery Meter */}
-                <div className="space-y-1 mb-4">
+                {/* Mastery Meter & Evidence Info */}
+                <div className="space-y-1.5 mb-4">
                   <div className="flex items-center justify-between text-[11px] font-mono text-slate-400">
-                    <span>Topic Mastery:</span>
-                    <span className="font-bold text-slate-200">{(node.mastery * 100).toFixed(0)}%</span>
+                    <button
+                      onClick={() => openWhyScoreDrawer(node)}
+                      className="flex items-center gap-1 text-indigo-400 hover:text-indigo-300 font-medium cursor-pointer transition-colors"
+                      title="Inspect Bayesian Knowledge Tracing equation and evidence trace"
+                    >
+                      <Calculator className="w-3 h-3" />
+                      <span className="underline decoration-dotted">Why this score?</span>
+                    </button>
+                    <span className="font-bold text-slate-200">{(node.mastery * 100).toFixed(0)}% (pL: {node.mastery.toFixed(2)})</span>
                   </div>
                   <div className="w-full h-1.5 bg-slate-950 rounded-full overflow-hidden">
                     <div
@@ -209,6 +217,12 @@ export const MemoryTree: React.FC = () => {
                       style={{ width: `${Math.round(node.mastery * 100)}%` }}
                     />
                   </div>
+                  {node.evidenceLabel && (
+                    <div className="text-[10px] text-slate-400 flex items-center justify-between pt-0.5">
+                      <span>Evidence:</span>
+                      <span className="text-slate-300 font-mono">{node.evidenceLabel}</span>
+                    </div>
+                  )}
                 </div>
               </div>
 
