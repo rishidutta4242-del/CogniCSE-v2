@@ -16,6 +16,9 @@ import { DiagnosticPretestModal } from './components/Pretest/DiagnosticPretestMo
 import { SecurityAuditModal } from './components/SecurityAudit/SecurityAuditModal';
 import { WhyThisScoreDrawer } from './components/Mastery/WhyThisScoreDrawer';
 import { CADLab } from './components/CADLab/CADLab';
+import { WebDevLab } from './components/WebDevLab/WebDevLab';
+import { EngagementPanel } from './components/Engagement/EngagementPanel';
+import { LiveClassView } from './components/LiveClass/LiveClassView';
 
 const MainApplication: React.FC = () => {
   const {
@@ -106,6 +109,11 @@ const MainApplication: React.FC = () => {
             <CADLab />
           </div>
         )}
+        {currentWorkflow === 'WEB_DEV_LAB' && (
+          <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full">
+            <WebDevLab />
+          </div>
+        )}
         {currentWorkflow === 'MEMORY_TREE' && (
           <div className="p-4 sm:p-6 max-w-7xl mx-auto w-full flex-1">
             <VisionMemoryTree />
@@ -134,6 +142,16 @@ const MainApplication: React.FC = () => {
         {currentWorkflow === 'TEACHER_DASHBOARD' && (
           <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full">
             <TeacherDashboard />
+          </div>
+        )}
+        {currentWorkflow === 'ENGAGEMENT' && (
+          <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full">
+            <EngagementPanel />
+          </div>
+        )}
+        {currentWorkflow === 'LIVE_CLASS' && (
+          <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full">
+            <LiveClassView />
           </div>
         )}
       </main>

@@ -1,0 +1,3539 @@
+{
+  "users": [
+    {
+      "id": "CSE_STU_8810",
+      "name": "haritha karthikkumar",
+      "email": "haritha.k@university.edu",
+      "role": "student",
+      "plan": "Free Plan",
+      "degree": "B.Tech in Computer Science & Engineering",
+      "preferredLanguages": [
+        "python",
+        "javascript",
+        "java",
+        "cpp",
+        "php"
+      ],
+      "streakDays": 7,
+      "testsCompleted": 3,
+      "overallMastery": 0.75,
+      "theme": "dark"
+    },
+    {
+      "id": "CSE_STU_9021",
+      "name": "Alex Rivera",
+      "email": "alex.r@university.edu",
+      "role": "student",
+      "plan": "Free Plan",
+      "degree": "B.Tech in Computer Science & Engineering",
+      "preferredLanguages": [
+        "python",
+        "javascript"
+      ],
+      "streakDays": 2,
+      "testsCompleted": 1,
+      "overallMastery": 0.28,
+      "theme": "dark"
+    },
+    {
+      "id": "CSE_STU_7734",
+      "name": "Maya Lin",
+      "email": "maya.l@university.edu",
+      "role": "student",
+      "plan": "Pro Student",
+      "degree": "B.Tech in Computer Science & Engineering",
+      "preferredLanguages": [
+        "cpp",
+        "python",
+        "rust"
+      ],
+      "streakDays": 14,
+      "testsCompleted": 8,
+      "overallMastery": 0.88,
+      "theme": "dark"
+    },
+    {
+      "id": "FACULTY_402",
+      "name": "Prof. David Thorne",
+      "email": "d.thorne@cs.university.edu",
+      "role": "teacher",
+      "plan": "Campus License",
+      "degree": "Department of Computer Science & Engineering",
+      "preferredLanguages": [
+        "cpp",
+        "python",
+        "go",
+        "rust"
+      ],
+      "streakDays": 42,
+      "testsCompleted": 18,
+      "overallMastery": 0.94,
+      "theme": "dark"
+    }
+  ],
+  "islm": [
+    {
+      "student_id": "CSE_STU_9021",
+      "name": "Alex Rivera",
+      "email": "alex.r@university.edu",
+      "role": "student",
+      "course_track": "Web Application Development",
+      "overall_mastery": 0.28,
+      "topic_mastery": {
+        "pdo_mysql_port": 0.2,
+        "web_apache_docroot": 0.14,
+        "recursion_base_case": 0.25,
+        "tcp_three_way_handshake": 0.35,
+        "async_event_loop": 0.3
+      },
+      "recent_misconceptions": [
+        "Confused line endings with file path accessibility",
+        "Confusing MySQL database port (3306) with HTTP web port (80)",
+        "Saving web assets outside DocumentRoot"
+      ],
+      "scaffolding_tier_required": 1,
+      "error_count": 9,
+      "independent_solves": 2,
+      "scaffolding_fading_index": 0.2,
+      "time_spent_mins": 45,
+      "history": []
+    },
+    {
+      "student_id": "CSE_STU_7734",
+      "name": "Maya Lin",
+      "email": "maya.l@university.edu",
+      "role": "student",
+      "course_track": "Web Application Development",
+      "overall_mastery": 0.88,
+      "topic_mastery": {
+        "pdo_mysql_port": 0.92,
+        "web_apache_docroot": 0.99,
+        "recursion_base_case": 0.85,
+        "tcp_three_way_handshake": 0.9,
+        "async_event_loop": 0.9
+      },
+      "recent_misconceptions": [],
+      "scaffolding_tier_required": 1,
+      "error_count": 1,
+      "independent_solves": 29,
+      "scaffolding_fading_index": 0.9,
+      "time_spent_mins": 260,
+      "history": []
+    },
+    {
+      "student_id": "CSE_STU_8810",
+      "name": "haritha karthikkumar",
+      "email": "haritha.k@university.edu",
+      "role": "student",
+      "course_track": "Web Application Development",
+      "overall_mastery": 0.44,
+      "topic_mastery": {
+        "pdo_mysql_port": 0.25,
+        "recursion_base_case": 0.3,
+        "tcp_three_way_handshake": 0.88,
+        "async_event_loop": 0.85,
+        "cad_stress_fos": 0.187,
+        "web_apache_docroot": 0.29
+      },
+      "recent_misconceptions": [
+        "directory_error",
+        "Compilation / Runtime Error",
+        "Independent Verification Logic Bug",
+        "Confusing MySQL database port (3306) with HTTP web port (80)",
+        "Omitting recursive base cases leading to call stack exhaustion"
+      ],
+      "scaffolding_tier_required": 1,
+      "error_count": 28,
+      "independent_solves": 16,
+      "scaffolding_fading_index": 0.1,
+      "time_spent_mins": 142,
+      "history": [
+        {
+          "id": "hist_1793690458116",
+          "timestamp": "12:50",
+          "topic_id": "web_apache_docroot",
+          "topic_name": "Apache DocumentRoot & File Hierarchy",
+          "tier_used": 1,
+          "issue_type": "CONCEPTUAL_GAP",
+          "resolved_independently": false,
+          "notes": "BKT transition: prior 0.1714 -> posterior 0.1714 (sandbox)"
+        },
+        {
+          "id": "hist_1793690458116",
+          "timestamp": "12:50",
+          "topic_id": "web_apache_docroot",
+          "topic_name": "Apache DocumentRoot & File Hierarchy",
+          "tier_used": 1,
+          "issue_type": "CONCEPTUAL_GAP",
+          "resolved_independently": false,
+          "notes": "BKT transition: prior 0.1714 -> posterior 0.1714 (web_lab)"
+        },
+        {
+          "id": "hist_1793690455867",
+          "timestamp": "12:50",
+          "topic_id": "web_apache_docroot",
+          "topic_name": "Apache DocumentRoot & File Hierarchy",
+          "tier_used": 1,
+          "issue_type": "CONCEPTUAL_GAP",
+          "resolved_independently": false,
+          "notes": "BKT transition: prior 0.1714 -> posterior 0.1714 (sandbox)"
+        },
+        {
+          "id": "hist_1793690455867",
+          "timestamp": "12:50",
+          "topic_id": "web_apache_docroot",
+          "topic_name": "Apache DocumentRoot & File Hierarchy",
+          "tier_used": 1,
+          "issue_type": "CONCEPTUAL_GAP",
+          "resolved_independently": false,
+          "notes": "BKT transition: prior 0.1714 -> posterior 0.1714 (web_lab)"
+        },
+        {
+          "id": "hist_1793690453935",
+          "timestamp": "12:50",
+          "topic_id": "web_apache_docroot",
+          "topic_name": "Apache DocumentRoot & File Hierarchy",
+          "tier_used": 1,
+          "issue_type": "CONCEPTUAL_GAP",
+          "resolved_independently": false,
+          "notes": "BKT transition: prior 0.1714 -> posterior 0.1714 (sandbox)"
+        },
+        {
+          "id": "hist_1793690453935",
+          "timestamp": "12:50",
+          "topic_id": "web_apache_docroot",
+          "topic_name": "Apache DocumentRoot & File Hierarchy",
+          "tier_used": 1,
+          "issue_type": "CONCEPTUAL_GAP",
+          "resolved_independently": false,
+          "notes": "BKT transition: prior 0.1714 -> posterior 0.1714 (web_lab)"
+        },
+        {
+          "id": "hist_1793690400757",
+          "timestamp": "12:50",
+          "topic_id": "web_apache_docroot",
+          "topic_name": "Apache DocumentRoot & File Hierarchy",
+          "tier_used": 1,
+          "issue_type": "CONCEPTUAL_GAP",
+          "resolved_independently": false,
+          "notes": "BKT transition: prior 0.1714 -> posterior 0.1714 (sandbox)"
+        },
+        {
+          "id": "hist_1793690400757",
+          "timestamp": "12:50",
+          "topic_id": "web_apache_docroot",
+          "topic_name": "Apache DocumentRoot & File Hierarchy",
+          "tier_used": 1,
+          "issue_type": "CONCEPTUAL_GAP",
+          "resolved_independently": false,
+          "notes": "BKT transition: prior 0.1714 -> posterior 0.1714 (web_lab)"
+        },
+        {
+          "id": "hist_1793690385008",
+          "timestamp": "12:49",
+          "topic_id": "web_apache_docroot",
+          "topic_name": "Apache DocumentRoot & File Hierarchy",
+          "tier_used": 1,
+          "issue_type": "CONCEPTUAL_GAP",
+          "resolved_independently": false,
+          "notes": "BKT transition: prior 0.1714 -> posterior 0.1714 (sandbox)"
+        },
+        {
+          "id": "hist_1793690385008",
+          "timestamp": "12:49",
+          "topic_id": "web_apache_docroot",
+          "topic_name": "Apache DocumentRoot & File Hierarchy",
+          "tier_used": 1,
+          "issue_type": "CONCEPTUAL_GAP",
+          "resolved_independently": false,
+          "notes": "BKT transition: prior 0.1714 -> posterior 0.1714 (web_lab)"
+        },
+        {
+          "id": "hist_1793690340565",
+          "timestamp": "12:49",
+          "topic_id": "web_apache_docroot",
+          "topic_name": "Apache DocumentRoot & File Hierarchy",
+          "tier_used": 1,
+          "issue_type": "CONCEPTUAL_GAP",
+          "resolved_independently": false,
+          "notes": "BKT transition: prior 0.1714 -> posterior 0.1714 (sandbox)"
+        },
+        {
+          "id": "hist_1793690340565",
+          "timestamp": "12:49",
+          "topic_id": "web_apache_docroot",
+          "topic_name": "Apache DocumentRoot & File Hierarchy",
+          "tier_used": 1,
+          "issue_type": "CONCEPTUAL_GAP",
+          "resolved_independently": false,
+          "notes": "BKT transition: prior 0.1714 -> posterior 0.1714 (web_lab)"
+        },
+        {
+          "id": "hist_1793690337752",
+          "timestamp": "12:48",
+          "topic_id": "web_apache_docroot",
+          "topic_name": "Apache DocumentRoot & File Hierarchy",
+          "tier_used": 1,
+          "issue_type": "CONCEPTUAL_GAP",
+          "resolved_independently": false,
+          "notes": "BKT transition: prior 0.1714 -> posterior 0.1714 (sandbox)"
+        },
+        {
+          "id": "hist_1793690337751",
+          "timestamp": "12:48",
+          "topic_id": "web_apache_docroot",
+          "topic_name": "Apache DocumentRoot & File Hierarchy",
+          "tier_used": 1,
+          "issue_type": "CONCEPTUAL_GAP",
+          "resolved_independently": false,
+          "notes": "BKT transition: prior 0.1714 -> posterior 0.1714 (web_lab)"
+        },
+        {
+          "id": "hist_1793690321483",
+          "timestamp": "12:48",
+          "topic_id": "web_apache_docroot",
+          "topic_name": "Apache DocumentRoot & File Hierarchy",
+          "tier_used": 1,
+          "issue_type": "CONCEPTUAL_GAP",
+          "resolved_independently": false,
+          "notes": "BKT transition: prior 0.1714 -> posterior 0.1714 (sandbox)"
+        },
+        {
+          "id": "hist_1793690321483",
+          "timestamp": "12:48",
+          "topic_id": "web_apache_docroot",
+          "topic_name": "Apache DocumentRoot & File Hierarchy",
+          "tier_used": 1,
+          "issue_type": "CONCEPTUAL_GAP",
+          "resolved_independently": false,
+          "notes": "BKT transition: prior 0.1714 -> posterior 0.1714 (web_lab)"
+        },
+        {
+          "id": "hist_1793690233253",
+          "timestamp": "12:47",
+          "topic_id": "web_apache_docroot",
+          "topic_name": "Apache DocumentRoot & File Hierarchy",
+          "tier_used": 1,
+          "issue_type": "CONCEPTUAL_GAP",
+          "resolved_independently": false,
+          "notes": "BKT transition: prior 0.1714 -> posterior 0.1714 (sandbox)"
+        },
+        {
+          "id": "hist_1793690129654",
+          "timestamp": "12:45",
+          "topic_id": "web_apache_docroot",
+          "topic_name": "Apache DocumentRoot & File Hierarchy",
+          "tier_used": 1,
+          "issue_type": "CONCEPTUAL_GAP",
+          "resolved_independently": false,
+          "notes": "BKT transition: prior 0.1714 -> posterior 0.1714 (sandbox)"
+        },
+        {
+          "id": "hist_1793690126712",
+          "timestamp": "12:45",
+          "topic_id": "web_apache_docroot",
+          "topic_name": "Apache DocumentRoot & File Hierarchy",
+          "tier_used": 1,
+          "issue_type": "CONCEPTUAL_GAP",
+          "resolved_independently": false,
+          "notes": "BKT transition: prior 0.1715 -> posterior 0.1714 (sandbox)"
+        },
+        {
+          "id": "hist_1793690119379",
+          "timestamp": "12:45",
+          "topic_id": "web_apache_docroot",
+          "topic_name": "Apache DocumentRoot & File Hierarchy",
+          "tier_used": 1,
+          "issue_type": "CONCEPTUAL_GAP",
+          "resolved_independently": false,
+          "notes": "BKT transition: prior 0.1717 -> posterior 0.1715 (sandbox)"
+        },
+        {
+          "id": "hist_1793690107898",
+          "timestamp": "12:45",
+          "topic_id": "web_apache_docroot",
+          "topic_name": "Apache DocumentRoot & File Hierarchy",
+          "tier_used": 1,
+          "issue_type": "CONCEPTUAL_GAP",
+          "resolved_independently": false,
+          "notes": "BKT transition: prior 0.1733 -> posterior 0.1717 (sandbox)"
+        },
+        {
+          "id": "hist_1793690107257",
+          "timestamp": "12:45",
+          "topic_id": "web_apache_docroot",
+          "topic_name": "Apache DocumentRoot & File Hierarchy",
+          "tier_used": 1,
+          "issue_type": "CONCEPTUAL_GAP",
+          "resolved_independently": false,
+          "notes": "BKT transition: prior 0.184 -> posterior 0.1733 (sandbox)"
+        },
+        {
+          "id": "hist_1793690105266",
+          "timestamp": "12:45",
+          "topic_id": "web_apache_docroot",
+          "topic_name": "Apache DocumentRoot & File Hierarchy",
+          "tier_used": 1,
+          "issue_type": "CONCEPTUAL_GAP",
+          "resolved_independently": false,
+          "notes": "BKT transition: prior 0.25 -> posterior 0.184 (sandbox)"
+        },
+        {
+          "id": "hist_1793690067507",
+          "timestamp": "12:44",
+          "topic_id": "cad_stress_fos",
+          "topic_name": "Static Stress and Factor of Safety (FOS)",
+          "tier_used": 1,
+          "issue_type": "PRACTICAL_EXECUTION_ERROR",
+          "resolved_independently": true,
+          "notes": "BKT transition: prior 0 -> posterior 0.187 (sandbox)"
+        }
+      ]
+    }
+  ],
+  "events": [
+    {
+      "id": "evt_init_1",
+      "ts": "2026-11-02T06:47:27.684Z",
+      "studentId": "CSE_STU_8810",
+      "type": "SYSTEM_ONBOARDING",
+      "conceptId": "cse_orientation",
+      "topicId": "orientation",
+      "payload": {
+        "action": "initial_login",
+        "role": "student"
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_init_2",
+      "ts": "2026-11-02T18:47:27.685Z",
+      "studentId": "CSE_STU_8810",
+      "type": "CODE_EXECUTION_ERROR",
+      "conceptId": "pdo_mysql_port",
+      "topicId": "pdo_mysql_port",
+      "payload": {
+        "error": "Connection refused on port 80",
+        "tier": 1
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793688977879_x5h0r",
+      "ts": "2026-11-03T06:56:17.880Z",
+      "studentId": "CSE_STU_8810",
+      "type": "USER_LOGIN",
+      "conceptId": "auth",
+      "topicId": "session",
+      "payload": {
+        "role": "student",
+        "name": "haritha karthikkumar",
+        "degree": "B.Tech in Computer Science & Engineering"
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793689966365_kpu25",
+      "ts": "2026-11-03T07:12:46.365Z",
+      "studentId": "CSE_STU_8810",
+      "type": "TUTORING_INTERACTION",
+      "conceptId": "Apache DocumentRoot & File Hierarchy",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "inputLength": 89,
+        "workflow": "CHATS",
+        "tier": 1,
+        "issueType": "CONCEPTUAL_GAP",
+        "source": "fallback",
+        "fallbackReason": "Gemini API: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-3.8-flash, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 13.652594661s."
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793689985779_3hh69",
+      "ts": "2026-11-03T07:13:05.780Z",
+      "studentId": "CSE_STU_8810",
+      "type": "TUTORING_INTERACTION",
+      "conceptId": "Apache DocumentRoot & File Hierarchy",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "inputLength": 89,
+        "workflow": "CHATS",
+        "tier": 1,
+        "issueType": "CONCEPTUAL_GAP",
+        "source": "fallback",
+        "fallbackReason": "Gemini API: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-3.8-flash, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 54.229542991s."
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793689988048_pjbtu",
+      "ts": "2026-11-03T07:13:08.048Z",
+      "studentId": "CSE_STU_8810",
+      "type": "TUTORING_INTERACTION",
+      "conceptId": "Apache DocumentRoot & File Hierarchy",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "inputLength": 60,
+        "workflow": "CHATS",
+        "tier": 1,
+        "issueType": "CONCEPTUAL_GAP",
+        "source": "fallback",
+        "fallbackReason": "Gemini API: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-3.8-flash, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 51.958558223s."
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793689989633_q3jul",
+      "ts": "2026-11-03T07:13:09.633Z",
+      "studentId": "CSE_STU_8810",
+      "type": "TUTORING_INTERACTION",
+      "conceptId": "Apache DocumentRoot & File Hierarchy",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "inputLength": 89,
+        "workflow": "CHATS",
+        "tier": 1,
+        "issueType": "CONCEPTUAL_GAP",
+        "source": "fallback",
+        "fallbackReason": "Gemini API: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-3.8-flash, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 50.381930435s."
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793689990421_jps4e",
+      "ts": "2026-11-03T07:13:10.421Z",
+      "studentId": "CSE_STU_8810",
+      "type": "TUTORING_INTERACTION",
+      "conceptId": "Apache DocumentRoot & File Hierarchy",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "inputLength": 89,
+        "workflow": "CHATS",
+        "tier": 1,
+        "issueType": "CONCEPTUAL_GAP",
+        "source": "fallback",
+        "fallbackReason": "Gemini API: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-3.8-flash, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 49.588961321s."
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793689990611_1sseq",
+      "ts": "2026-11-03T07:13:10.611Z",
+      "studentId": "CSE_STU_8810",
+      "type": "TUTORING_INTERACTION",
+      "conceptId": "Apache DocumentRoot & File Hierarchy",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "inputLength": 89,
+        "workflow": "CHATS",
+        "tier": 1,
+        "issueType": "CONCEPTUAL_GAP",
+        "source": "fallback",
+        "fallbackReason": "Gemini API: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-3.8-flash, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 49.397092632s."
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793689990800_us4sg",
+      "ts": "2026-11-03T07:13:10.800Z",
+      "studentId": "CSE_STU_8810",
+      "type": "TUTORING_INTERACTION",
+      "conceptId": "Apache DocumentRoot & File Hierarchy",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "inputLength": 89,
+        "workflow": "CHATS",
+        "tier": 1,
+        "issueType": "CONCEPTUAL_GAP",
+        "source": "fallback",
+        "fallbackReason": "Gemini API: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-3.8-flash, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 49.205476461s."
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793689994710_oxwos",
+      "ts": "2026-11-03T07:13:14.710Z",
+      "studentId": "CSE_STU_8810",
+      "type": "TUTORING_INTERACTION",
+      "conceptId": "Apache DocumentRoot & File Hierarchy",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "inputLength": 60,
+        "workflow": "CHATS",
+        "tier": 1,
+        "issueType": "CONCEPTUAL_GAP",
+        "source": "fallback",
+        "fallbackReason": "Gemini API: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later."
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690067405_y31xc",
+      "ts": "2026-11-03T07:14:27.405Z",
+      "studentId": "CSE_STU_8810",
+      "type": "CAD_FEA_SIMULATION",
+      "conceptId": "cad_stress_fos",
+      "topicId": "cad_stress_fos",
+      "payload": {
+        "loadInN": 500,
+        "maxStressMpa": 118.5,
+        "fos": 2.33,
+        "isFosSafe": true,
+        "yieldStrengthMpa": 276,
+        "material": "Al 6061-T6"
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690067411_06c74",
+      "ts": "2026-11-03T07:14:27.411Z",
+      "studentId": "CSE_STU_8810",
+      "type": "OBSERVATION_RECORDED",
+      "conceptId": "cad_stress_fos",
+      "topicId": "Static Stress and Factor of Safety (FOS)",
+      "payload": {
+        "isCorrect": true,
+        "isIndependent": true,
+        "source": "sandbox",
+        "prior": 0,
+        "posterior": 0.187,
+        "tierUsed": 1
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690105017_jwxkn",
+      "ts": "2026-11-03T07:15:05.017Z",
+      "studentId": "CSE_STU_8810",
+      "type": "OBSERVATION_RECORDED",
+      "conceptId": "web_apache_docroot",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "isCorrect": false,
+        "isIndependent": false,
+        "source": "sandbox",
+        "prior": 0.25,
+        "posterior": 0.184,
+        "errorCategory": "Compilation / Runtime Error",
+        "tierUsed": 1
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690106981_gj574",
+      "ts": "2026-11-03T07:15:06.981Z",
+      "studentId": "CSE_STU_8810",
+      "type": "OBSERVATION_RECORDED",
+      "conceptId": "web_apache_docroot",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "isCorrect": false,
+        "isIndependent": false,
+        "source": "sandbox",
+        "prior": 0.184,
+        "posterior": 0.1733,
+        "errorCategory": "Compilation / Runtime Error",
+        "tierUsed": 1
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690107625_qdc8j",
+      "ts": "2026-11-03T07:15:07.625Z",
+      "studentId": "CSE_STU_8810",
+      "type": "OBSERVATION_RECORDED",
+      "conceptId": "web_apache_docroot",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "isCorrect": false,
+        "isIndependent": false,
+        "source": "sandbox",
+        "prior": 0.1733,
+        "posterior": 0.1717,
+        "errorCategory": "Compilation / Runtime Error",
+        "tierUsed": 1
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690119101_8rcc4",
+      "ts": "2026-11-03T07:15:19.101Z",
+      "studentId": "CSE_STU_8810",
+      "type": "OBSERVATION_RECORDED",
+      "conceptId": "web_apache_docroot",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "isCorrect": false,
+        "isIndependent": false,
+        "source": "sandbox",
+        "prior": 0.1717,
+        "posterior": 0.1715,
+        "errorCategory": "Compilation / Runtime Error",
+        "tierUsed": 1
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690126436_xqyam",
+      "ts": "2026-11-03T07:15:26.436Z",
+      "studentId": "CSE_STU_8810",
+      "type": "OBSERVATION_RECORDED",
+      "conceptId": "web_apache_docroot",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "isCorrect": false,
+        "isIndependent": false,
+        "source": "sandbox",
+        "prior": 0.1715,
+        "posterior": 0.1714,
+        "errorCategory": "Compilation / Runtime Error",
+        "tierUsed": 1
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690129382_hay1p",
+      "ts": "2026-11-03T07:15:29.382Z",
+      "studentId": "CSE_STU_8810",
+      "type": "OBSERVATION_RECORDED",
+      "conceptId": "web_apache_docroot",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "isCorrect": false,
+        "isIndependent": true,
+        "source": "sandbox",
+        "prior": 0.1714,
+        "posterior": 0.1714,
+        "errorCategory": "Independent Verification Logic Bug",
+        "tierUsed": 1
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690233016_cr62p",
+      "ts": "2026-11-03T07:17:13.016Z",
+      "studentId": "CSE_STU_8810",
+      "type": "OBSERVATION_RECORDED",
+      "conceptId": "web_apache_docroot",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "isCorrect": false,
+        "isIndependent": false,
+        "source": "sandbox",
+        "prior": 0.1714,
+        "posterior": 0.1714,
+        "errorCategory": "Compilation / Runtime Error",
+        "tierUsed": 1
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690288466_mxk6u",
+      "ts": "2026-11-03T07:18:08.466Z",
+      "studentId": "CSE_STU_8810",
+      "type": "TUTORING_INTERACTION",
+      "conceptId": "Apache DocumentRoot & File Hierarchy",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "inputLength": 114,
+        "workflow": "CODE_SANDBOX_TUTORING",
+        "tier": 1,
+        "issueType": "CONCEPTUAL_GAP",
+        "source": "fallback",
+        "fallbackReason": "Gemini API: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-3.8-flash, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 51.565191149s."
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690288648_lgz4y",
+      "ts": "2026-11-03T07:18:08.648Z",
+      "studentId": "CSE_STU_8810",
+      "type": "TUTORING_INTERACTION",
+      "conceptId": "Apache DocumentRoot & File Hierarchy",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "inputLength": 114,
+        "workflow": "CODE_SANDBOX_TUTORING",
+        "tier": 1,
+        "issueType": "CONCEPTUAL_GAP",
+        "source": "fallback",
+        "fallbackReason": "Gemini API: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-3.8-flash, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 51.362930113s."
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690291493_0zyme",
+      "ts": "2026-11-03T07:18:11.493Z",
+      "studentId": "CSE_STU_8810",
+      "type": "TUTORING_INTERACTION",
+      "conceptId": "Apache DocumentRoot & File Hierarchy",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "inputLength": 98,
+        "workflow": "CODE_SANDBOX_TUTORING",
+        "tier": 1,
+        "issueType": "CONCEPTUAL_GAP",
+        "source": "fallback",
+        "fallbackReason": "Gemini API: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-3.8-flash, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 48.513664958s."
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690291992_4tfjg",
+      "ts": "2026-11-03T07:18:11.992Z",
+      "studentId": "CSE_STU_8810",
+      "type": "TUTORING_INTERACTION",
+      "conceptId": "Apache DocumentRoot & File Hierarchy",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "inputLength": 98,
+        "workflow": "CODE_SANDBOX_TUTORING",
+        "tier": 1,
+        "issueType": "CONCEPTUAL_GAP",
+        "source": "fallback",
+        "fallbackReason": "Gemini API: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-3.8-flash, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 48.015702549s."
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690296856_udykv",
+      "ts": "2026-11-03T07:18:16.856Z",
+      "studentId": "CSE_STU_8810",
+      "type": "TUTORING_INTERACTION",
+      "conceptId": "Apache DocumentRoot & File Hierarchy",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "inputLength": 114,
+        "workflow": "CODE_SANDBOX_TUTORING",
+        "tier": 1,
+        "issueType": "CONCEPTUAL_GAP",
+        "source": "fallback",
+        "fallbackReason": "Gemini API: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later."
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690309549_7dh97",
+      "ts": "2026-11-03T07:18:29.549Z",
+      "studentId": "CSE_STU_8810",
+      "type": "TUTORING_INTERACTION",
+      "conceptId": "Apache DocumentRoot & File Hierarchy",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "inputLength": 114,
+        "workflow": "CODE_SANDBOX_TUTORING",
+        "tier": 1,
+        "issueType": "CONCEPTUAL_GAP",
+        "source": "fallback",
+        "fallbackReason": "This operation was aborted"
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690337483_bbcnz",
+      "ts": "2026-11-03T07:18:57.483Z",
+      "studentId": "CSE_STU_8810",
+      "type": "OBSERVATION_RECORDED",
+      "conceptId": "web_apache_docroot",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "isCorrect": false,
+        "isIndependent": true,
+        "source": "sandbox",
+        "prior": 0.1714,
+        "posterior": 0.1714,
+        "errorCategory": "directory_error",
+        "tierUsed": 1
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690337488_x3cx1",
+      "ts": "2026-11-03T07:18:57.488Z",
+      "studentId": "CSE_STU_8810",
+      "type": "OBSERVATION_RECORDED",
+      "conceptId": "web_apache_docroot",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "isCorrect": false,
+        "isIndependent": false,
+        "source": "web_lab",
+        "prior": 0.1714,
+        "posterior": 0.1714,
+        "errorCategory": "directory_error",
+        "tierUsed": 1
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690337504_lhiia",
+      "ts": "2026-11-03T07:18:57.504Z",
+      "studentId": "CSE_STU_8810",
+      "type": "ATTEMPT_EVALUATED",
+      "conceptId": "web_apache_docroot",
+      "topicId": "web_apache_docroot",
+      "payload": {
+        "id": "att_1793690337751_p6wfe",
+        "studentId": "CSE_STU_8810",
+        "conceptId": "web_apache_docroot",
+        "kind": "web_lab",
+        "passed": false,
+        "tierUsed": 1,
+        "hintsRequested": 0,
+        "durationSec": 15,
+        "errorCategory": "directory_error",
+        "repeatedError": false,
+        "ts": "2026-11-03T07:18:57.751Z",
+        "timestamp": "2026-11-03T07:18:57.751Z",
+        "isSuccess": false,
+        "details": "File saved outside DocumentRoot to C:\\Users\\Student\\Desktop"
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690340287_u41a3",
+      "ts": "2026-11-03T07:19:00.287Z",
+      "studentId": "CSE_STU_8810",
+      "type": "OBSERVATION_RECORDED",
+      "conceptId": "web_apache_docroot",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "isCorrect": false,
+        "isIndependent": false,
+        "source": "web_lab",
+        "prior": 0.1714,
+        "posterior": 0.1714,
+        "errorCategory": "directory_error",
+        "tierUsed": 1
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690340294_pis6t",
+      "ts": "2026-11-03T07:19:00.294Z",
+      "studentId": "CSE_STU_8810",
+      "type": "OBSERVATION_RECORDED",
+      "conceptId": "web_apache_docroot",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "isCorrect": false,
+        "isIndependent": true,
+        "source": "sandbox",
+        "prior": 0.1714,
+        "posterior": 0.1714,
+        "errorCategory": "directory_error",
+        "tierUsed": 1
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690340312_isksc",
+      "ts": "2026-11-03T07:19:00.312Z",
+      "studentId": "CSE_STU_8810",
+      "type": "ATTEMPT_EVALUATED",
+      "conceptId": "web_apache_docroot",
+      "topicId": "web_apache_docroot",
+      "payload": {
+        "id": "att_1793690340563_5d3wp",
+        "studentId": "CSE_STU_8810",
+        "conceptId": "web_apache_docroot",
+        "kind": "web_lab",
+        "passed": false,
+        "tierUsed": 1,
+        "hintsRequested": 0,
+        "durationSec": 15,
+        "errorCategory": "directory_error",
+        "repeatedError": true,
+        "ts": "2026-11-03T07:19:00.563Z",
+        "timestamp": "2026-11-03T07:19:00.563Z",
+        "isSuccess": false,
+        "details": "Browser 404 on http://localhost/index.html"
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690384799_uu9ma",
+      "ts": "2026-11-03T07:19:44.799Z",
+      "studentId": "CSE_STU_8810",
+      "type": "OBSERVATION_RECORDED",
+      "conceptId": "web_apache_docroot",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "isCorrect": false,
+        "isIndependent": true,
+        "source": "sandbox",
+        "prior": 0.1714,
+        "posterior": 0.1714,
+        "errorCategory": "directory_error",
+        "tierUsed": 1
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690384892_f0100",
+      "ts": "2026-11-03T07:19:44.892Z",
+      "studentId": "CSE_STU_8810",
+      "type": "OBSERVATION_RECORDED",
+      "conceptId": "web_apache_docroot",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "isCorrect": false,
+        "isIndependent": false,
+        "source": "web_lab",
+        "prior": 0.1714,
+        "posterior": 0.1714,
+        "errorCategory": "directory_error",
+        "tierUsed": 1
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690384902_xhj51",
+      "ts": "2026-11-03T07:19:44.902Z",
+      "studentId": "CSE_STU_8810",
+      "type": "ATTEMPT_EVALUATED",
+      "conceptId": "web_apache_docroot",
+      "topicId": "web_apache_docroot",
+      "payload": {
+        "id": "att_1793690385002_7psia",
+        "studentId": "CSE_STU_8810",
+        "conceptId": "web_apache_docroot",
+        "kind": "web_lab",
+        "passed": false,
+        "tierUsed": 1,
+        "hintsRequested": 0,
+        "durationSec": 15,
+        "errorCategory": "directory_error",
+        "repeatedError": true,
+        "ts": "2026-11-03T07:19:45.002Z",
+        "timestamp": "2026-11-03T07:19:45.002Z",
+        "isSuccess": false,
+        "details": "Browser 404 on http://localhost/index.html"
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690400496_oxz38",
+      "ts": "2026-11-03T07:20:00.496Z",
+      "studentId": "CSE_STU_8810",
+      "type": "OBSERVATION_RECORDED",
+      "conceptId": "web_apache_docroot",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "isCorrect": false,
+        "isIndependent": false,
+        "source": "web_lab",
+        "prior": 0.1714,
+        "posterior": 0.1714,
+        "errorCategory": "directory_error",
+        "tierUsed": 1
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690400506_cqg7q",
+      "ts": "2026-11-03T07:20:00.506Z",
+      "studentId": "CSE_STU_8810",
+      "type": "OBSERVATION_RECORDED",
+      "conceptId": "web_apache_docroot",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "isCorrect": false,
+        "isIndependent": true,
+        "source": "sandbox",
+        "prior": 0.1714,
+        "posterior": 0.1714,
+        "errorCategory": "directory_error",
+        "tierUsed": 1
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690400518_uzh4k",
+      "ts": "2026-11-03T07:20:00.518Z",
+      "studentId": "CSE_STU_8810",
+      "type": "ATTEMPT_EVALUATED",
+      "conceptId": "web_apache_docroot",
+      "topicId": "web_apache_docroot",
+      "payload": {
+        "id": "att_1793690400757_zidk9",
+        "studentId": "CSE_STU_8810",
+        "conceptId": "web_apache_docroot",
+        "kind": "web_lab",
+        "passed": false,
+        "tierUsed": 1,
+        "hintsRequested": 0,
+        "durationSec": 15,
+        "errorCategory": "directory_error",
+        "repeatedError": true,
+        "ts": "2026-11-03T07:20:00.757Z",
+        "timestamp": "2026-11-03T07:20:00.757Z",
+        "isSuccess": false,
+        "details": "File saved outside DocumentRoot to C:\\Users\\Student\\Desktop"
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690453727_vi9dg",
+      "ts": "2026-11-03T07:20:53.727Z",
+      "studentId": "CSE_STU_8810",
+      "type": "OBSERVATION_RECORDED",
+      "conceptId": "web_apache_docroot",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "isCorrect": false,
+        "isIndependent": true,
+        "source": "sandbox",
+        "prior": 0.1714,
+        "posterior": 0.1714,
+        "errorCategory": "directory_error",
+        "tierUsed": 1
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690453811_82onw",
+      "ts": "2026-11-03T07:20:53.811Z",
+      "studentId": "CSE_STU_8810",
+      "type": "OBSERVATION_RECORDED",
+      "conceptId": "web_apache_docroot",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "isCorrect": false,
+        "isIndependent": false,
+        "source": "web_lab",
+        "prior": 0.1714,
+        "posterior": 0.1714,
+        "errorCategory": "directory_error",
+        "tierUsed": 1
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690453818_fs6eg",
+      "ts": "2026-11-03T07:20:53.818Z",
+      "studentId": "CSE_STU_8810",
+      "type": "ATTEMPT_EVALUATED",
+      "conceptId": "web_apache_docroot",
+      "topicId": "web_apache_docroot",
+      "payload": {
+        "id": "att_1793690453932_307fs",
+        "studentId": "CSE_STU_8810",
+        "conceptId": "web_apache_docroot",
+        "kind": "web_lab",
+        "passed": false,
+        "tierUsed": 1,
+        "hintsRequested": 0,
+        "durationSec": 15,
+        "errorCategory": "directory_error",
+        "repeatedError": true,
+        "ts": "2026-11-03T07:20:53.932Z",
+        "timestamp": "2026-11-03T07:20:53.932Z",
+        "isSuccess": false,
+        "details": "Browser 404 on http://localhost/index.html"
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690455600_32hi6",
+      "ts": "2026-11-03T07:20:55.600Z",
+      "studentId": "CSE_STU_8810",
+      "type": "OBSERVATION_RECORDED",
+      "conceptId": "web_apache_docroot",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "isCorrect": false,
+        "isIndependent": false,
+        "source": "web_lab",
+        "prior": 0.1714,
+        "posterior": 0.1714,
+        "errorCategory": "directory_error",
+        "tierUsed": 1
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690455611_fptso",
+      "ts": "2026-11-03T07:20:55.611Z",
+      "studentId": "CSE_STU_8810",
+      "type": "OBSERVATION_RECORDED",
+      "conceptId": "web_apache_docroot",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "isCorrect": false,
+        "isIndependent": true,
+        "source": "sandbox",
+        "prior": 0.1714,
+        "posterior": 0.1714,
+        "errorCategory": "directory_error",
+        "tierUsed": 1
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690455626_n8cav",
+      "ts": "2026-11-03T07:20:55.626Z",
+      "studentId": "CSE_STU_8810",
+      "type": "ATTEMPT_EVALUATED",
+      "conceptId": "web_apache_docroot",
+      "topicId": "web_apache_docroot",
+      "payload": {
+        "id": "att_1793690455867_b4191",
+        "studentId": "CSE_STU_8810",
+        "conceptId": "web_apache_docroot",
+        "kind": "web_lab",
+        "passed": false,
+        "tierUsed": 1,
+        "hintsRequested": 0,
+        "durationSec": 15,
+        "errorCategory": "directory_error",
+        "repeatedError": true,
+        "ts": "2026-11-03T07:20:55.867Z",
+        "timestamp": "2026-11-03T07:20:55.867Z",
+        "isSuccess": false,
+        "details": "File saved outside DocumentRoot to C:\\Users\\Student\\Desktop"
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690457840_xdjtd",
+      "ts": "2026-11-03T07:20:57.840Z",
+      "studentId": "CSE_STU_8810",
+      "type": "OBSERVATION_RECORDED",
+      "conceptId": "web_apache_docroot",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "isCorrect": false,
+        "isIndependent": false,
+        "source": "web_lab",
+        "prior": 0.1714,
+        "posterior": 0.1714,
+        "errorCategory": "directory_error",
+        "tierUsed": 1
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690457847_qo6fw",
+      "ts": "2026-11-03T07:20:57.847Z",
+      "studentId": "CSE_STU_8810",
+      "type": "OBSERVATION_RECORDED",
+      "conceptId": "web_apache_docroot",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "isCorrect": false,
+        "isIndependent": true,
+        "source": "sandbox",
+        "prior": 0.1714,
+        "posterior": 0.1714,
+        "errorCategory": "directory_error",
+        "tierUsed": 1
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793690457895_xmxjs",
+      "ts": "2026-11-03T07:20:57.895Z",
+      "studentId": "CSE_STU_8810",
+      "type": "ATTEMPT_EVALUATED",
+      "conceptId": "web_apache_docroot",
+      "topicId": "web_apache_docroot",
+      "payload": {
+        "id": "att_1793690458114_2y0pl",
+        "studentId": "CSE_STU_8810",
+        "conceptId": "web_apache_docroot",
+        "kind": "web_lab",
+        "passed": false,
+        "tierUsed": 1,
+        "hintsRequested": 0,
+        "durationSec": 15,
+        "errorCategory": "directory_error",
+        "repeatedError": true,
+        "ts": "2026-11-03T07:20:58.114Z",
+        "timestamp": "2026-11-03T07:20:58.114Z",
+        "isSuccess": false,
+        "details": "Browser 404 on http://localhost/index.html"
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793691001846_0lwwi",
+      "ts": "2026-11-03T07:30:01.846Z",
+      "studentId": "CSE_STU_8810",
+      "type": "TUTORING_INTERACTION",
+      "conceptId": "Apache DocumentRoot & File Hierarchy",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "inputLength": 3,
+        "workflow": "CHATS",
+        "tier": 1,
+        "issueType": "CONCEPTUAL_GAP",
+        "source": "fallback",
+        "fallbackReason": "Gemini API: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.8-flash, description: Generate content requests per day limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 29m58.164118291s."
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793691017194_fs1k8",
+      "ts": "2026-11-03T07:30:17.194Z",
+      "studentId": "CSE_STU_8810",
+      "type": "TUTORING_INTERACTION",
+      "conceptId": "Apache DocumentRoot & File Hierarchy",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "inputLength": 3,
+        "workflow": "CHATS",
+        "tier": 1,
+        "issueType": "CONCEPTUAL_GAP",
+        "source": "fallback",
+        "fallbackReason": "Gemini API: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.8-flash, description: Generate content requests per day limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 29m42.811782505s."
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793691287075_vismy",
+      "ts": "2026-11-03T07:34:47.075Z",
+      "studentId": "CSE_STU_9021",
+      "type": "LIVE_CLASS_ANSWER",
+      "conceptId": "web_apache_docroot",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "questionId": "q_docroot_1",
+        "selectedIndex": 1,
+        "isCorrect": false,
+        "level": "Beginner",
+        "lowEngagement": false
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793691287094_ytebk",
+      "ts": "2026-11-03T07:34:47.094Z",
+      "studentId": "CSE_STU_7734",
+      "type": "LIVE_CLASS_ANSWER",
+      "conceptId": "web_apache_docroot",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "questionId": "q_docroot_1",
+        "selectedIndex": 0,
+        "isCorrect": true,
+        "level": "Advanced",
+        "lowEngagement": false
+      },
+      "synthetic": false
+    },
+    {
+      "id": "evt_1793691287107_pti27",
+      "ts": "2026-11-03T07:34:47.107Z",
+      "studentId": "CSE_STU_8810",
+      "type": "LIVE_CLASS_ANSWER",
+      "conceptId": "web_apache_docroot",
+      "topicId": "Apache DocumentRoot & File Hierarchy",
+      "payload": {
+        "questionId": "q_docroot_1",
+        "selectedIndex": 0,
+        "isCorrect": true,
+        "level": "Beginner",
+        "lowEngagement": true
+      },
+      "synthetic": false
+    }
+  ],
+  "attempts": [
+    {
+      "id": "att_1",
+      "studentId": "CSE_STU_8810",
+      "timestamp": "2026-11-02T18:47:27.685Z",
+      "codeSnippet": "$dsn = \"mysql:host=$host;port=80;dbname=$db\";",
+      "language": "php",
+      "isSuccess": false,
+      "errorLog": "SQLSTATE[HY000] [2002] Connection refused",
+      "topicId": "pdo_mysql_port"
+    },
+    {
+      "id": "att_1793690337751_p6wfe",
+      "studentId": "CSE_STU_8810",
+      "conceptId": "web_apache_docroot",
+      "kind": "web_lab",
+      "passed": false,
+      "tierUsed": 1,
+      "hintsRequested": 0,
+      "durationSec": 15,
+      "errorCategory": "directory_error",
+      "repeatedError": false,
+      "ts": "2026-11-03T07:18:57.751Z",
+      "timestamp": "2026-11-03T07:18:57.751Z",
+      "isSuccess": false,
+      "details": "File saved outside DocumentRoot to C:\\Users\\Student\\Desktop"
+    },
+    {
+      "id": "att_1793690340563_5d3wp",
+      "studentId": "CSE_STU_8810",
+      "conceptId": "web_apache_docroot",
+      "kind": "web_lab",
+      "passed": false,
+      "tierUsed": 1,
+      "hintsRequested": 0,
+      "durationSec": 15,
+      "errorCategory": "directory_error",
+      "repeatedError": true,
+      "ts": "2026-11-03T07:19:00.563Z",
+      "timestamp": "2026-11-03T07:19:00.563Z",
+      "isSuccess": false,
+      "details": "Browser 404 on http://localhost/index.html"
+    },
+    {
+      "id": "att_1793690385002_7psia",
+      "studentId": "CSE_STU_8810",
+      "conceptId": "web_apache_docroot",
+      "kind": "web_lab",
+      "passed": false,
+      "tierUsed": 1,
+      "hintsRequested": 0,
+      "durationSec": 15,
+      "errorCategory": "directory_error",
+      "repeatedError": true,
+      "ts": "2026-11-03T07:19:45.002Z",
+      "timestamp": "2026-11-03T07:19:45.002Z",
+      "isSuccess": false,
+      "details": "Browser 404 on http://localhost/index.html"
+    },
+    {
+      "id": "att_1793690400757_zidk9",
+      "studentId": "CSE_STU_8810",
+      "conceptId": "web_apache_docroot",
+      "kind": "web_lab",
+      "passed": false,
+      "tierUsed": 1,
+      "hintsRequested": 0,
+      "durationSec": 15,
+      "errorCategory": "directory_error",
+      "repeatedError": true,
+      "ts": "2026-11-03T07:20:00.757Z",
+      "timestamp": "2026-11-03T07:20:00.757Z",
+      "isSuccess": false,
+      "details": "File saved outside DocumentRoot to C:\\Users\\Student\\Desktop"
+    },
+    {
+      "id": "att_1793690453932_307fs",
+      "studentId": "CSE_STU_8810",
+      "conceptId": "web_apache_docroot",
+      "kind": "web_lab",
+      "passed": false,
+      "tierUsed": 1,
+      "hintsRequested": 0,
+      "durationSec": 15,
+      "errorCategory": "directory_error",
+      "repeatedError": true,
+      "ts": "2026-11-03T07:20:53.932Z",
+      "timestamp": "2026-11-03T07:20:53.932Z",
+      "isSuccess": false,
+      "details": "Browser 404 on http://localhost/index.html"
+    },
+    {
+      "id": "att_1793690455867_b4191",
+      "studentId": "CSE_STU_8810",
+      "conceptId": "web_apache_docroot",
+      "kind": "web_lab",
+      "passed": false,
+      "tierUsed": 1,
+      "hintsRequested": 0,
+      "durationSec": 15,
+      "errorCategory": "directory_error",
+      "repeatedError": true,
+      "ts": "2026-11-03T07:20:55.867Z",
+      "timestamp": "2026-11-03T07:20:55.867Z",
+      "isSuccess": false,
+      "details": "File saved outside DocumentRoot to C:\\Users\\Student\\Desktop"
+    },
+    {
+      "id": "att_1793690458114_2y0pl",
+      "studentId": "CSE_STU_8810",
+      "conceptId": "web_apache_docroot",
+      "kind": "web_lab",
+      "passed": false,
+      "tierUsed": 1,
+      "hintsRequested": 0,
+      "durationSec": 15,
+      "errorCategory": "directory_error",
+      "repeatedError": true,
+      "ts": "2026-11-03T07:20:58.114Z",
+      "timestamp": "2026-11-03T07:20:58.114Z",
+      "isSuccess": false,
+      "details": "Browser 404 on http://localhost/index.html"
+    }
+  ],
+  "interventions": [
+    {
+      "id": "int_1",
+      "studentId": "CSE_STU_8810",
+      "timestamp": "2026-11-02T18:49:07.685Z",
+      "tier": 1,
+      "issueType": "PRACTICAL_EXECUTION_ERROR",
+      "refusalReason": "Anti-Answer Protocol Active: Direct code generation withheld.",
+      "tutorMessage": "In computer networking, port 80 is reserved for standard HTTP web traffic. What is the standard default port number where MySQL servers listen for client queries?",
+      "socraticQuestion": "What port does MySQL listen on by default?",
+      "conceptId": "pdo_mysql_port"
+    },
+    {
+      "id": "int_1793689966377",
+      "studentId": "CSE_STU_8810",
+      "timestamp": "2026-11-03T07:12:46.377Z",
+      "tier": 1,
+      "issueType": "CONCEPTUAL_GAP",
+      "refusalReason": "",
+      "tutorMessage": "Let's analyze this concept from foundational principles: \"Please explain the concept and give a Tier 2 hint on Apache DocumentRoot & File Hierarchy\". In software engineering, dividing complex behavior into discrete stages makes debugging much easier.",
+      "socraticQuestion": "What is the expected output or state change you want to achieve at this step?",
+      "conceptId": "Apache DocumentRoot & File Hierarchy"
+    },
+    {
+      "id": "int_1793689985789",
+      "studentId": "CSE_STU_8810",
+      "timestamp": "2026-11-03T07:13:05.789Z",
+      "tier": 1,
+      "issueType": "CONCEPTUAL_GAP",
+      "refusalReason": "",
+      "tutorMessage": "Let's analyze this concept from foundational principles: \"Please explain the concept and give a Tier 2 hint on Apache DocumentRoot & File Hierarchy\". In software engineering, dividing complex behavior into discrete stages makes debugging much easier.",
+      "socraticQuestion": "What is the expected output or state change you want to achieve at this step?",
+      "conceptId": "Apache DocumentRoot & File Hierarchy"
+    },
+    {
+      "id": "int_1793689988058",
+      "studentId": "CSE_STU_8810",
+      "timestamp": "2026-11-03T07:13:08.058Z",
+      "tier": 1,
+      "issueType": "CONCEPTUAL_GAP",
+      "refusalReason": "",
+      "tutorMessage": "Let's analyze this concept from foundational principles: \"I need a Tier 1 hint on Apache DocumentRoot & File Hierarchy\". In software engineering, dividing complex behavior into discrete stages makes debugging much easier.",
+      "socraticQuestion": "What is the expected output or state change you want to achieve at this step?",
+      "conceptId": "Apache DocumentRoot & File Hierarchy"
+    },
+    {
+      "id": "int_1793689989645",
+      "studentId": "CSE_STU_8810",
+      "timestamp": "2026-11-03T07:13:09.645Z",
+      "tier": 1,
+      "issueType": "CONCEPTUAL_GAP",
+      "refusalReason": "",
+      "tutorMessage": "Let's analyze this concept from foundational principles: \"Please explain the concept and give a Tier 2 hint on Apache DocumentRoot & File Hierarchy\". In software engineering, dividing complex behavior into discrete stages makes debugging much easier.",
+      "socraticQuestion": "What is the expected output or state change you want to achieve at this step?",
+      "conceptId": "Apache DocumentRoot & File Hierarchy"
+    },
+    {
+      "id": "int_1793689990437",
+      "studentId": "CSE_STU_8810",
+      "timestamp": "2026-11-03T07:13:10.437Z",
+      "tier": 1,
+      "issueType": "CONCEPTUAL_GAP",
+      "refusalReason": "",
+      "tutorMessage": "Let's analyze this concept from foundational principles: \"Please explain the concept and give a Tier 2 hint on Apache DocumentRoot & File Hierarchy\". In software engineering, dividing complex behavior into discrete stages makes debugging much easier.",
+      "socraticQuestion": "What is the expected output or state change you want to achieve at this step?",
+      "conceptId": "Apache DocumentRoot & File Hierarchy"
+    },
+    {
+      "id": "int_1793689990621",
+      "studentId": "CSE_STU_8810",
+      "timestamp": "2026-11-03T07:13:10.621Z",
+      "tier": 1,
+      "issueType": "CONCEPTUAL_GAP",
+      "refusalReason": "",
+      "tutorMessage": "Let's analyze this concept from foundational principles: \"Please explain the concept and give a Tier 2 hint on Apache DocumentRoot & File Hierarchy\". In software engineering, dividing complex behavior into discrete stages makes debugging much easier.",
+      "socraticQuestion": "What is the expected output or state change you want to achieve at this step?",
+      "conceptId": "Apache DocumentRoot & File Hierarchy"
+    },
+    {
+      "id": "int_1793689990808",
+      "studentId": "CSE_STU_8810",
+      "timestamp": "2026-11-03T07:13:10.808Z",
+      "tier": 1,
+      "issueType": "CONCEPTUAL_GAP",
+      "refusalReason": "",
+      "tutorMessage": "Let's analyze this concept from foundational principles: \"Please explain the concept and give a Tier 2 hint on Apache DocumentRoot & File Hierarchy\". In software engineering, dividing complex behavior into discrete stages makes debugging much easier.",
+      "socraticQuestion": "What is the expected output or state change you want to achieve at this step?",
+      "conceptId": "Apache DocumentRoot & File Hierarchy"
+    },
+    {
+      "id": "int_1793689994722",
+      "studentId": "CSE_STU_8810",
+      "timestamp": "2026-11-03T07:13:14.722Z",
+      "tier": 1,
+      "issueType": "CONCEPTUAL_GAP",
+      "refusalReason": "",
+      "tutorMessage": "Let's analyze this concept from foundational principles: \"I need a Tier 1 hint on Apache DocumentRoot & File Hierarchy\". In software engineering, dividing complex behavior into discrete stages makes debugging much easier.",
+      "socraticQuestion": "What is the expected output or state change you want to achieve at this step?",
+      "conceptId": "Apache DocumentRoot & File Hierarchy"
+    },
+    {
+      "id": "int_1793690288486",
+      "studentId": "CSE_STU_8810",
+      "timestamp": "2026-11-03T07:18:08.486Z",
+      "tier": 1,
+      "issueType": "CONCEPTUAL_GAP",
+      "refusalReason": "",
+      "tutorMessage": "Let's trace your program's execution step by step. Look at the inputs entering your logic and the exact condition being evaluated.",
+      "socraticQuestion": "What exact value does your variable hold right before the problematic line executes?",
+      "conceptId": "Apache DocumentRoot & File Hierarchy"
+    },
+    {
+      "id": "int_1793690288663",
+      "studentId": "CSE_STU_8810",
+      "timestamp": "2026-11-03T07:18:08.663Z",
+      "tier": 1,
+      "issueType": "CONCEPTUAL_GAP",
+      "refusalReason": "",
+      "tutorMessage": "Let's trace your program's execution step by step. Look at the inputs entering your logic and the exact condition being evaluated.",
+      "socraticQuestion": "What exact value does your variable hold right before the problematic line executes?",
+      "conceptId": "Apache DocumentRoot & File Hierarchy"
+    },
+    {
+      "id": "int_1793690291503",
+      "studentId": "CSE_STU_8810",
+      "timestamp": "2026-11-03T07:18:11.503Z",
+      "tier": 1,
+      "issueType": "CONCEPTUAL_GAP",
+      "refusalReason": "",
+      "tutorMessage": "Let's trace your program's execution step by step. Look at the inputs entering your logic and the exact condition being evaluated.",
+      "socraticQuestion": "What exact value does your variable hold right before the problematic line executes?",
+      "conceptId": "Apache DocumentRoot & File Hierarchy"
+    },
+    {
+      "id": "int_1793690292003",
+      "studentId": "CSE_STU_8810",
+      "timestamp": "2026-11-03T07:18:12.003Z",
+      "tier": 1,
+      "issueType": "CONCEPTUAL_GAP",
+      "refusalReason": "",
+      "tutorMessage": "Let's trace your program's execution step by step. Look at the inputs entering your logic and the exact condition being evaluated.",
+      "socraticQuestion": "What exact value does your variable hold right before the problematic line executes?",
+      "conceptId": "Apache DocumentRoot & File Hierarchy"
+    },
+    {
+      "id": "int_1793690296867",
+      "studentId": "CSE_STU_8810",
+      "timestamp": "2026-11-03T07:18:16.867Z",
+      "tier": 1,
+      "issueType": "CONCEPTUAL_GAP",
+      "refusalReason": "",
+      "tutorMessage": "Let's trace your program's execution step by step. Look at the inputs entering your logic and the exact condition being evaluated.",
+      "socraticQuestion": "What exact value does your variable hold right before the problematic line executes?",
+      "conceptId": "Apache DocumentRoot & File Hierarchy"
+    },
+    {
+      "id": "int_1793690309562",
+      "studentId": "CSE_STU_8810",
+      "timestamp": "2026-11-03T07:18:29.562Z",
+      "tier": 1,
+      "issueType": "CONCEPTUAL_GAP",
+      "refusalReason": "",
+      "tutorMessage": "Let's trace your program's execution step by step. Look at the inputs entering your logic and the exact condition being evaluated.",
+      "socraticQuestion": "What exact value does your variable hold right before the problematic line executes?",
+      "conceptId": "Apache DocumentRoot & File Hierarchy"
+    },
+    {
+      "id": "int_1793691001860",
+      "studentId": "CSE_STU_8810",
+      "timestamp": "2026-11-03T07:30:01.860Z",
+      "tier": 1,
+      "issueType": "CONCEPTUAL_GAP",
+      "refusalReason": "",
+      "tutorMessage": "Let's analyze this concept from foundational principles: \"DSA\". In software engineering, dividing complex behavior into discrete stages makes debugging much easier.",
+      "socraticQuestion": "What is the expected output or state change you want to achieve at this step?",
+      "conceptId": "Apache DocumentRoot & File Hierarchy"
+    },
+    {
+      "id": "int_1793691017205",
+      "studentId": "CSE_STU_8810",
+      "timestamp": "2026-11-03T07:30:17.205Z",
+      "tier": 1,
+      "issueType": "CONCEPTUAL_GAP",
+      "refusalReason": "",
+      "tutorMessage": "Let's analyze this concept from foundational principles: \"DSA\". In software engineering, dividing complex behavior into discrete stages makes debugging much easier.",
+      "socraticQuestion": "What is the expected output or state change you want to achieve at this step?",
+      "conceptId": "Apache DocumentRoot & File Hierarchy"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "chat_1793690993716",
+      "title": "New Technical Inquiry",
+      "timestamp": "Just now",
+      "messages": [
+        {
+          "id": "msg_init_1793690993716",
+          "sender": "assistant",
+          "text": "What Computer Science problem or code error can we explore together?",
+          "timestamp": "12:59",
+          "source": "gemini",
+          "fallback_reason": null
+        }
+      ]
+    },
+    {
+      "id": "chat_1793690993716",
+      "title": "DSA...",
+      "timestamp": "Just now",
+      "messages": [
+        {
+          "id": "msg_init_1793690993716",
+          "sender": "assistant",
+          "text": "What Computer Science problem or code error can we explore together?",
+          "timestamp": "12:59",
+          "source": "gemini",
+          "fallback_reason": null
+        },
+        {
+          "id": "msg_u_1793691001048",
+          "sender": "user",
+          "text": "DSA",
+          "timestamp": "13:00"
+        }
+      ]
+    },
+    {
+      "id": "chat_1793690993716",
+      "title": "DSA...",
+      "timestamp": "Just now",
+      "messages": [
+        {
+          "id": "msg_init_1793690993716",
+          "sender": "assistant",
+          "text": "What Computer Science problem or code error can we explore together?",
+          "timestamp": "12:59",
+          "source": "gemini",
+          "fallback_reason": null
+        },
+        {
+          "id": "msg_u_1793691001048",
+          "sender": "user",
+          "text": "DSA",
+          "timestamp": "13:00"
+        },
+        {
+          "id": "msg_a_1793691002248",
+          "sender": "assistant",
+          "text": "Let's analyze this concept from foundational principles: \"DSA\". In software engineering, dividing complex behavior into discrete stages makes debugging much easier.",
+          "timestamp": "13:00",
+          "visualizerMode": "Timeline",
+          "socraticTier": 1,
+          "source": "fallback",
+          "fallback_reason": "Gemini API: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.8-flash, description: Generate content requests per day limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 29m58.164118291s."
+        }
+      ]
+    },
+    {
+      "id": "chat_1793690993716",
+      "title": "DSA...",
+      "timestamp": "Just now",
+      "messages": [
+        {
+          "id": "msg_init_1793690993716",
+          "sender": "assistant",
+          "text": "What Computer Science problem or code error can we explore together?",
+          "timestamp": "12:59",
+          "source": "gemini",
+          "fallback_reason": null
+        },
+        {
+          "id": "msg_u_1793691001048",
+          "sender": "user",
+          "text": "DSA",
+          "timestamp": "13:00"
+        },
+        {
+          "id": "msg_a_1793691002248",
+          "sender": "assistant",
+          "text": "Let's analyze this concept from foundational principles: \"DSA\". In software engineering, dividing complex behavior into discrete stages makes debugging much easier.",
+          "timestamp": "13:00",
+          "visualizerMode": "Timeline",
+          "socraticTier": 1,
+          "source": "fallback",
+          "fallback_reason": "Gemini API: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.8-flash, description: Generate content requests per day limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 29m58.164118291s."
+        },
+        {
+          "id": "msg_u_1793691017012",
+          "sender": "user",
+          "text": "DSA",
+          "timestamp": "13:00"
+        },
+        {
+          "id": "msg_a_1793691017596",
+          "sender": "assistant",
+          "text": "Let's analyze this concept from foundational principles: \"DSA\". In software engineering, dividing complex behavior into discrete stages makes debugging much easier.",
+          "timestamp": "13:00",
+          "socraticTier": 1,
+          "source": "fallback",
+          "fallback_reason": "Gemini API: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.8-flash, description: Generate content requests per day limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 29m42.811782505s."
+        }
+      ]
+    },
+    {
+      "id": "chat_1793690993716",
+      "title": "DSA...",
+      "timestamp": "Just now",
+      "messages": [
+        {
+          "id": "msg_init_1793690993716",
+          "sender": "assistant",
+          "text": "What Computer Science problem or code error can we explore together?",
+          "timestamp": "12:59",
+          "source": "gemini",
+          "fallback_reason": null
+        },
+        {
+          "id": "msg_u_1793691001048",
+          "sender": "user",
+          "text": "DSA",
+          "timestamp": "13:00"
+        },
+        {
+          "id": "msg_a_1793691002248",
+          "sender": "assistant",
+          "text": "Let's analyze this concept from foundational principles: \"DSA\". In software engineering, dividing complex behavior into discrete stages makes debugging much easier.",
+          "timestamp": "13:00",
+          "visualizerMode": "Timeline",
+          "socraticTier": 1,
+          "source": "fallback",
+          "fallback_reason": "Gemini API: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.8-flash, description: Generate content requests per day limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 29m58.164118291s."
+        },
+        {
+          "id": "msg_u_1793691017012",
+          "sender": "user",
+          "text": "DSA",
+          "timestamp": "13:00"
+        },
+        {
+          "id": "msg_a_1793691017596",
+          "sender": "assistant",
+          "text": "Let's analyze this concept from foundational principles: \"DSA\". In software engineering, dividing complex behavior into discrete stages makes debugging much easier.",
+          "timestamp": "13:00",
+          "socraticTier": 1,
+          "source": "fallback",
+          "fallback_reason": "Gemini API: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.8-flash, description: Generate content requests per day limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 29m42.811782505s."
+        }
+      ]
+    },
+    {
+      "id": "chat_greeting",
+      "studentId": "CSE_STU_8810",
+      "title": "Greeting",
+      "timestamp": "Today",
+      "messages": [
+        {
+          "id": "msg_1",
+          "sender": "user",
+          "text": "Hi",
+          "timestamp": "10:00 AM"
+        },
+        {
+          "id": "msg_2",
+          "sender": "assistant",
+          "text": "Hello! I am your CogniCSE Technical Tutor. How can I help you master Computer Science & Engineering today?",
+          "timestamp": "10:00 AM",
+          "source": "gemini",
+          "fallback_reason": null
+        }
+      ]
+    }
+  ],
+  "cohorts": [
+    {
+      "id": "cohort_systems_ai_2026",
+      "name": "CSE Batch 2026 - Systems & Artificial Intelligence",
+      "studentsCount": 48,
+      "averageMastery": 0.74,
+      "activeInterventions": 12,
+      "track": "Systems & Artificial Intelligence"
+    },
+    {
+      "id": "cohort_web_arch_2026",
+      "name": "CSE Batch 2026 - Web Architectures & Protocols",
+      "studentsCount": 52,
+      "averageMastery": 0.81,
+      "activeInterventions": 7,
+      "track": "Web Application Development"
+    }
+  ],
+  "studies": [
+    {
+      "id": "study_socratic_vs_direct",
+      "title": "Socratic Scaffolding vs Direct Solution In CSE Problem Solving",
+      "sampleSize": 120,
+      "metrics": {
+        "fadingIndexGain": "+38%",
+        "retentionRate": "84%",
+        "independentSolveDelta": "+41%",
+        "misconceptionRecurrenceDrop": "-62%"
+      },
+      "provenance": "STUDY DATA"
+    }
+  ],
+  "dkmStates": {
+    "CSE_STU_8810": [
+      {
+        "id": "pdo_mysql_port",
+        "name": "PHP PDO & MySQL Port Configuration",
+        "domain": "cse",
+        "track": "Web Application Development",
+        "category": "Database Connectivity",
+        "description": "Configuring TCP socket bindings and standard port numbers for PDO database connection strings.",
+        "keyConcept": "MySQL daemon listens on TCP port 3306 by default, whereas port 80 is reserved for standard HTTP web traffic.",
+        "typicalTrap": "Specifying port 80 or web ports inside the PDO DSN, triggering SQLSTATE[HY000] [2002] Connection refused.",
+        "codeLanguage": "php",
+        "starterCodeSnippet": "<?php\n// Attempting to establish a persistent PDO connection\n$host = 'localhost';\n$port = '80'; // <-- Look closely here\n$db   = 'university_cse';\n$user = 'root';\n$pass = '';\n\ntry {\n    $dsn = \"mysql:host=$host;port=$port;dbname=$db\";\n    $pdo = new PDO($dsn, $user, $pass);\n    echo \"Connected successfully to MySQL!\";\n} catch (PDOException $e) {\n    echo \"Connection failed: \" . $e->getMessage();\n}\n?>",
+        "starterErrorLog": "Fatal error: Uncaught PDOException: SQLSTATE[HY000] [2002] Connection refused in /var/www/html/db.php:12\nStack trace:\n#0 /var/www/html/db.php(12): PDO->__construct('mysql:host=loca...', 'root', '')\n#1 {main}",
+        "prerequisites": [
+          "Client-Server Architecture",
+          "TCP/IP Sockets",
+          "HTTP vs MySQL Protocols"
+        ],
+        "status": "RED",
+        "mastery": 0.25,
+        "errorCount": 3,
+        "solvedCount": 0,
+        "compositeMastery": {
+          "composite": 24,
+          "conceptual": 25,
+          "practical": 25,
+          "independent": 20,
+          "retention": null,
+          "weights": {
+            "conceptual": 0.3889,
+            "practical": 0.3889,
+            "independent": 0.2222,
+            "retention": 0
+          },
+          "status": "Needs Attention",
+          "independentPassedCount": 0
+        }
+      },
+      {
+        "id": "http_statelessness",
+        "name": "HTTP Statelessness & Session Tokens",
+        "domain": "cse",
+        "track": "Web Application Development",
+        "category": "Web Architecture",
+        "description": "Understanding how HTTP handles request-response boundaries without native session persistence.",
+        "keyConcept": "Every HTTP transaction is isolated. Application state requires client-side tokens, cookies, or database session identifiers.",
+        "typicalTrap": "Assuming a backend global variable automatically remembers an authenticated user across distinct browser tabs without cookie verification.",
+        "codeLanguage": "javascript",
+        "starterCodeSnippet": "// Server-side route handler\nlet globalLoggedInUser = null; // Anti-pattern!\n\napp.post('/api/login', (req, res) => {\n  globalLoggedInUser = req.body.username; // Leaks state across all concurrent users!\n  res.json({ status: \"Logged in as \" + globalLoggedInUser });\n});\n\napp.get('/api/profile', (req, res) => {\n  // Bug: Every user now sees whoever logged in last!\n  res.json({ user: globalLoggedInUser });\n});",
+        "starterErrorLog": "Security Alert: Race condition and state bleed detected. Concurrent session #402 overwritten by session #403 in global scope.",
+        "prerequisites": [
+          "HTTP Request Lifecycle",
+          "Variable Scope in Node.js"
+        ],
+        "status": "YELLOW",
+        "mastery": 0.5,
+        "errorCount": 1,
+        "solvedCount": 1,
+        "compositeMastery": {
+          "composite": 50,
+          "conceptual": 50,
+          "practical": 50,
+          "independent": 50,
+          "retention": null,
+          "weights": {
+            "conceptual": 0.3889,
+            "practical": 0.3889,
+            "independent": 0.2222,
+            "retention": 0
+          },
+          "status": "Developing",
+          "independentPassedCount": 0
+        }
+      },
+      {
+        "id": "async_event_loop",
+        "name": "JavaScript Event Loop & Microtasks",
+        "domain": "cse",
+        "track": "Web Application Development",
+        "category": "Async Runtime",
+        "description": "Order of execution between synchronous code, microtask queue (Promises), and macrotask queue (setTimeout).",
+        "keyConcept": "The call stack clears synchronous frames first, then executes the microtask queue completely before dequeuing macrotasks.",
+        "typicalTrap": "Expecting setTimeout(fn, 0) to execute before a Promise.resolve().then() callback.",
+        "codeLanguage": "javascript",
+        "starterCodeSnippet": "console.log(\"A: Start\");\n\nsetTimeout(() => {\n  console.log(\"B: Macrotask Timer\");\n}, 0);\n\nPromise.resolve().then(() => {\n  console.log(\"C: Microtask Promise\");\n});\n\nconsole.log(\"D: End\");\n// Predicted order vs actual order?",
+        "starterErrorLog": "Assertion Error: Expected output [\"A\", \"B\", \"C\", \"D\"], but received [\"A\", \"D\", \"C\", \"B\"].",
+        "prerequisites": [
+          "Call Stack",
+          "Callback Functions",
+          "Promises"
+        ],
+        "status": "GREEN",
+        "mastery": 0.85,
+        "errorCount": 0,
+        "solvedCount": 4,
+        "compositeMastery": {
+          "composite": 84,
+          "conceptual": 85,
+          "practical": 85,
+          "independent": 80,
+          "retention": null,
+          "weights": {
+            "conceptual": 0.3889,
+            "practical": 0.3889,
+            "independent": 0.2222,
+            "retention": 0
+          },
+          "status": "Near Mastery",
+          "independentPassedCount": 0
+        }
+      },
+      {
+        "id": "sql_injection_defense",
+        "name": "SQL Prepared Statements vs Concatenation",
+        "domain": "cse",
+        "track": "Web Application Development",
+        "category": "Database Security",
+        "description": "Preventing SQL injection via parametrized queries instead of raw string interpolation.",
+        "keyConcept": "Prepared statements separate SQL syntax compilation from literal user data, neutralizing payload injection.",
+        "typicalTrap": "Using string concatenation `WHERE username = '\" . $user . \"'` which allows `' OR 1=1 --`.",
+        "codeLanguage": "php",
+        "starterCodeSnippet": "<?php\n// Vulnerable query construction\n$userInput = \"admin' OR '1'='1\";\n$sql = \"SELECT * FROM users WHERE username = '\" . $userInput . \"'\";\n// Executing raw SQL directly allows full authentication bypass!\n?>",
+        "starterErrorLog": "Security Vulnerability: SQL Injection detected. Query evaluates to TRUE regardless of user authentication credentials.",
+        "prerequisites": [
+          "SQL Queries",
+          "String Escaping"
+        ],
+        "status": "YELLOW",
+        "mastery": 0.6,
+        "errorCount": 1,
+        "solvedCount": 2,
+        "compositeMastery": {
+          "composite": 60,
+          "conceptual": 60,
+          "practical": 60,
+          "independent": 60,
+          "retention": null,
+          "weights": {
+            "conceptual": 0.3889,
+            "practical": 0.3889,
+            "independent": 0.2222,
+            "retention": 0
+          },
+          "status": "Improving",
+          "independentPassedCount": 0
+        }
+      },
+      {
+        "id": "rest_http_verbs",
+        "name": "RESTful API Verbs & Idempotence",
+        "domain": "cse",
+        "track": "Web Application Development",
+        "category": "API Design",
+        "description": "Appropriate semantic use of GET, POST, PUT, PATCH, and DELETE with idempotency guarantees.",
+        "keyConcept": "GET, PUT, and DELETE must be idempotent (multiple identical requests yield same server state); POST creates new resources.",
+        "typicalTrap": "Using GET requests to delete database records via hyperlink query parameters.",
+        "codeLanguage": "javascript",
+        "starterCodeSnippet": "// Flawed API design\napp.get('/api/delete-user', (req, res) => {\n  // Web crawlers following links will inadvertently delete accounts!\n  deleteUser(req.query.id);\n  res.send(\"User deleted\");\n});",
+        "starterErrorLog": "Semantic Warning: Mutating state via HTTP GET violates RFC 7231 idempotency specifications.",
+        "prerequisites": [
+          "HTTP Methods",
+          "Resource URIs"
+        ],
+        "status": "GREEN",
+        "mastery": 0.9,
+        "errorCount": 0,
+        "solvedCount": 5,
+        "compositeMastery": {
+          "composite": 88,
+          "conceptual": 90,
+          "practical": 90,
+          "independent": 80,
+          "retention": null,
+          "weights": {
+            "conceptual": 0.3889,
+            "practical": 0.3889,
+            "independent": 0.2222,
+            "retention": 0
+          },
+          "status": "Near Mastery",
+          "independentPassedCount": 0
+        }
+      },
+      {
+        "id": "cors_preflight",
+        "name": "CORS Preflight & Header Negotiation",
+        "domain": "cse",
+        "track": "Web Application Development",
+        "category": "Browser Security",
+        "description": "How browsers enforce the Same-Origin Policy and trigger HTTP OPTIONS preflight checks.",
+        "keyConcept": "Non-simple cross-origin HTTP requests require an OPTIONS preflight exchange before the browser issues the actual payload.",
+        "typicalTrap": "Disabling CORS entirely on production or failing to respond with Access-Control-Allow-Methods.",
+        "codeLanguage": "javascript",
+        "starterCodeSnippet": "// Client fetch on https://app.example.com\nfetch('https://api.backend.com/data', {\n  method: 'POST',\n  headers: { 'Authorization': 'Bearer 123', 'Content-Type': 'application/json' },\n  body: JSON.stringify({ item: \"book\" })\n});",
+        "starterErrorLog": "Access to fetch at 'https://api.backend.com/data' has been blocked by CORS policy: Response to preflight request doesn't pass access control check.",
+        "prerequisites": [
+          "Same-Origin Policy",
+          "HTTP Headers"
+        ],
+        "status": "YELLOW",
+        "mastery": 0.65,
+        "errorCount": 2,
+        "solvedCount": 2,
+        "compositeMastery": {
+          "composite": 65,
+          "conceptual": 65,
+          "practical": 65,
+          "independent": 65,
+          "retention": null,
+          "weights": {
+            "conceptual": 0.3889,
+            "practical": 0.3889,
+            "independent": 0.2222,
+            "retention": 0
+          },
+          "status": "Improving",
+          "independentPassedCount": 0
+        }
+      },
+      {
+        "id": "recursion_base_case",
+        "name": "Recursion Base Case & Stack Frames",
+        "domain": "cse",
+        "track": "Data Structures & Algorithms",
+        "category": "Recursion & Dynamic Programming",
+        "description": "Preventing infinite recursive descent by designing sound termination conditions.",
+        "keyConcept": "Every recursive routine must evaluate a base case prior to making the next self-call; each step must strictly advance toward the base case.",
+        "typicalTrap": "Decrementing the parameter incorrectly or omitting the stopping condition, exhausting call stack memory.",
+        "codeLanguage": "python",
+        "starterCodeSnippet": "def compute_factorial(n):\n    # Missing base case: what if n == 1 or n == 0?\n    return n * compute_factorial(n - 1)\n\nprint(compute_factorial(5))",
+        "starterErrorLog": "RecursionError: maximum recursion depth exceeded while calling a Python object\nStack frame count: 1000+",
+        "prerequisites": [
+          "Function Scope",
+          "Call Stack Mechanics"
+        ],
+        "status": "RED",
+        "mastery": 0.3,
+        "errorCount": 4,
+        "solvedCount": 0,
+        "compositeMastery": {
+          "composite": 29,
+          "conceptual": 30,
+          "practical": 30,
+          "independent": 24,
+          "retention": null,
+          "weights": {
+            "conceptual": 0.3889,
+            "practical": 0.3889,
+            "independent": 0.2222,
+            "retention": 0
+          },
+          "status": "Needs Attention",
+          "independentPassedCount": 0
+        }
+      },
+      {
+        "id": "bst_invalidation",
+        "name": "Binary Search Tree Property & Traversal",
+        "domain": "cse",
+        "track": "Data Structures & Algorithms",
+        "category": "Trees & Graphs",
+        "description": "Enforcing that for every node, all keys in the left subtree are strictly less, and all keys in the right subtree are greater.",
+        "keyConcept": "Checking only direct children is insufficient; whole subtrees must abide by lower and upper bound constraints.",
+        "typicalTrap": "Checking only `node.left.val < node.val` without propagating global ancestor bounds.",
+        "codeLanguage": "javascript",
+        "starterCodeSnippet": "function isValidBST(root) {\n  if (!root) return true;\n  // Bug: Only checks direct immediate children!\n  if (root.left && root.left.val >= root.val) return false;\n  if (root.right && root.right.val <= root.val) return false;\n  return isValidBST(root.left) && isValidBST(root.right);\n}",
+        "starterErrorLog": "Failed Test Case: Tree [10, 5, 15, null, null, 6, 20] marked valid, but node 6 is in the right subtree of 10!",
+        "prerequisites": [
+          "Tree Data Structures",
+          "Depth-First Search"
+        ],
+        "status": "YELLOW",
+        "mastery": 0.55,
+        "errorCount": 2,
+        "solvedCount": 1,
+        "compositeMastery": {
+          "composite": 55,
+          "conceptual": 55,
+          "practical": 55,
+          "independent": 55,
+          "retention": null,
+          "weights": {
+            "conceptual": 0.3889,
+            "practical": 0.3889,
+            "independent": 0.2222,
+            "retention": 0
+          },
+          "status": "Developing",
+          "independentPassedCount": 0
+        }
+      },
+      {
+        "id": "two_pointer_technique",
+        "name": "Two-Pointer Technique & Array Slicing",
+        "domain": "cse",
+        "track": "Data Structures & Algorithms",
+        "category": "Array Algorithms",
+        "description": "Reducing time complexity from O(n^2) to O(n) on sorted arrays using convergent pointers.",
+        "keyConcept": "Moving left/right pointers toward each other based on comparison against target sum.",
+        "typicalTrap": "Forgetting to sort the array first, or advancing both pointers simultaneously.",
+        "codeLanguage": "python",
+        "starterCodeSnippet": "def two_sum_sorted(arr, target):\n    left = 0\n    right = len(arr) - 1\n    while left < right:\n        current_sum = arr[left] + arr[right]\n        if current_sum == target:\n            return (left, right)\n        elif current_sum < target:\n            left += 1\n        else:\n            right -= 1\n    return None",
+        "starterErrorLog": "Runtime Verified: Passed all edge test cases with O(n) time and O(1) space.",
+        "prerequisites": [
+          "Arrays",
+          "Time Complexity O(n)"
+        ],
+        "status": "GREEN",
+        "mastery": 0.92,
+        "errorCount": 0,
+        "solvedCount": 6,
+        "compositeMastery": {
+          "composite": 89,
+          "conceptual": 92,
+          "practical": 92,
+          "independent": 80,
+          "retention": null,
+          "weights": {
+            "conceptual": 0.3889,
+            "practical": 0.3889,
+            "independent": 0.2222,
+            "retention": 0
+          },
+          "status": "Near Mastery",
+          "independentPassedCount": 0
+        }
+      },
+      {
+        "id": "graph_cycle_detection",
+        "name": "Graph Cycle Detection (Directed vs Undirected)",
+        "domain": "cse",
+        "track": "Data Structures & Algorithms",
+        "category": "Trees & Graphs",
+        "description": "Detecting cycles using 3-color DFS (White/Gray/Black) or Disjoint Set Union (Union-Find).",
+        "keyConcept": "In directed graphs, an edge to an ancestor in the active recursion call stack (Gray node) confirms a back-edge and cycle.",
+        "typicalTrap": "Using a simple visited boolean array without distinguishing between active call ancestors and finished nodes.",
+        "codeLanguage": "python",
+        "starterCodeSnippet": "def has_cycle_flawed(graph, node, visited):\n    visited.add(node)\n    for neighbor in graph[node]:\n        if neighbor in visited:\n            return True # False positive if neighbor was visited in a previously completed branch!\n        if has_cycle_flawed(graph, neighbor, visited):\n            return True\n    return False",
+        "starterErrorLog": "False Positive: Marked diamond DAG (A->B, A->C, B->D, C->D) as cyclic when no cycle exists.",
+        "prerequisites": [
+          "Depth-First Search",
+          "Directed Graphs"
+        ],
+        "status": "RED",
+        "mastery": 0.35,
+        "errorCount": 3,
+        "solvedCount": 1,
+        "compositeMastery": {
+          "composite": 35,
+          "conceptual": 35,
+          "practical": 35,
+          "independent": 35,
+          "retention": null,
+          "weights": {
+            "conceptual": 0.3889,
+            "practical": 0.3889,
+            "independent": 0.2222,
+            "retention": 0
+          },
+          "status": "Needs Attention",
+          "independentPassedCount": 0
+        }
+      },
+      {
+        "id": "dp_memoization_table",
+        "name": "Dynamic Programming: Overlapping Subproblems",
+        "domain": "cse",
+        "track": "Data Structures & Algorithms",
+        "category": "Recursion & Dynamic Programming",
+        "description": "Transforming exponential O(2^n) recursion into polynomial O(n) via memoization tables.",
+        "keyConcept": "Memoization caches computed subproblem answers to avoid redundant re-computation of identical states.",
+        "typicalTrap": "Not passing the memo dictionary across recursive branches or indexing memo keys with mutable objects.",
+        "codeLanguage": "python",
+        "starterCodeSnippet": "def fib(n, memo={}):\n    # Note on default mutable arguments in Python\n    if n in memo: return memo[n]\n    if n <= 1: return n\n    memo[n] = fib(n-1, memo) + fib(n-2, memo)\n    return memo[n]",
+        "starterErrorLog": "Code Analysis: Memoization table functioning, but beware of shared default dictionary instances across test suites.",
+        "prerequisites": [
+          "Recursion",
+          "Time Complexity Analysis"
+        ],
+        "status": "GREEN",
+        "mastery": 0.88,
+        "errorCount": 1,
+        "solvedCount": 4,
+        "compositeMastery": {
+          "composite": 86,
+          "conceptual": 88,
+          "practical": 88,
+          "independent": 80,
+          "retention": null,
+          "weights": {
+            "conceptual": 0.3889,
+            "practical": 0.3889,
+            "independent": 0.2222,
+            "retention": 0
+          },
+          "status": "Near Mastery",
+          "independentPassedCount": 0
+        }
+      },
+      {
+        "id": "linked_list_fast_slow",
+        "name": "Linked List Cycle: Floyd's Tortoise & Hare",
+        "domain": "cse",
+        "track": "Data Structures & Algorithms",
+        "category": "Linked Lists",
+        "description": "Detecting loops in linear pointer chains in O(n) time and O(1) auxiliary memory.",
+        "keyConcept": "Slow pointer steps by 1; fast pointer steps by 2. If a cycle exists, they must collide within the loop.",
+        "typicalTrap": "Dereferencing fast.next.next without verifying that fast.next is not null.",
+        "codeLanguage": "javascript",
+        "starterCodeSnippet": "function hasCycle(head) {\n  let slow = head;\n  let fast = head;\n  while (fast && fast.next) {\n    slow = slow.next;\n    fast = fast.next.next;\n    if (slow === fast) return true;\n  }\n  return false;\n}",
+        "starterErrorLog": "Runtime Verified: Passed all edge cases including single-node cycles and null heads.",
+        "prerequisites": [
+          "Pointers & References",
+          "Linked Lists"
+        ],
+        "status": "GREEN",
+        "mastery": 0.95,
+        "errorCount": 0,
+        "solvedCount": 7,
+        "compositeMastery": {
+          "composite": 92,
+          "conceptual": 95,
+          "practical": 95,
+          "independent": 80,
+          "retention": null,
+          "weights": {
+            "conceptual": 0.3889,
+            "practical": 0.3889,
+            "independent": 0.2222,
+            "retention": 0
+          },
+          "status": "Near Mastery",
+          "independentPassedCount": 0
+        }
+      },
+      {
+        "id": "deadlock_four_conditions",
+        "name": "Deadlock: Coffman Conditions & Banker's Algorithm",
+        "domain": "cse",
+        "track": "Operating Systems",
+        "category": "Concurrency & Synchronization",
+        "description": "Mutual Exclusion, Hold and Wait, No Preemption, and Circular Wait causing process lockup.",
+        "keyConcept": "Deadlock cannot occur if at least one of the 4 Coffman conditions is broken (e.g., global lock ordering breaks Circular Wait).",
+        "typicalTrap": "Acquiring locks in arbitrary order across multiple threads (Thread A: Lock1 then Lock2; Thread B: Lock2 then Lock1).",
+        "codeLanguage": "cpp",
+        "starterCodeSnippet": "// Thread 1\nstd::lock_guard<std::mutex> l1(mutexA);\nstd::lock_guard<std::mutex> l2(mutexB);\n\n// Thread 2 (Opposite order!)\nstd::lock_guard<std::mutex> l3(mutexB);\nstd::lock_guard<std::mutex> l4(mutexA);",
+        "starterErrorLog": "Deadlock Detected: Thread 1 waiting on mutexB held by Thread 2. Thread 2 waiting on mutexA held by Thread 1. Circular Wait condition satisfied.",
+        "prerequisites": [
+          "Threads & Processes",
+          "Mutex Locks"
+        ],
+        "status": "RED",
+        "mastery": 0.28,
+        "errorCount": 3,
+        "solvedCount": 0,
+        "compositeMastery": {
+          "composite": 27,
+          "conceptual": 28,
+          "practical": 28,
+          "independent": 22,
+          "retention": null,
+          "weights": {
+            "conceptual": 0.3889,
+            "practical": 0.3889,
+            "independent": 0.2222,
+            "retention": 0
+          },
+          "status": "Needs Attention",
+          "independentPassedCount": 0
+        }
+      },
+      {
+        "id": "virtual_memory_paging",
+        "name": "Virtual Memory, Page Tables & TLB Thrashing",
+        "domain": "cse",
+        "track": "Operating Systems",
+        "category": "Memory Management",
+        "description": "Translating virtual addresses to physical frames via multi-level page tables and hardware TLB cache.",
+        "keyConcept": "Page faults occur when a requested page is not in physical RAM (present bit = 0), triggering an OS disk swap.",
+        "typicalTrap": "Confusing page size with total frame count, or traversing a large matrix in column-major order causing repeated cache misses.",
+        "codeLanguage": "cpp",
+        "starterCodeSnippet": "// Column-major traversal of row-major allocated 2D array\nint matrix[4096][4096];\nfor (int col = 0; col < 4096; col++) {\n    for (int row = 0; row < 4096; row++) {\n        matrix[row][col] = 0; // Triggers a page fault / cache miss on almost every access!\n    }\n}",
+        "starterErrorLog": "Performance Telemetry: Page fault rate: 89.4%. Severe cache thrashing and memory bus saturation observed.",
+        "prerequisites": [
+          "Physical Memory",
+          "Cache Locality (Spatial/Temporal)"
+        ],
+        "status": "YELLOW",
+        "mastery": 0.45,
+        "errorCount": 2,
+        "solvedCount": 1,
+        "compositeMastery": {
+          "composite": 45,
+          "conceptual": 45,
+          "practical": 45,
+          "independent": 45,
+          "retention": null,
+          "weights": {
+            "conceptual": 0.3889,
+            "practical": 0.3889,
+            "independent": 0.2222,
+            "retention": 0
+          },
+          "status": "Developing",
+          "independentPassedCount": 0
+        }
+      },
+      {
+        "id": "process_fork_exec",
+        "name": "Process Creation: fork(), exec(), and waitpid()",
+        "domain": "cse",
+        "track": "Operating Systems",
+        "category": "Process Management",
+        "description": "Copy-on-write memory replication and child process lifecycle management in POSIX Unix systems.",
+        "keyConcept": "fork() returns 0 to the child process and the child's PID to the parent process; both resume execution from the fork instruction.",
+        "typicalTrap": "Forgetting to call wait() or waitpid() in the parent, creating zombie processes in the process table.",
+        "codeLanguage": "cpp",
+        "starterCodeSnippet": "pid_t pid = fork();\nif (pid == 0) {\n    // Child process\n    execlp(\"/bin/ls\", \"ls\", NULL);\n} else {\n    // Parent process forgets wait(NULL)!\n    printf(\"Parent finished immediately without reaping child\\n\");\n}",
+        "starterErrorLog": "Warning: Process with PID 1842 entered <defunct> zombie state. Parent did not reap exit status.",
+        "prerequisites": [
+          "POSIX System Calls",
+          "Process States"
+        ],
+        "status": "YELLOW",
+        "mastery": 0.62,
+        "errorCount": 1,
+        "solvedCount": 2,
+        "compositeMastery": {
+          "composite": 62,
+          "conceptual": 62,
+          "practical": 62,
+          "independent": 62,
+          "retention": null,
+          "weights": {
+            "conceptual": 0.3889,
+            "practical": 0.3889,
+            "independent": 0.2222,
+            "retention": 0
+          },
+          "status": "Improving",
+          "independentPassedCount": 0
+        }
+      },
+      {
+        "id": "cpu_scheduling_preemption",
+        "name": "CPU Scheduling: Round Robin & Quantum Sizing",
+        "domain": "cse",
+        "track": "Operating Systems",
+        "category": "Scheduling",
+        "description": "Preemptive time-sliced CPU allocation balancing throughput and interactive response time.",
+        "keyConcept": "A tiny time quantum causes excessive context-switch overhead; an excessively large quantum degenerates into FCFS.",
+        "typicalTrap": "Ignoring context switch latency when calculating CPU utilization and average turnaround time.",
+        "codeLanguage": "python",
+        "starterCodeSnippet": "def round_robin_time(quantum, switch_overhead, tasks):\n    # If quantum = 1ms and switch_overhead = 1ms, CPU efficiency is only 50%!\n    effective_utilization = quantum / (quantum + switch_overhead)\n    return effective_utilization",
+        "starterErrorLog": "Calculation Verified: Correctly models time slicing trade-off.",
+        "prerequisites": [
+          "Context Switching",
+          "Process States"
+        ],
+        "status": "GREEN",
+        "mastery": 0.82,
+        "errorCount": 0,
+        "solvedCount": 3,
+        "compositeMastery": {
+          "composite": 82,
+          "conceptual": 82,
+          "practical": 82,
+          "independent": 80,
+          "retention": null,
+          "weights": {
+            "conceptual": 0.3889,
+            "practical": 0.3889,
+            "independent": 0.2222,
+            "retention": 0
+          },
+          "status": "Near Mastery",
+          "independentPassedCount": 0
+        }
+      },
+      {
+        "id": "pointers_memory_leak",
+        "name": "C/C++ Dynamic Memory & Heap Deallocation",
+        "domain": "cse",
+        "track": "Operating Systems",
+        "category": "Memory Management",
+        "description": "Manual memory management using malloc/free or new/delete; avoiding leaks and dangling pointers.",
+        "keyConcept": "Every byte allocated on the heap remains reserved until explicitly freed. Loss of pointer reference causes irreversible memory leakage.",
+        "typicalTrap": "Reassigning a pointer variable without calling `free()`, making the allocated chunk unrecoverable.",
+        "codeLanguage": "cpp",
+        "starterCodeSnippet": "void processUserData() {\n    int* buffer = (int*)malloc(1024 * sizeof(int));\n    // Buffer is populated...\n    // Function exits without free(buffer)! Pointer vanishes, heap memory remains locked.\n}",
+        "starterErrorLog": "Valgrind Memcheck: 4,096 bytes in 1 blocks are definitely lost in loss record 1 of 1 at malloc().",
+        "prerequisites": [
+          "Pointers",
+          "Stack vs Heap"
+        ],
+        "status": "RED",
+        "mastery": 0.38,
+        "errorCount": 3,
+        "solvedCount": 1,
+        "compositeMastery": {
+          "composite": 38,
+          "conceptual": 38,
+          "practical": 38,
+          "independent": 38,
+          "retention": null,
+          "weights": {
+            "conceptual": 0.3889,
+            "practical": 0.3889,
+            "independent": 0.2222,
+            "retention": 0
+          },
+          "status": "Needs Attention",
+          "independentPassedCount": 0
+        }
+      },
+      {
+        "id": "semaphores_producer_consumer",
+        "name": "Semaphores & Producer-Consumer Bounded Buffer",
+        "domain": "cse",
+        "track": "Operating Systems",
+        "category": "Concurrency & Synchronization",
+        "description": "Counting semaphores for tracking empty/full buffer slots and binary semaphores for mutex protection.",
+        "keyConcept": "Empty semaphore starts at N; Full semaphore starts at 0; Mutex protects the critical section during enqueue/dequeue.",
+        "typicalTrap": "Placing the mutex wait BEFORE the empty/full wait, causing immediate deadlock when the buffer is empty.",
+        "codeLanguage": "cpp",
+        "starterCodeSnippet": "// Flawed Producer ordering:\nwait(mutex); // Acquired mutex first!\nwait(empty_slots); // Deadlock if buffer is full: producer holds mutex while sleeping!\n// insert_item();\nsignal(mutex);\nsignal(full_slots);",
+        "starterErrorLog": "Concurrency Deadlock: Producer thread holding buffer mutex while blocked on empty_slots. Consumer cannot access buffer to consume!",
+        "prerequisites": [
+          "Race Conditions",
+          "Atomic Operations"
+        ],
+        "status": "YELLOW",
+        "mastery": 0.48,
+        "errorCount": 2,
+        "solvedCount": 1,
+        "compositeMastery": {
+          "composite": 48,
+          "conceptual": 48,
+          "practical": 48,
+          "independent": 48,
+          "retention": null,
+          "weights": {
+            "conceptual": 0.3889,
+            "practical": 0.3889,
+            "independent": 0.2222,
+            "retention": 0
+          },
+          "status": "Developing",
+          "independentPassedCount": 0
+        }
+      },
+      {
+        "id": "tcp_three_way_handshake",
+        "name": "TCP 3-Way Handshake (SYN, SYN-ACK, ACK)",
+        "domain": "cse",
+        "track": "Computer Networks",
+        "category": "Transport Layer",
+        "description": "Establishing reliable full-duplex byte stream synchronization and sequence numbering.",
+        "keyConcept": "Client sends SYN(seq=x); Server replies SYN(seq=y)-ACK(ack=x+1); Client concludes with ACK(ack=y+1).",
+        "typicalTrap": "Believing UDP requires a handshake, or thinking TCP resets sequence numbers on every packet.",
+        "codeLanguage": "python",
+        "starterCodeSnippet": "import socket\n# Standard TCP Socket instantiation\nsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\n# Connect initiates the 3-way handshake kernel sequence\nsock.connect(('127.0.0.1', 3306))\nprint(\"TCP Connection established with MySQL Server!\")",
+        "starterErrorLog": "Connection Log: SYN [seq=100] -> SYN-ACK [seq=500, ack=101] -> ACK [ack=501]. Handshake complete.",
+        "prerequisites": [
+          "OSI 7-Layer Model",
+          "IP Addressing"
+        ],
+        "status": "GREEN",
+        "mastery": 0.88,
+        "errorCount": 0,
+        "solvedCount": 5,
+        "compositeMastery": {
+          "composite": 86,
+          "conceptual": 88,
+          "practical": 88,
+          "independent": 80,
+          "retention": null,
+          "weights": {
+            "conceptual": 0.3889,
+            "practical": 0.3889,
+            "independent": 0.2222,
+            "retention": 0
+          },
+          "status": "Near Mastery",
+          "independentPassedCount": 0
+        }
+      },
+      {
+        "id": "dns_recursive_resolution",
+        "name": "DNS Hierarchical Resolution & TTL Caching",
+        "domain": "cse",
+        "track": "Computer Networks",
+        "category": "Application Layer",
+        "description": "Translating human-readable hostnames to IP addresses via Root, TLD, and Authoritative Name Servers.",
+        "keyConcept": "Recursive resolvers query Root servers (.), then TLD servers (.com), then Authoritative servers before caching answers according to TTL.",
+        "typicalTrap": "Assuming DNS queries always hit the authoritative server directly without local or ISP resolver caching.",
+        "codeLanguage": "javascript",
+        "starterCodeSnippet": "// DNS lookup simulation\nconst domain = \"api.university.edu\";\n// Resolution chain:\n// 1. Browser cache -> 2. OS hosts file -> 3. Local Recursive Resolver ->\n// 4. Root (.) -> 5. TLD (.edu) -> 6. Authoritative (university.edu)",
+        "starterErrorLog": "DNS Resolution Verified: Query returned A record 198.51.100.42 with TTL 300 seconds.",
+        "prerequisites": [
+          "Client-Server Model",
+          "UDP Protocol"
+        ],
+        "status": "GREEN",
+        "mastery": 0.92,
+        "errorCount": 0,
+        "solvedCount": 4,
+        "compositeMastery": {
+          "composite": 89,
+          "conceptual": 92,
+          "practical": 92,
+          "independent": 80,
+          "retention": null,
+          "weights": {
+            "conceptual": 0.3889,
+            "practical": 0.3889,
+            "independent": 0.2222,
+            "retention": 0
+          },
+          "status": "Near Mastery",
+          "independentPassedCount": 0
+        }
+      },
+      {
+        "id": "cidr_subnetting_mask",
+        "name": "IPv4 CIDR Subnetting & Network/Broadcast IPs",
+        "domain": "cse",
+        "track": "Computer Networks",
+        "category": "Network Layer",
+        "description": "Calculating network ID, broadcast address, and usable host count using prefix lengths (e.g. /24, /27).",
+        "keyConcept": "In a /27 subnet, 5 host bits provide 2^5 = 32 total addresses, minus 2 (network ID & broadcast) = 30 usable host IPs.",
+        "typicalTrap": "Assigning the all-zeros network address or all-ones broadcast address as a static host IP to a server interface.",
+        "codeLanguage": "python",
+        "starterCodeSnippet": "def calculate_usable_hosts(cidr_prefix):\n    host_bits = 32 - cidr_prefix\n    total_ips = 2 ** host_bits\n    usable_hosts = total_ips - 2 # Subtract Network Address & Broadcast Address\n    return usable_hosts\n\nprint(f\"/27 Usable hosts: {calculate_usable_hosts(27)}\")",
+        "starterErrorLog": "Subnet Validation: Passed. Note that /31 and /32 have specialized RFC point-to-point exceptions.",
+        "prerequisites": [
+          "Binary Arithmetic",
+          "IP Addressing"
+        ],
+        "status": "YELLOW",
+        "mastery": 0.58,
+        "errorCount": 1,
+        "solvedCount": 2,
+        "compositeMastery": {
+          "composite": 58,
+          "conceptual": 58,
+          "practical": 58,
+          "independent": 58,
+          "retention": null,
+          "weights": {
+            "conceptual": 0.3889,
+            "practical": 0.3889,
+            "independent": 0.2222,
+            "retention": 0
+          },
+          "status": "Developing",
+          "independentPassedCount": 0
+        }
+      },
+      {
+        "id": "osi_transport_layer",
+        "name": "Transport Layer: TCP vs UDP Multiplexing",
+        "domain": "cse",
+        "track": "Computer Networks",
+        "category": "Transport Layer",
+        "description": "Port-based multiplexing, reliability, flow control, and checksum validation across network protocols.",
+        "keyConcept": "TCP prioritizes lossless ordered delivery (file transfer, web, database); UDP prioritizes low-latency real-time delivery (voice, video, gaming).",
+        "typicalTrap": "Attempting to use raw UDP for database queries where packet loss would silently corrupt financial transactions.",
+        "codeLanguage": "python",
+        "starterCodeSnippet": "import socket\n# Creating an unconfirmed UDP datagram socket\nsock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)\n# Sendto fires packets without waiting for delivery confirmation\nsock.sendto(b\"PACKET_DATA\", (\"127.0.0.1\", 9999))",
+        "starterErrorLog": "Socket Analysis: UDP packets transmitted. No acknowledgment received (stateless datagram semantics).",
+        "prerequisites": [
+          "OSI Layering",
+          "Port Multiplexing"
+        ],
+        "status": "YELLOW",
+        "mastery": 0.65,
+        "errorCount": 1,
+        "solvedCount": 2,
+        "compositeMastery": {
+          "composite": 65,
+          "conceptual": 65,
+          "practical": 65,
+          "independent": 65,
+          "retention": null,
+          "weights": {
+            "conceptual": 0.3889,
+            "practical": 0.3889,
+            "independent": 0.2222,
+            "retention": 0
+          },
+          "status": "Improving",
+          "independentPassedCount": 0
+        }
+      },
+      {
+        "id": "tls_handshake_crypto",
+        "name": "TLS 1.3 Asymmetric Handshake & Session Keys",
+        "domain": "cse",
+        "track": "Computer Networks",
+        "category": "Network Security",
+        "description": "How asymmetric cryptography (RSA / Diffie-Hellman) negotiates a symmetric session key for high-speed encryption.",
+        "keyConcept": "Public key encrypts; private key decrypts. Once established, AES symmetric key encrypts the entire HTTP payload for performance.",
+        "typicalTrap": "Believing the public key is used to encrypt all incoming and outgoing data throughout the entire connection duration.",
+        "codeLanguage": "javascript",
+        "starterCodeSnippet": "// Conceptual TLS exchange\n// 1. ClientHello (Supported Cipher Suites)\n// 2. ServerHello + Certificate (Public Key)\n// 3. Key Exchange (Diffie-Hellman parameters) -> Shared Symmetric Secret derived!\n// 4. Encrypted Application Data begins using symmetric AES-GCM",
+        "starterErrorLog": "Handshake Telemetry: TLS 1.3 negotiated in 1-RTT. Symmetric session key active.",
+        "prerequisites": [
+          "Symmetric vs Asymmetric Encryption",
+          "Certificates & CAs"
+        ],
+        "status": "YELLOW",
+        "mastery": 0.52,
+        "errorCount": 2,
+        "solvedCount": 1,
+        "compositeMastery": {
+          "composite": 52,
+          "conceptual": 52,
+          "practical": 52,
+          "independent": 52,
+          "retention": null,
+          "weights": {
+            "conceptual": 0.3889,
+            "practical": 0.3889,
+            "independent": 0.2222,
+            "retention": 0
+          },
+          "status": "Developing",
+          "independentPassedCount": 0
+        }
+      },
+      {
+        "id": "arp_ip_to_mac",
+        "name": "ARP Protocol: IP-to-MAC Physical Address Resolution",
+        "domain": "cse",
+        "track": "Computer Networks",
+        "category": "Data Link Layer",
+        "description": "Translating Layer 3 logical IP addresses to Layer 2 physical MAC hardware addresses within local broadcast domains.",
+        "keyConcept": "ARP sends a broadcast frame (FF:FF:FF:FF:FF:FF) asking \"Who has IP X?\"; target device responds with unicast MAC.",
+        "typicalTrap": "Assuming ARP queries cross router boundaries into foreign internet subnets.",
+        "codeLanguage": "python",
+        "starterCodeSnippet": "// ARP Request: \"Who has 192.168.1.1? Tell 192.168.1.100\"\n// Target responds: \"192.168.1.1 is at 00:1A:2B:3C:4D:5E\"\n// Switch populates CAM table and host updates local ARP cache.",
+        "starterErrorLog": "Layer 2 Trace: Frame received. ARP entry cached with 1200 second TTL.",
+        "prerequisites": [
+          "MAC Addresses",
+          "Broadcast Domains"
+        ],
+        "status": "GREEN",
+        "mastery": 0.84,
+        "errorCount": 0,
+        "solvedCount": 3,
+        "compositeMastery": {
+          "composite": 83,
+          "conceptual": 84,
+          "practical": 84,
+          "independent": 80,
+          "retention": null,
+          "weights": {
+            "conceptual": 0.3889,
+            "practical": 0.3889,
+            "independent": 0.2222,
+            "retention": 0
+          },
+          "status": "Near Mastery",
+          "independentPassedCount": 0
+        }
+      },
+      {
+        "id": "cad_dof_2d",
+        "name": "Degrees of Freedom in a 2D Sketch",
+        "track": "Mechanical Engineering (CAD)",
+        "domain": "mech",
+        "category": "2D Parametric Sketching",
+        "description": "Analyzing unconstrained translational and rotational degrees of freedom (DOF) in parametric 2D planar sketches.",
+        "keyConcept": "In planar 2D sketching, an unconstrained point has 2 translational DOF (X, Y). A line has 4 DOF (two endpoints) or 3 DOF (length, orientation, position). Fully constrained sketches exhibit 0 DOF and render black.",
+        "typicalTrap": "Extruding an under-constrained (blue) sketch assuming it is finished (frequency 82%). Unconstrained geometry floats unpredictably when parent dimensions or global assemblies change.",
+        "codeLanguage": "python",
+        "starterCodeSnippet": "# CadQuery Parametric Sketch Validation\nimport cadquery as cq\n\n# Bug: Sketch lines unanchored to origin (3 free DOF remaining)\nresult = (\n    cq.Workplane(\"XY\")\n    .moveTo(10, 10)\n    .lineTo(50, 10) # Blue geometry: missing coincident to origin or fixed datum\n    .lineTo(50, 40)\n    .close()\n    .extrude(15.0)  # Premature extrusion of under-constrained profile\n)",
+        "starterErrorLog": "CAD Solver Warning [ConstraintEngine]: Profile #1 has 3 unconstrained Degrees of Freedom (Status: Blue). Model lacks deterministic positional stability under parametric revision.",
+        "prerequisites": [],
+        "status": "NOT_ASSESSED",
+        "mastery": 0,
+        "errorCount": 0,
+        "solvedCount": 0,
+        "evidenceLabel": "Insufficient Evidence",
+        "diagnosticQuestions": [
+          {
+            "id": "mech_q_dof_1",
+            "section": "Parametric Sketching",
+            "topic_id": "cad_dof_2d",
+            "topic_name": "Degrees of Freedom in a 2D Sketch",
+            "question": "In Fusion 360 a sketch line is blue instead of black. What does this signify?",
+            "options": [
+              "Under-constrained, still has free degrees of freedom",
+              "The sketch entity is fully constrained and ready for production extrusion",
+              "The entity is a construction reference line that does not define boundaries",
+              "An over-constraint or geometric conflict error has occurred"
+            ],
+            "correct_option_index": 0,
+            "explanation": "In Fusion 360 and standard parametric CAD (SolidWorks, Inventor, NX), black geometry indicates 0 remaining degrees of freedom (fully constrained). Blue geometry indicates under-constrained geometry that still possesses free DOF.",
+            "distractor_explanations": [
+              "Black curves indicate fully constrained geometry, not blue.",
+              "Construction lines are indicated by dashed/centerline formatting.",
+              "Over-constrained geometry is displayed in red/orange with a solver warning."
+            ]
+          },
+          {
+            "id": "mech_q_dof_2",
+            "section": "Parametric Sketching",
+            "topic_id": "cad_dof_2d",
+            "topic_name": "Degrees of Freedom in a 2D Sketch",
+            "question": "How many total degrees of freedom does an unconstrained circle possess on a 2D sketch plane?",
+            "options": [
+              "3 DOF (2 translational center coordinates X/Y, and 1 dimensional radius/diameter)",
+              "2 DOF (translational X and Y position only)",
+              "1 DOF (diameter only because circles are radially symmetric)",
+              "6 DOF (3 translational and 3 rotational axes)"
+            ],
+            "correct_option_index": 0,
+            "explanation": "A 2D circle requires 3 constraints to be fully fixed: center X position, center Y position, and diameter (or radius). Planar rotational symmetry removes rotational DOF.",
+            "distractor_explanations": [
+              "Radius or diameter constraint is also required to remove the size degree of freedom.",
+              "Without center coordinates, the circle floats across the plane.",
+              "6 DOF applies to free bodies in 3D Euclidean space, not 2D sketch entities."
+            ]
+          },
+          {
+            "id": "mech_q_dof_3",
+            "section": "Parametric Sketching",
+            "topic_id": "cad_dof_2d",
+            "topic_name": "Degrees of Freedom in a 2D Sketch",
+            "question": "Why is extruding an under-constrained sketch considered an engineering anti-pattern in CAD production workflows?",
+            "options": [
+              "Downstream changes to global driving parameters cause floating geometry to distort or flip unpredictably",
+              "CAD software will refuse to generate mesh triangles for FEA on any body derived from blue sketches",
+              "Under-constrained sketches consume 5x more GPU VRAM in viewport shading",
+              "Blue sketch curves automatically invert surface normals during CNC G-code post-processing"
+            ],
+            "correct_option_index": 0,
+            "explanation": "Under-constrained sketches lack deterministic intent. Changing a parent variable can cause unconstrained sketch vertices to shift, flip inside-out, or break downstream fillet and shell operations.",
+            "distractor_explanations": [
+              "Solvers can extrude under-constrained sketches, but the resulting geometry is unstable.",
+              "GPU VRAM is unaffected by constraint status.",
+              "CAM post-processors evaluate boundary solid B-reps, not sketch line colours directly."
+            ]
+          }
+        ],
+        "compositeMastery": {
+          "composite": 0,
+          "conceptual": 0,
+          "practical": 0,
+          "independent": 0,
+          "retention": null,
+          "weights": {
+            "conceptual": 0.3889,
+            "practical": 0.3889,
+            "independent": 0.2222,
+            "retention": 0
+          },
+          "status": "Not Assessed",
+          "independentPassedCount": 0
+        }
+      },
+      {
+        "id": "cad_geometric_constraints",
+        "name": "Geometric Constraints (Coincident, Tangent, Concentric, Symmetric)",
+        "track": "Mechanical Engineering (CAD)",
+        "domain": "mech",
+        "category": "Geometric Relationships",
+        "description": "Enforcing topological and relational constraints between sketch entities without numeric dimensions.",
+        "keyConcept": "Geometric constraints eliminate DOF through geometric relationships: Coincident locks points together; Tangent forces G1 continuous slope; Concentric aligns center points; Symmetric mirrors entities across a designated centerline axis.",
+        "typicalTrap": "Applying redundant dimensional constraints where geometric constraints already lock the geometry, causing over-constrained solver conflicts (cad_constraint_error), or relying on manual visual placement.",
+        "codeLanguage": "python",
+        "starterCodeSnippet": "# Applying Non-Redundant Geometric Constraints\nimport cadquery as cq\n\n# Issue: Tangency omitted between arc and straight guide edge\nsketch = (\n    cq.Workplane(\"XY\")\n    .line(30, 0)\n    # Missing tangent constraint: arc joins with discontinuous sharp cusp\n    .radiusArc((50, 20), 20)\n    .close()\n)",
+        "starterErrorLog": "Constraint Engine Warning: Discontinuous C0 vertex detected between Arc_1 and Line_1. Tangent constraint missing; sharp stress riser will form during sweep.",
+        "prerequisites": [
+          "cad_dof_2d"
+        ],
+        "status": "NOT_ASSESSED",
+        "mastery": 0,
+        "errorCount": 0,
+        "solvedCount": 0,
+        "evidenceLabel": "Insufficient Evidence",
+        "diagnosticQuestions": [
+          {
+            "id": "mech_q_geo_1",
+            "section": "Geometric Constraints",
+            "topic_id": "cad_geometric_constraints",
+            "topic_name": "Geometric Constraints (Coincident, Tangent, Concentric, Symmetric)",
+            "question": "Which geometric constraint must be applied between a linear edge and an arc to ensure smooth G1 slope continuity without a sharp cusp?",
+            "options": [
+              "Tangent constraint",
+              "Coincident constraint",
+              "Concentric constraint",
+              "Collinear constraint"
+            ],
+            "correct_option_index": 0,
+            "explanation": "A tangent constraint aligns the first derivatives (tangent vectors) of the curve and line at the junction point, ensuring G1 tangency and eliminating stress-concentrating cusps.",
+            "distractor_explanations": [
+              "Coincident only ensures C0 point contact without matching slopes.",
+              "Concentric aligns circular centerpoints, not line-to-curve continuity.",
+              "Collinear applies only between two straight lines."
+            ]
+          },
+          {
+            "id": "mech_q_geo_2",
+            "section": "Geometric Constraints",
+            "topic_id": "cad_geometric_constraints",
+            "topic_name": "Geometric Constraints (Coincident, Tangent, Concentric, Symmetric)",
+            "question": "When modeling an engine piston top with two identical valve cutouts, what is the best parametric constraint strategy?",
+            "options": [
+              "Model one cutout and apply a Symmetric constraint across the piston wrist-pin centerline plane",
+              "Manually dimension both cutouts independently using identical numerical dimension callouts",
+              "Draw one circle, convert it to construction geometry, and trace it by eye",
+              "Create a single offset loop without locking its centerpoint"
+            ],
+            "correct_option_index": 0,
+            "explanation": "Symmetry constraints capture design intent. Modifying one valve pocket parameter immediately propagates symmetrically to the other without maintaining dual redundant dimensions.",
+            "distractor_explanations": [
+              "Duplicate dimensions introduce maintenance debt and risk asymmetric drift when editing.",
+              "Tracing by eye destroys parametric precision.",
+              "Offset loops without center locking leave free degrees of freedom."
+            ]
+          },
+          {
+            "id": "mech_q_geo_3",
+            "section": "Geometric Constraints",
+            "topic_id": "cad_geometric_constraints",
+            "topic_name": "Geometric Constraints (Coincident, Tangent, Concentric, Symmetric)",
+            "question": "What happens in a 2D sketch solver when you add a 50mm dimension between two points already locked by a 50mm Symmetric constraint and Coincident origin anchor?",
+            "options": [
+              "An over-constrained error occurs because the dimension is mathematically redundant",
+              "The CAD software automatically recalculates the geometry to 100mm",
+              "The sketch converts to a 3D spline automatically",
+              "The solver deletes the origin constraint to prioritize the numerical dimension"
+            ],
+            "correct_option_index": 0,
+            "explanation": "Solvers solve systems of simultaneous equations. Specifying a dimension on geometry whose position is already uniquely determined causes an over-constrained conflict (must be converted to a driven/reference dimension).",
+            "distractor_explanations": [
+              "The solver cannot arbitrarily double dimensions.",
+              "2D sketches do not transform into 3D splines upon over-constraint.",
+              "Solvers flag errors rather than silently deleting user constraints."
+            ]
+          }
+        ],
+        "compositeMastery": {
+          "composite": 0,
+          "conceptual": 0,
+          "practical": 0,
+          "independent": 0,
+          "retention": null,
+          "weights": {
+            "conceptual": 0.3889,
+            "practical": 0.3889,
+            "independent": 0.2222,
+            "retention": 0
+          },
+          "status": "Not Assessed",
+          "independentPassedCount": 0
+        }
+      },
+      {
+        "id": "cad_driving_parameters",
+        "name": "Dimensions and Driving Parameters",
+        "track": "Mechanical Engineering (CAD)",
+        "domain": "mech",
+        "category": "Parametric Modeling",
+        "description": "Establishing functional parametric relationships, user parameters, and unit consistency (mm vs cm).",
+        "keyConcept": "Driving dimensions control model geometry through user parameters and algebraic equations (e.g. wall_thickness = bore_diameter * 0.12). Driven dimensions are read-only references. ISO/ASME mechanical design standardizes on millimeters (mm).",
+        "typicalTrap": "Mixing mm and cm units in parameter tables (e.g. entering 10 without units inside a cm document defaults to 100mm instead of 10mm), creating 10x scale errors.",
+        "codeLanguage": "python",
+        "starterCodeSnippet": "# Parametric Formula with Unit Awareness\nbore_d_mm = 50.0  # mm\n# Unit Mismatch Trap: adding 2 (cm) to 50 (mm) yields 52mm instead of 70mm\nflange_d_mm = bore_d_mm + (2.0 * 10.0) # Corrected unit conversion from cm to mm",
+        "starterErrorLog": "Dimensional Alert: Parameter expression \"flange_d = bore_d + 2\" mixed dimensionless scalar with length unit [mm]. Physical scale discrepancy detected.",
+        "prerequisites": [
+          "cad_geometric_constraints"
+        ],
+        "status": "NOT_ASSESSED",
+        "mastery": 0,
+        "errorCount": 0,
+        "solvedCount": 0,
+        "evidenceLabel": "Insufficient Evidence",
+        "diagnosticQuestions": [
+          {
+            "id": "mech_q_dim_1",
+            "section": "Parametric Dimensions",
+            "topic_id": "cad_driving_parameters",
+            "topic_name": "Dimensions and Driving Parameters",
+            "question": "A CAD user working in an ISO metric document (standard units: mm) enters `length = 15` in a parameter formula intended for 15 centimeters. What is the physical dimension produced?",
+            "options": [
+              "15 mm (an order-of-magnitude 10x smaller than intended)",
+              "15 cm (the CAD automatically detects real-world intent)",
+              "150 mm (it converts to cm automatically)",
+              "1.5 mm (it divides by 10)"
+            ],
+            "correct_option_index": 0,
+            "explanation": "In metric mechanical CAD documents, dimensionless entries default to the active document unit (mm). Entering 15 produces 15 mm rather than the intended 150 mm (15 cm). Explicit units (15 cm) must be typed.",
+            "distractor_explanations": [
+              "CAD systems strictly follow active unit settings without guessing user intent.",
+              "150 mm would only be created if explicit units (15 cm) or (15 * 10) were supplied.",
+              "The system does not divide by 10."
+            ]
+          },
+          {
+            "id": "mech_q_dim_2",
+            "section": "Parametric Dimensions",
+            "topic_id": "cad_driving_parameters",
+            "topic_name": "Dimensions and Driving Parameters",
+            "question": "What is the fundamental difference between a driving dimension and a driven (reference) dimension?",
+            "options": [
+              "Driving dimensions actively control geometry; driven dimensions passively measure geometry and cannot be modified directly",
+              "Driving dimensions can only be applied to arcs; driven dimensions apply only to straight lines",
+              "Driven dimensions appear in bold red; driving dimensions are always greyed out",
+              "Driving dimensions cannot be used in global formula equations"
+            ],
+            "correct_option_index": 0,
+            "explanation": "Driving dimensions change sketch size when their value changes. Driven dimensions (often enclosed in parentheses like (45.2 mm)) are calculated outputs of other constraints and cannot push geometry.",
+            "distractor_explanations": [
+              "Both types apply to any geometric entity (arcs, lines, splines).",
+              "Driving dimensions are typically black/blue; driven dimensions are grey/parenthesized.",
+              "Driving dimensions are the primary variables in global equation managers."
+            ]
+          },
+          {
+            "id": "mech_q_dim_3",
+            "section": "Parametric Dimensions",
+            "topic_id": "cad_driving_parameters",
+            "topic_name": "Dimensions and Driving Parameters",
+            "question": "In a parametric flange design, the bolt circle diameter (BCD) must always remain exactly midway between inner bore (80mm) and outer flange (140mm). What equation represents this driving relationship?",
+            "options": [
+              "BCD = (bore_dia + outer_dia) / 2",
+              "BCD = outer_dia - bore_dia",
+              "BCD = (outer_dia * bore_dia) / 2",
+              "BCD = outer_dia - 30mm"
+            ],
+            "correct_option_index": 0,
+            "explanation": "The midpoint between two concentric diameters is their arithmetic mean: (80 + 140) / 2 = 110 mm. Writing it algebraically ensures that if the bore or flange changes, the BCD automatically scales correctly.",
+            "distractor_explanations": [
+              "140 - 80 = 60 mm, which is smaller than the inner bore diameter.",
+              "Multiplying diameters creates a squared unit (mm²) and wrong scale.",
+              "Hardcoding -30mm breaks when outer diameter changes dynamically."
+            ]
+          }
+        ],
+        "compositeMastery": {
+          "composite": 0,
+          "conceptual": 0,
+          "practical": 0,
+          "independent": 0,
+          "retention": null,
+          "weights": {
+            "conceptual": 0.3889,
+            "practical": 0.3889,
+            "independent": 0.2222,
+            "retention": 0
+          },
+          "status": "Not Assessed",
+          "independentPassedCount": 0
+        }
+      },
+      {
+        "id": "cad_extrude_operations",
+        "name": "Extrude and Feature Operations",
+        "track": "Mechanical Engineering (CAD)",
+        "domain": "mech",
+        "category": "3D Feature Generation",
+        "description": "Transforming closed 2D profiles into manifold 3D solid bodies via linear extrusion, cuts, and joins.",
+        "keyConcept": "Extrusions sweep closed planar 2D profiles along a normal or vector. Self-intersecting boundaries, micro-gaps (<0.001mm), or open profiles fail to form watertight 2-manifold B-rep solid bodies.",
+        "typicalTrap": "Attempting to generate a solid extrude from an unclosed sketch loop or overlooking small overlapping line segments, causing kernel boundary evaluation failures.",
+        "codeLanguage": "python",
+        "starterCodeSnippet": "# Closed Manifold 3D Extrusion\nimport cadquery as cq\n\n# Watertight rectangular block with central extruded cut\nbody = (\n    cq.Workplane(\"XY\")\n    .box(100, 60, 20)\n    .faces(\">Z\")\n    .workplane()\n    .circle(15) # Fully closed circle profile\n    .cutThruAll() # Boolean cut operation\n)",
+        "starterErrorLog": "Kernel Error [BRepBuilderAPI]: Profile is not closed. Gap of 0.042mm detected between Vertex_7 and Vertex_1. Cannot compute interior volume.",
+        "prerequisites": [
+          "cad_driving_parameters"
+        ],
+        "status": "NOT_ASSESSED",
+        "mastery": 0,
+        "errorCount": 0,
+        "solvedCount": 0,
+        "evidenceLabel": "Insufficient Evidence",
+        "diagnosticQuestions": [
+          {
+            "id": "mech_q_ext_1",
+            "section": "3D Features",
+            "topic_id": "cad_extrude_operations",
+            "topic_name": "Extrude and Feature Operations",
+            "question": "Why does an extrusion operation in CAD fail with a \"Non-manifold body\" or \"Profile not closed\" error?",
+            "options": [
+              "The sketch boundary contains open gaps or self-intersecting crossing lines",
+              "The sketch contains too many dimensions",
+              "The extrusion depth is greater than the sketch perimeter",
+              "The sketch plane was created on a standard reference plane rather than a solid face"
+            ],
+            "correct_option_index": 0,
+            "explanation": "Solid modeling kernels (Parasolid, ACIS, ShapeManager) require closed 1D boundaries that unambiguously divide the 2D plane into an interior and exterior to generate a watertight 2-manifold volume.",
+            "distractor_explanations": [
+              "Dimension count does not cause manifold topological errors.",
+              "Extrusion depth can be arbitrarily larger than the sketch profile.",
+              "Standard reference planes are the standard baseline for initial extrusions."
+            ]
+          },
+          {
+            "id": "mech_q_ext_2",
+            "section": "3D Features",
+            "topic_id": "cad_extrude_operations",
+            "topic_name": "Extrude and Feature Operations",
+            "question": "When creating a mounting hole through a plate whose thickness is controlled by a variable `plate_thk`, what extrusion termination condition should be selected?",
+            "options": [
+              "\"Through All\" (or \"To Object\" linked to opposite face) rather than a fixed numerical blind depth",
+              "A blind extrusion depth equal to 500mm to guarantee penetration",
+              "A surface loft without solid conversion",
+              "A negative draft extrude of 45 degrees"
+            ],
+            "correct_option_index": 0,
+            "explanation": "Selecting \"Through All\" or \"To Object\" ensures design intent: if `plate_thk` is increased from 10mm to 25mm in the future, the hole automatically penetrates completely rather than ending blindly inside.",
+            "distractor_explanations": [
+              "Hardcoding 500mm can pierce downstream parts in multi-body or assembly contexts.",
+              "Surface lofts do not create subtractive solid holes.",
+              "Negative draft creates a tapered cone rather than a cylindrical clearance hole."
+            ]
+          },
+          {
+            "id": "mech_q_ext_3",
+            "section": "3D Features",
+            "topic_id": "cad_extrude_operations",
+            "topic_name": "Extrude and Feature Operations",
+            "question": "What is the boolean difference between a \"Join\" (Union) and a \"New Body\" extrude operation in multi-component modeling?",
+            "options": [
+              "\"Join\" merges the new extrusion seamlessly into the intersecting solid; \"New Body\" maintains it as an independent part with its own mass properties",
+              "\"Join\" converts the object into a mesh; \"New Body\" creates a sheet metal flat pattern",
+              "\"Join\" deletes the original sketch; \"New Body\" keeps the sketch active",
+              "\"New Body\" can only be used for plastic materials, while \"Join\" is for metals"
+            ],
+            "correct_option_index": 0,
+            "explanation": "Multi-body CAD modeling uses \"New Body\" to model separate assembly components (e.g., a pin inside a clevis) so each can have distinct material assignments and BOM tracking.",
+            "distractor_explanations": [
+              "Neither operation converts solid B-reps to polygonal meshes.",
+              "Sketch consumption is identical in both operations.",
+              "Material assignments are completely independent of boolean join modes."
+            ]
+          }
+        ],
+        "compositeMastery": {
+          "composite": 0,
+          "conceptual": 0,
+          "practical": 0,
+          "independent": 0,
+          "retention": null,
+          "weights": {
+            "conceptual": 0.3889,
+            "practical": 0.3889,
+            "independent": 0.2222,
+            "retention": 0
+          },
+          "status": "Not Assessed",
+          "independentPassedCount": 0
+        }
+      },
+      {
+        "id": "cad_fillets_chamfers_g1",
+        "name": "Fillets and Chamfers (G1 Tangency)",
+        "track": "Mechanical Engineering (CAD)",
+        "domain": "mech",
+        "category": "Detailing & Stress Concentration",
+        "description": "Applying rounds, fillets, and chamfers to mitigate mechanical stress concentrations and establish G1 surface tangency.",
+        "keyConcept": "Sharp internal re-entrant corners create theoretical infinite stress concentrations (Kt -> inf). Fillets introduce circular arc transitions with G1 continuous tangent boundaries, distributing structural load and preventing fatigue cracks.",
+        "typicalTrap": "Applying cosmetic fillets at the beginning of the CAD tree before major functional extrusions and drafts, leading to frequent topology rebuild errors when upstream geometry shifts.",
+        "codeLanguage": "python",
+        "starterCodeSnippet": "# Stress Relieving Internal Fillet\nimport cadquery as cq\n\n# Stepped shaft: internal shoulder requires fillet to lower Kt\nshaft = (\n    cq.Workplane(\"XY\")\n    .circle(25).extrude(60) # Main hub\n    .faces(\">Z\").workplane()\n    .circle(15).extrude(40) # Stepped shaft\n    .edges(\"|Z and <Z\").fillet(3.0) # G1 fillet removes sharp stress riser\n)",
+        "starterErrorLog": "FEA Warning: Sharp 90-degree internal corner detected at shoulder transition (radius = 0.0mm). Stress concentration factor Kt > 3.8. Fillet radius >= 2.5mm required.",
+        "prerequisites": [
+          "cad_extrude_operations"
+        ],
+        "status": "NOT_ASSESSED",
+        "mastery": 0,
+        "errorCount": 0,
+        "solvedCount": 0,
+        "evidenceLabel": "Insufficient Evidence",
+        "diagnosticQuestions": [
+          {
+            "id": "mech_q_fil_1",
+            "section": "Fillets & Chamfers",
+            "topic_id": "cad_fillets_chamfers_g1",
+            "topic_name": "Fillets and Chamfers (G1 Tangency)",
+            "question": "Why do mechanical engineers specify fillets on internal stepped shaft shoulders subjected to cyclic bending loads?",
+            "options": [
+              "To increase the transition radius, drastically reducing the stress concentration factor Kt and preventing fatigue failure",
+              "To reduce the total weight of the shaft by removing material",
+              "To eliminate the need for surface heat treatment or carburizing",
+              "To ensure the shaft can spin faster than the critical resonance speed"
+            ],
+            "correct_option_index": 0,
+            "explanation": "According to Peterson’s Stress Concentration Factors, internal sharp 90° transitions act as crack initiation sites under cyclic bending. A fillet radius smoothly redirects stress streamlines, reducing Kt.",
+            "distractor_explanations": [
+              "Filleting an internal corner adds material compared to a sharp undercut.",
+              "Fillets do not replace required metallurgical heat treatments.",
+              "Resonance critical speed depends on mass, stiffness, and shaft span."
+            ]
+          },
+          {
+            "id": "mech_q_fil_2",
+            "section": "Fillets & Chamfers",
+            "topic_id": "cad_fillets_chamfers_g1",
+            "topic_name": "Fillets and Chamfers (G1 Tangency)",
+            "question": "What is the surface continuity classification of a standard circular fillet transitioning into a flat planar face?",
+            "options": [
+              "G1 continuity (tangent slope matching at boundary, but discontinuous curvature step)",
+              "G0 continuity (positional contact only, visible sharp edge angle)",
+              "G2 continuity (continuous curvature with no acceleration discontinuity)",
+              "G3 continuity (continuous torsion and rate of curvature change)"
+            ],
+            "correct_option_index": 0,
+            "explanation": "Standard CAD circular fillets achieve G1 tangency (equal surface normals and tangent vectors). Curvature jumps abruptly from 0 (flat face) to 1/R (circle).",
+            "distractor_explanations": [
+              "G0 represents a sharp crease or cusp without shared tangency.",
+              "G2 requires conic, clothoid, or spline blends.",
+              "G3 is reserved for ultra-high-end aerospace and aesthetic styling surfaces."
+            ]
+          },
+          {
+            "id": "mech_q_fil_3",
+            "section": "Fillets & Chamfers",
+            "topic_id": "cad_fillets_chamfers_g1",
+            "topic_name": "Fillets and Chamfers (G1 Tangency)",
+            "question": "In best-practice parametric CAD modeling order, where should edge fillets and chamfers be placed in the feature tree?",
+            "options": [
+              "Near the end of the feature tree, after primary solid geometry and functional cuts are established",
+              "In the very first 2D sketch before any 3D extrusions",
+              "Immediately after the first sketch line is drawn",
+              "Randomly throughout the tree to save memory"
+            ],
+            "correct_option_index": 0,
+            "explanation": "Filleting late in the tree preserves simple rectangular and cylindrical reference topologies for downstream sketches, planes, and booleans, preventing fragile edge-tagging rebuild failures.",
+            "distractor_explanations": [
+              "Sketch fillets complicate constraint solvers and make parameter changes brittle.",
+              "Filleting premature sketch segments causes tangent propagation rebuild errors.",
+              "Interleaving fillets causes circular reference dependencies in parametric kernels."
+            ]
+          }
+        ],
+        "compositeMastery": {
+          "composite": 0,
+          "conceptual": 0,
+          "practical": 0,
+          "independent": 0,
+          "retention": null,
+          "weights": {
+            "conceptual": 0.3889,
+            "practical": 0.3889,
+            "independent": 0.2222,
+            "retention": 0
+          },
+          "status": "Not Assessed",
+          "independentPassedCount": 0
+        }
+      },
+      {
+        "id": "cad_hub_bore_concentricity",
+        "name": "Hub/Bore Concentricity and GD&T",
+        "track": "Mechanical Engineering (CAD)",
+        "domain": "mech",
+        "category": "Assembly & Precision Fits",
+        "description": "Enforcing coaxial datum alignment, runout tolerances, and concentricity in rotating machinery shafts and bores.",
+        "keyConcept": "Coaxial rotating components demand precise concentricity (GD&T concentricity / total runout) to prevent centrifugal unbalance, excessive bearing dynamic loads, and premature seal wear. In CAD assemblies, cylindrical mate constraints lock coaxial datums.",
+        "typicalTrap": "Mating cylindrical faces using point contact or planar coincidence rather than coaxial/concentric constraints, creating eccentric radial runout (cad_tolerance_mismatch).",
+        "codeLanguage": "python",
+        "starterCodeSnippet": "# Concentric Shaft & Bearing Hub Assembly\nimport cadquery as cq\n\n# Outer Bearing Housing with Coaxial Bore\nhousing = (\n    cq.Workplane(\"XY\")\n    .circle(60).extrude(30) # Outer housing hub\n    .faces(\">Z\").workplane()\n    .circle(35) # Concentric inner bore (Datum A axis)\n    .cutThruAll()\n)",
+        "starterErrorLog": "GD&T Assembly Error: Radial eccentricity of 0.28mm detected between Shaft_Axis and Housing_Bore_Datum. Total circular runout exceeds ISO tolerance class IT6.",
+        "prerequisites": [
+          "cad_geometric_constraints",
+          "cad_extrude_operations"
+        ],
+        "status": "NOT_ASSESSED",
+        "mastery": 0,
+        "errorCount": 0,
+        "solvedCount": 0,
+        "evidenceLabel": "Insufficient Evidence",
+        "diagnosticQuestions": [
+          {
+            "id": "mech_q_hub_1",
+            "section": "Assembly & Fits",
+            "topic_id": "cad_hub_bore_concentricity",
+            "topic_name": "Hub/Bore Concentricity and GD&T",
+            "question": "When assembling a 35mm precision steel shaft into a ball bearing inner ring in CAD, which assembly constraint pair fully establishes concentric alignment without over-constraining rotation?",
+            "options": [
+              "A Concentric (or Coaxial) cylindrical mate plus one axial planar mate against the shoulder stop",
+              "Two parallel face mates and a tangent line contact mate",
+              "Three perpendicular point-to-point coincident mates",
+              "A rigid ground weld constraint on the bearing bore"
+            ],
+            "correct_option_index": 0,
+            "explanation": "A concentric/coaxial constraint removes 4 degrees of freedom (2 translational, 2 rotational tilt), leaving 1 axial translation and 1 rotation. The shoulder planar mate locks the remaining axial translation.",
+            "distractor_explanations": [
+              "Parallel face mates do not center the cylindrical axes, allowing radial slip.",
+              "Point-to-point coincident mates do not establish line-contact coaxiality.",
+              "Grounding eliminates all rotational motion, preventing operational kinematic simulation."
+            ]
+          },
+          {
+            "id": "mech_q_hub_2",
+            "section": "Assembly & Fits",
+            "topic_id": "cad_hub_bore_concentricity",
+            "topic_name": "Hub/Bore Concentricity and GD&T",
+            "question": "If a rotating transmission hub exhibits 0.15mm radial eccentricity relative to its driving shaft centerline, what physical phenomenon occurs at 3000 RPM?",
+            "options": [
+              "Significant centrifugal unbalance force (F = m * e * omega^2) causing severe vibration and bearing fatigue",
+              "The shaft automatically centers itself due to gyroscopic precession",
+              "The rotational friction drops to zero due to aerodynamic air levitation",
+              "The material modulus of elasticity doubles"
+            ],
+            "correct_option_index": 0,
+            "explanation": "Dynamic unbalance force scales with the square of angular velocity (omega^2). An eccentricity e = 0.15mm creates massive cyclic centrifugal forces that quickly destroy ball bearings.",
+            "distractor_explanations": [
+              "Gyroscopic precession resists tilt, but does not eliminate radial centrifugal unbalance.",
+              "Friction in bearings increases drastically under eccentric shock loading.",
+              "Modulus of elasticity is an intrinsic material property unaffected by RPM."
+            ]
+          },
+          {
+            "id": "mech_q_hub_3",
+            "section": "Assembly & Fits",
+            "topic_id": "cad_hub_bore_concentricity",
+            "topic_name": "Hub/Bore Concentricity and GD&T",
+            "question": "Under ISO tolerance standards, what type of fit is achieved when mating a 25mm shaft machined to 25.015mm (+15um) with a bore machined to 24.990mm (-10um)?",
+            "options": [
+              "Interference fit (press-fit requiring thermal expansion or hydraulic arbor press assembly)",
+              "Clearance fit (free sliding slip fit with room for lubricant film)",
+              "Transition fit (can be clearance or light tap fit depending on random batch distribution)",
+              "Threaded engagement fit"
+            ],
+            "correct_option_index": 0,
+            "explanation": "Since the minimum shaft diameter (25.015mm) is strictly larger than the maximum bore diameter (24.990mm), there is guaranteed negative clearance (interference of 25um), requiring force/thermal fit.",
+            "distractor_explanations": [
+              "Clearance fits require the bore to be strictly larger than the shaft.",
+              "Transition fits have overlapping tolerance zones with both positive and negative clearance possible.",
+              "Neither component possesses helical screw threads."
+            ]
+          }
+        ],
+        "compositeMastery": {
+          "composite": 0,
+          "conceptual": 0,
+          "practical": 0,
+          "independent": 0,
+          "retention": null,
+          "weights": {
+            "conceptual": 0.3889,
+            "practical": 0.3889,
+            "independent": 0.2222,
+            "retention": 0
+          },
+          "status": "Not Assessed",
+          "independentPassedCount": 0
+        }
+      },
+      {
+        "id": "cad_material_mass_properties",
+        "name": "Material, Volume and Mass Properties (Density in g/cm³)",
+        "track": "Mechanical Engineering (CAD)",
+        "domain": "mech",
+        "category": "Materials & Mass Evaluation",
+        "description": "Calculating part volume, assigning engineering physical materials, and evaluating mass and center of gravity (CG).",
+        "keyConcept": "Mass equals density multiplied by volume (m = rho * V). 1 cm³ = 1000 mm³. Benchmark densities: 6061-T6 Aluminum ~ 2.70 g/cm³, 1018 Mild Steel ~ 7.85 g/cm³, ABS Polymer ~ 1.04 g/cm³, Titanium Ti-6Al-4V ~ 4.43 g/cm³.",
+        "typicalTrap": "Confusing volume with mass, or mixing volume unit conversions (e.g. failing to realize that 1,000,000 mm³ = 1,000 cm³ = 1 liter, resulting in 1000x mass evaluation errors).",
+        "codeLanguage": "python",
+        "starterCodeSnippet": "# Physical Mass Calculation in CAD\nvolume_mm3 = 250000.0 # 250,000 mm^3 = 250.0 cm^3\ndensity_steel_g_cm3 = 7.85 # 1018 Steel\n\n# Unit Conversion: 1 cm^3 = 1000 mm^3\nvolume_cm3 = volume_mm3 / 1000.0\nmass_grams = volume_cm3 * density_steel_g_cm3 # 250 * 7.85 = 1962.5 g = 1.96 kg",
+        "starterErrorLog": "Mass Evaluation Error: Volume was directly multiplied by density without mm^3 to cm^3 unit conversion factor (1000). Calculated component mass is 1000x too high (1962.5 kg instead of 1.96 kg).",
+        "prerequisites": [
+          "cad_extrude_operations"
+        ],
+        "status": "NOT_ASSESSED",
+        "mastery": 0,
+        "errorCount": 0,
+        "solvedCount": 0,
+        "evidenceLabel": "Insufficient Evidence",
+        "diagnosticQuestions": [
+          {
+            "id": "mech_q_mat_1",
+            "section": "Physical Materials",
+            "topic_id": "cad_material_mass_properties",
+            "topic_name": "Material, Volume and Mass Properties (Density in g/cm³)",
+            "question": "A CAD solid body has a measured volume of 500,000 mm³. If the material assigned is 6061 Aluminum with density 2.70 g/cm³, what is the total mass of the part in kilograms?",
+            "options": [
+              "1.35 kg",
+              "1350 kg",
+              "0.135 kg",
+              "3.70 kg"
+            ],
+            "correct_option_index": 0,
+            "explanation": "Volume in cm³ = 500,000 mm³ / 1,000 = 500 cm³. Mass = 500 cm³ * 2.70 g/cm³ = 1,350 grams = 1.35 kg.",
+            "distractor_explanations": [
+              "1350 kg happens if you fail to convert mm³ to cm³, confusing volume with mass scales.",
+              "0.135 kg is off by a factor of 10 from incorrect decimal shifting.",
+              "3.70 kg occurs if you divide volume by density rather than multiplying."
+            ]
+          },
+          {
+            "id": "mech_q_mat_2",
+            "section": "Physical Materials",
+            "topic_id": "cad_material_mass_properties",
+            "topic_name": "Material, Volume and Mass Properties (Density in g/cm³)",
+            "question": "Two identical bracket CAD models have the exact same geometric volume of 200 cm³. Bracket A is 1018 Steel (7.85 g/cm³) and Bracket B is 6061-T6 Aluminum (2.70 g/cm³). What is the ratio of Mass(A) to Mass(B)?",
+            "options": [
+              "Approximately 2.91 : 1 (Steel is nearly 3x heavier for the identical volume)",
+              "1 : 1 (Identical volume always guarantees identical mass)",
+              "0.34 : 1 (Aluminum is heavier than steel)",
+              "7.85 : 1"
+            ],
+            "correct_option_index": 0,
+            "explanation": "Ratio of mass for equal volume is simply the ratio of their densities: rho_steel / rho_aluminum = 7.85 / 2.70 = 2.907 (~2.91x). Steel is approximately 2.9 times denser than aluminum.",
+            "distractor_explanations": [
+              "Identical volume guarantees equal mass ONLY if materials are identical (confusing volume with mass).",
+              "Aluminum is significantly lighter than steel, not heavier.",
+              "7.85 is the raw steel density, not the ratio against aluminum (2.70 g/cm³)."
+            ]
+          },
+          {
+            "id": "mech_q_mat_3",
+            "section": "Physical Materials",
+            "topic_id": "cad_material_mass_properties",
+            "topic_name": "Material, Volume and Mass Properties (Density in g/cm³)",
+            "question": "Why does changing a CAD model’s visual appearance color (e.g. to \"Chrome Shiny\") fail to update its structural mass and center of gravity?",
+            "options": [
+              "Appearances are purely optical rendering shaders; physical material density must be explicitly assigned in the Material Library",
+              "The CAD software must be restarted before optical shaders reflect mass",
+              "Shiny surfaces reflect photons, temporarily neutralizing gravitational acceleration",
+              "Chrome appearance automatically converts all inner solid bodies into hollow surfaces"
+            ],
+            "correct_option_index": 0,
+            "explanation": "In engineering CAD systems, Appearance controls RGB color, specular reflection, and roughness. Physical Material controls mass density (g/cm³), Young’s modulus, thermal expansion, and yield strength.",
+            "distractor_explanations": [
+              "Shaders never govern mass regardless of software restarts.",
+              "Photon reflection does not alter gravitational rest mass in engineering mechanics.",
+              "Solid B-rep geometry remains solid regardless of visual appearance assignment."
+            ]
+          }
+        ],
+        "compositeMastery": {
+          "composite": 0,
+          "conceptual": 0,
+          "practical": 0,
+          "independent": 0,
+          "retention": null,
+          "weights": {
+            "conceptual": 0.3889,
+            "practical": 0.3889,
+            "independent": 0.2222,
+            "retention": 0
+          },
+          "status": "Not Assessed",
+          "independentPassedCount": 0
+        }
+      },
+      {
+        "id": "cad_stress_fos",
+        "name": "Static Stress and Factor of Safety (FOS)",
+        "track": "Mechanical Engineering (CAD)",
+        "domain": "mech",
+        "category": "Structural Analysis & FEA",
+        "description": "Evaluating Von Mises equivalent stress, structural yield criteria, and Factor of Safety (FOS = yield / max_stress >= 2.0).",
+        "keyConcept": "Factor of Safety (FOS) measures structural design margin: FOS = sigma_yield / sigma_max. Engineering design guidelines mandate target FOS >= 2.0 for ductile static mechanical equipment to prevent permanent plastic deformation and account for shock loading.",
+        "typicalTrap": "Assuming a low Factor of Safety (e.g., FOS = 1.1 or 1.2) is acceptable in general machinery without considering dynamic shock, fatigue, or stress concentrations, leading to catastrophic field yielding.",
+        "codeLanguage": "python",
+        "starterCodeSnippet": "# Structural Factor of Safety (FOS) Evaluation\nyield_strength_mpa = 276.0 # 6061-T6 Aluminum Yield = 276 MPa\nmax_von_mises_stress_mpa = 120.0 # Peak localized stress from FEA\n\n# Target: FOS >= 2.0 for robust mechanical service\nfos = yield_strength_mpa / max_von_mises_stress_mpa # 276 / 120 = 2.30 (SAFE, FOS >= 2.0)",
+        "starterErrorLog": "FEA Compliance Failure: Component minimum Factor of Safety is 1.22 (Peak Von Mises stress = 226 MPa vs Yield = 276 MPa). FOS is below structural design threshold (target FOS >= 2.0). Redesign required.",
+        "prerequisites": [
+          "cad_material_mass_properties"
+        ],
+        "status": "RED",
+        "mastery": 0.187,
+        "errorCount": 0,
+        "solvedCount": 1,
+        "evidenceLabel": "Insufficient Evidence",
+        "diagnosticQuestions": [
+          {
+            "id": "mech_q_fos_1",
+            "section": "FEA Stress & FOS",
+            "topic_id": "cad_stress_fos",
+            "topic_name": "Static Stress and Factor of Safety (FOS)",
+            "question": "A mechanical bracket made of structural steel (Yield Strength = 250 MPa) exhibits a maximum Von Mises stress of 100 MPa under rated service load. What is the Factor of Safety (FOS)?",
+            "options": [
+              "2.50 (Meets standard engineering target FOS >= 2.0)",
+              "0.40 (Failing yield)",
+              "1.50 (Marginal)",
+              "25,000 (Dimensionless unit error)"
+            ],
+            "correct_option_index": 0,
+            "explanation": "FOS = sigma_yield / sigma_max = 250 MPa / 100 MPa = 2.50. This provides a 150% safety margin above yield, comfortably satisfying the standard engineering design requirement of FOS >= 2.0.",
+            "distractor_explanations": [
+              "0.40 is the inverse ratio (sigma_max / sigma_yield), which is the stress utilization fraction.",
+              "1.50 is incorrect arithmetic.",
+              "25,000 is multiplying the values instead of dividing."
+            ]
+          },
+          {
+            "id": "mech_q_fos_2",
+            "section": "FEA Stress & FOS",
+            "topic_id": "cad_stress_fos",
+            "topic_name": "Static Stress and Factor of Safety (FOS)",
+            "question": "Why is an FOS of 1.15 considered unacceptable for general industrial machinery even though the calculated stress is below the material yield point (FOS > 1.0)?",
+            "options": [
+              "An FOS of 1.15 leaves virtually zero margin for dynamic shock loads, manufacturing tolerances, material inclusions, or cyclic fatigue",
+              "CAD software will refuse to save any model file with an FOS below 2.0",
+              "At FOS < 1.5, the material automatically converts into a non-Newtonian fluid",
+              "International ISO standards forbid components with FOS < 10.0"
+            ],
+            "correct_option_index": 0,
+            "explanation": "Real-world machinery experiences vibration, accidental overload, tool marks, and material imperfections. A target FOS >= 2.0 guards against unexpected plastic deformation and fatigue.",
+            "distractor_explanations": [
+              "CAD/FEA software allows saving any design regardless of structural safety.",
+              "Solid metals do not turn into fluids under sub-yield stress.",
+              "An FOS of 10.0 is excessively over-engineered and only seen in critical elevators or man-rated rigging."
+            ]
+          },
+          {
+            "id": "mech_q_fos_3",
+            "section": "FEA Stress & FOS",
+            "topic_id": "cad_stress_fos",
+            "topic_name": "Static Stress and Factor of Safety (FOS)",
+            "question": "If a finite element analysis reveals an unacceptable FOS of 1.25 concentrated at a sharp 90-degree internal corner, what is the most effective CAD design change to raise the FOS above 2.0 without significantly increasing mass?",
+            "options": [
+              "Add a generous transition fillet radius to smooth out stress concentration streamlines",
+              "Double the overall thickness of the entire component uniformly",
+              "Switch the CAD display mode from shaded to wireframe",
+              "Increase the applied simulation load by 50%"
+            ],
+            "correct_option_index": 0,
+            "explanation": "Localized stress peaks at sharp corners are caused by geometric notch effects (Kt). Adding an internal fillet radius (e.g. R = 4mm) eliminates the notch, drastically lowering peak stress and raising FOS above 2.0.",
+            "distractor_explanations": [
+              "Doubling the entire part thickness adds unnecessary weight and manufacturing cost.",
+              "Viewport display modes have no effect on physical stress tensors.",
+              "Increasing load would decrease the FOS even further."
+            ]
+          }
+        ],
+        "compositeMastery": {
+          "composite": 68,
+          "conceptual": 19,
+          "practical": 100,
+          "independent": 100,
+          "retention": null,
+          "weights": {
+            "conceptual": 0.3889,
+            "practical": 0.3889,
+            "independent": 0.2222,
+            "retention": 0
+          },
+          "status": "Improving",
+          "independentPassedCount": 1
+        },
+        "bktTrace": [
+          {
+            "id": "trace_1793690067506_wi8z4",
+            "conceptId": "cad_stress_fos",
+            "prior": 0,
+            "observed": true,
+            "posterior": 0.187,
+            "pLObserved": 0.0435,
+            "isCorrect": true,
+            "isIndependent": true,
+            "source": "sandbox",
+            "timestamp": "2026-11-03T07:14:27.506Z",
+            "tierUsed": 1
+          }
+        ]
+      }
+    ]
+  }
+}

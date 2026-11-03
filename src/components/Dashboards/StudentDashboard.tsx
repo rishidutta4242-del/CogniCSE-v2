@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTutor } from '../../context/TutorContext';
-import { User, Award, CheckCircle2, AlertTriangle, TrendingUp, Clock, Download, ArrowRight, ShieldCheck, Terminal, Video } from 'lucide-react';
+import { User, Award, CheckCircle2, AlertTriangle, TrendingUp, Clock, Download, ArrowRight, ShieldCheck, Terminal, Video, Radio, Sparkles } from 'lucide-react';
 
 export const StudentDashboard: React.FC = () => {
   const { islm, dkmNodes, exportOfflinePack, setCurrentWorkflow, setSelectedNode } = useTutor();
+  const [approvedInterventions, setApprovedInterventions] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetch(`/api/store/interventions?studentId=${islm.student_id}`)
+      .then(r => r.json())
+      .then(data => {
+        const approved = (data.items || []).filter((i: any) => i.status === 'Teacher-approved');
+        setApprovedInterventions(approved);
+      })
+      .catch(() => {});
+  }, [islm.student_id]);
 
   const greenCount = dkmNodes.filter(n => n.status === 'GREEN').length;
   const yellowCount = dkmNodes.filter(n => n.status === 'YELLOW').length;
@@ -30,13 +41,22 @@ export const StudentDashboard: React.FC = () => {
           </div>
         </div>
 
-        <button
-          onClick={exportOfflinePack}
-          className="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-bold flex items-center gap-2 shadow-md shadow-indigo-950/40 transition-colors cursor-pointer shrink-0"
-        >
-          <Download className="w-4 h-4" />
-          Export Offline Revision Pack
-        </button>
+        <div className="flex items-center gap-2 shrink-0">
+          <button
+            onClick={() => setCurrentWorkflow('LIVE_CLASS')}
+            className="px-4 py-2.5 bg-rose-600 hover:bg-rose-500 text-white rounded-xl text-xs font-bold flex items-center gap-2 shadow-md transition-colors cursor-pointer"
+          >
+            <Radio className="w-4 h-4 animate-pulse" />
+            Join Live Class
+          </button>
+          <button
+            onClick={exportOfflinePack}
+            className="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-bold flex items-center gap-2 shadow-md shadow-indigo-950/40 transition-colors cursor-pointer"
+          >
+            <Download className="w-4 h-4" />
+            Export Revision Pack
+          </button>
+        </div>
       </div>
 
       {/* METRIC SUMMARY CARDS */}
@@ -79,6 +99,48 @@ export const StudentDashboard: React.FC = () => {
           <div className="text-[10px] text-rose-300 mt-1">Flagged for targeted drills</div>
         </div>
       </div>
+
+      {/* TEACHER-APPROVED INTERVENTIONS */}
+      {approvedInterventions.length > 0 && (
+        <div className="bg-indigo-950/40 border border-indigo-700/60 rounded-2xl p-5 shadow-lg space-y-3">
+          <div className="flex items-center justify-between pb-2 border-b border-indigo-800/60">
+            <div className="text-xs font-bold text-amber-300 uppercase tracking-wider flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-amber-400" />
+              Teacher-Approved Pedagogical Interventions
+            </div>
+            <span className="text-[10px] font-mono text-emerald-300 bg-emerald-950 px-2 py-0.5 rounded border border-emerald-800">
+              Teacher-approved
+            </span>
+          </div>
+
+          <div className="space-y-3">
+            {approvedInterventions.map((item: any) => (
+              <div key={item.id} className="p-3.5 bg-slate-900/90 rounded-xl border border-indigo-900/50 space-y-2 text-xs">
+                <div className="flex items-center justify-between">
+                  <span className="font-bold text-slate-100">{item.conceptName || item.conceptId || 'Core Architecture'}</span>
+                  <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded border ${
+                    item.outcome === 'resolved'
+                      ? 'bg-emerald-950 text-emerald-300 border-emerald-800'
+                      : item.outcome === 'repeated error'
+                      ? 'bg-rose-950 text-rose-300 border-rose-800'
+                      : 'bg-slate-950 text-slate-400 border-slate-800'
+                  }`}>
+                    Outcome: {(item.outcome || 'pending').toUpperCase()}
+                  </span>
+                </div>
+                <p className="text-slate-300 leading-relaxed">
+                  <strong>Instructor Advice:</strong> {item.tutorMessage}
+                </p>
+                {item.socraticQuestion && (
+                  <p className="text-indigo-300 italic">
+                    <strong>Reflective Prompt:</strong> "{item.socraticQuestion}"
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* TWO COLUMNS: RECENT MISCONCEPTIONS & LEARNING HISTORY */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">

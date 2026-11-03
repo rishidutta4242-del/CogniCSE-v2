@@ -17,6 +17,8 @@ import {
   processLibraryRequest,
   processVariantRequest,
 } from './server/gemini.ts';
+import { registerLiveRoutes } from './server/liveRoutes.ts';
+import { registerTeacherRoutes } from './server/teacherRoutes.ts';
 
 dotenv.config();
 
@@ -31,6 +33,10 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // Ensure store.json is initialized atomically on startup
 ensureStoreExists();
+
+// Mount Live Class & Teacher Analytics routes
+registerLiveRoutes(app);
+registerTeacherRoutes(app);
 
 // Endpoint: Auth Login / User Provisioning
 app.post('/api/auth/login', async (req: Request, res: Response) => {
@@ -338,6 +344,21 @@ app.post('/api/attempts', async (req: Request, res: Response) => {
     await writeStoreAtomically(s => {
       if (!s.attempts) s.attempts = [];
       s.attempts.push(newAttempt);
+
+      // Check if student has a Teacher-approved intervention for this concept; record outcome
+      if (s.interventions) {
+        const approvedInt = s.interventions.find(
+          (i: any) =>
+            i.studentId === newAttempt.studentId &&
+            i.status === 'Teacher-approved' &&
+            (!i.conceptId || i.conceptId === newAttempt.conceptId) &&
+            (!i.outcome || i.outcome === 'pending')
+        );
+        if (approvedInt) {
+          approvedInt.outcome = newAttempt.passed ? 'resolved' : 'repeated error';
+          approvedInt.outcomeRecordedAt = new Date().toISOString();
+        }
+      }
     });
 
     // Also append as pedagogical event

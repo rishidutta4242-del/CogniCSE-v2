@@ -66,6 +66,7 @@ export interface StoreData {
   interventions: Array<{
     id: string;
     studentId: string;
+    studentName?: string;
     timestamp: string;
     tier: number;
     issueType: string;
@@ -73,6 +74,12 @@ export interface StoreData {
     tutorMessage: string;
     socraticQuestion: string;
     conceptId?: string;
+    conceptName?: string;
+    suggestedAction?: string;
+    status?: 'pending' | 'Teacher-approved' | 'dismissed';
+    outcome?: 'pending' | 'resolved' | 'repeated error';
+    approvedAt?: string;
+    outcomeRecordedAt?: string;
   }>;
   sessions: Array<{
     id: string;

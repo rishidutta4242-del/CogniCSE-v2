@@ -14,6 +14,7 @@ import {
   Sparkles,
   Users,
   GraduationCap,
+  Radio,
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -25,6 +26,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPretest, onOpenSecurityAud
   const { currentWorkflow, setCurrentWorkflow, islm, switchRole, exportOfflinePack } = useTutor();
 
   const navItems = [
+    { id: 'LIVE_CLASS', label: 'Live Class', icon: Radio },
     { id: 'CODE_SANDBOX_TUTORING', label: 'Code Sandbox', icon: Code2 },
     { id: 'MEMORY_TREE', label: 'Memory Tree', icon: GitGraph },
     { id: 'AI_VIDEO', label: '60s AI Video', icon: Video },

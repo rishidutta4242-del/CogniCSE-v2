@@ -5,6 +5,8 @@ import {
   getMockTestFallback,
   getLibraryVaultFallback,
   getVariantFallback,
+  getLiveTranscriptFallback,
+  getInterventionSuggestionsFallback,
 } from './fallbacks.ts';
 
 const geminiApiKey = process.env.GEMINI_API_KEY;
@@ -436,6 +438,120 @@ Return JSON containing title, prompt, description, code, and test cases.`;
   const fallback = getVariantFallback(conceptId, track, language);
   return {
     ...fallback,
+    source: 'fallback' as const,
+    fallback_reason: cleanErrorMessage(error),
+  };
+}
+
+export async function processLiveTranscriptRequest(
+  transcript: string,
+  track?: string,
+  topicId?: string
+) {
+  const prompt = `Extract a lecture timeline and pedagogical check questions from the following lecture transcript or notes:
+Track: ${track || 'Engineering'}
+Topic: ${topicId || 'Core'}
+Transcript:
+"""
+${(transcript || '').slice(0, 4000)}
+"""
+
+Extract an array of timeline items. Each timeline item represents a milestone concept and must include:
+- id: string
+- timeOffset: string (e.g. "05:00")
+- conceptId: string
+- conceptName: string
+- summary: string
+- questions: array of exactly 2 check questions. Each question must include:
+  - id: string
+  - conceptId: string
+  - conceptName: string
+  - question: string
+  - options: array of 4 distinct choices
+  - correctIndex: number (0 to 3)
+  - explanation: string
+  - misconceptionMap: object mapping wrong option indexes to specific cognitive misconceptions.
+Return JSON with key { timeline: [...] }.`;
+
+  const { data, error } = await callGeminiWithRetry<any>(
+    prompt,
+    'You are an expert pedagogical curriculum designer extracting real-time concept milestones and diagnostic check questions for live lectures.',
+    undefined,
+    10000
+  );
+
+  if (data && Array.isArray(data.timeline) && data.timeline.length > 0) {
+    return {
+      ...data,
+      source: 'gemini' as const,
+      fallback_reason: null,
+    };
+  }
+
+  const fallback = getLiveTranscriptFallback(transcript, track, topicId);
+  return {
+    ...fallback,
+    source: 'fallback' as const,
+    fallback_reason: cleanErrorMessage(error),
+  };
+}
+
+export async function processInterventionSuggestionsRequest(
+  students: any[],
+  dkmNodes?: any[]
+) {
+  const atRiskStudents = students.filter(s => {
+    const redCount = Object.values(s.topic_mastery || {}).filter((v: any) => Number(v) < 0.5).length;
+    return redCount >= 3 || (s.overall_mastery || 0) < 0.40;
+  });
+
+  const prompt = `Analyze at-risk student telemetry and suggest targeted pedagogical interventions:
+At-risk count: ${atRiskStudents.length}
+Students summary: ${JSON.stringify(
+    atRiskStudents.map(s => ({
+      id: s.student_id,
+      name: s.name,
+      overall: s.overall_mastery,
+      fading: s.scaffolding_fading_index,
+      misconceptions: s.recent_misconceptions,
+      errors: s.error_count,
+    }))
+  )}
+
+Return a JSON array of intervention objects with:
+- id: string
+- studentId: string
+- studentName: string
+- conceptId: string
+- conceptName: string
+- severity: 'high' | 'medium' | 'low'
+- issueType: string
+- suggestedAction: string
+- rationale: string
+- tutorMessage: string
+- socraticQuestion: string
+- status: 'pending'
+- outcome: 'pending'
+- createdAt: string (ISO)`;
+
+  const { data, error } = await callGeminiWithRetry<any>(
+    prompt,
+    'You are an automated pedagogical intervention advisor for university professors.',
+    undefined,
+    10000
+  );
+
+  if (Array.isArray(data) && data.length > 0) {
+    return {
+      interventions: data,
+      source: 'gemini' as const,
+      fallback_reason: null,
+    };
+  }
+
+  const fallback = getInterventionSuggestionsFallback(students, dkmNodes);
+  return {
+    interventions: fallback,
     source: 'fallback' as const,
     fallback_reason: cleanErrorMessage(error),
   };

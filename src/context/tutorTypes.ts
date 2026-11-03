@@ -21,12 +21,15 @@ export type AppWorkflow =
   | 'MOCK_TEST'
   | 'CODE_SANDBOX'
   | 'CAD_LAB'
+  | 'WEB_DEV_LAB'
   | 'MEMORY_TREE'
   | 'LIBRARY_VAULT'
   | 'AI_VIDEO'
   | 'COMPARISON_STUDY'
   | 'STUDENT_DASHBOARD'
-  | 'TEACHER_DASHBOARD';
+  | 'TEACHER_DASHBOARD'
+  | 'ENGAGEMENT'
+  | 'LIVE_CLASS';
 
 export interface TutorContextType {
   isAuthenticated: boolean;

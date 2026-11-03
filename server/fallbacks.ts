@@ -713,3 +713,300 @@ const target_dof = 0;
   };
 }
 
+export function getLiveTranscriptFallback(transcript?: string, track?: string, topicId?: string) {
+  const isMech = track === 'Mechanical Engineering (CAD)' || (topicId && topicId.startsWith('cad_'));
+
+  if (isMech) {
+    return {
+      timeline: [
+        {
+          id: 'timeline_mech_1',
+          timeOffset: '05:30',
+          conceptId: 'cad_degrees_of_freedom',
+          conceptName: '2D Sketch Degrees of Freedom',
+          summary: 'Constraint resolution and dimensional locking of sketch profiles.',
+          questions: [
+            {
+              id: 'q_dof_1',
+              conceptId: 'cad_degrees_of_freedom',
+              conceptName: '2D Sketch Degrees of Freedom',
+              question: 'When creating a symmetrical mounting lug, why does adding a centerline symmetry constraint reduce remaining DOF from 2 to 1?',
+              options: [
+                'It binds symmetrical vertices to mirror across the axis, eliminating independent lateral translation',
+                'It converts the sketch profile into a solid 3D extrusion directly',
+                'It locks both horizontal and vertical position to the absolute origin',
+                'It sets tangent continuity across all surrounding arcs'
+              ],
+              correctIndex: 0,
+              explanation: 'Symmetry constraint mirrors positions across an axis, coupling 2 independent coordinate pairs into 1.',
+              misconceptionMap: {
+                1: 'Confusing 2D sketch constraint solver with 3D solid extrusion operations',
+                2: 'Assuming symmetry fixes origin location rather than relative counterpart spacing',
+                3: 'Confusing symmetry geometric constraint with tangential curvature continuity'
+              }
+            },
+            {
+              id: 'q_dof_2',
+              conceptId: 'cad_degrees_of_freedom',
+              conceptName: '2D Sketch Degrees of Freedom',
+              question: 'What is the required state of sketch DOF before an extrusion feature is safe for production parametric updates?',
+              options: [
+                'Exactly 0 (Fully Constrained, indicated in green)',
+                '1 or 2 DOF to allow dynamic stretching',
+                'Negative DOF (Over-constrained)',
+                'DOF is irrelevant once dimensions are typed'
+              ],
+              correctIndex: 0,
+              explanation: 'Fully constrained sketches (0 DOF) prevent unintended geometry inversion when global parameters change.',
+              misconceptionMap: {
+                1: 'Believing under-constrained sketches provide healthy flexibility rather than modeling instability',
+                2: 'Misunderstanding over-constrained red solver conflicts as robust locking',
+                3: 'Treating dimension annotations as static without constraint graph validation'
+              }
+            }
+          ]
+        },
+        {
+          id: 'timeline_mech_2',
+          timeOffset: '18:45',
+          conceptId: 'cad_safety_factor_fea',
+          conceptName: 'FEA Stress & Factor of Safety',
+          summary: 'Von Mises stress evaluation against yield strength (FOS >= 2.0).',
+          questions: [
+            {
+              id: 'q_fos_1',
+              conceptId: 'cad_safety_factor_fea',
+              conceptName: 'FEA Stress & Factor of Safety',
+              question: 'If an Al 6061-T6 bracket (yield strength 276 MPa) experiences peak Von Mises stress of 118.5 MPa under 500 N, what is the Factor of Safety?',
+              options: [
+                '2.33 (Compliant with FOS >= 2.0 requirement)',
+                '0.43 (Immediate failure under static load)',
+                '1.00 (At the threshold of plastic deformation)',
+                '3.50 (Calculated via tensile strength instead)'
+              ],
+              correctIndex: 0,
+              explanation: 'FOS = Yield Strength / Peak Von Mises = 276 / 118.5 = 2.33.',
+              misconceptionMap: {
+                1: 'Inverted the FOS ratio (computed stress / yield instead of yield / stress)',
+                2: 'Assumed static load implies neutral unity safety factor',
+                3: 'Used ultimate tensile strength instead of yield limit for structural elasticity'
+              }
+            },
+            {
+              id: 'q_fos_2',
+              conceptId: 'cad_safety_factor_fea',
+              conceptName: 'FEA Stress & Factor of Safety',
+              question: 'Under an overload of 2500 N, the bracket stress reaches 592.5 MPa. What physical event occurs?',
+              options: [
+                'Permanent plastic deformation and failure (FOS = 0.47 < 1.0)',
+                'Elastic springback with zero permanent strain',
+                'Linear thermal expansion without structural yielding',
+                'Stress automatically redistributes safely to the hub'
+              ],
+              correctIndex: 0,
+              explanation: 'Because Von Mises (592.5 MPa) exceeds yield (276 MPa), the material undergoes irreversible plastic deformation.',
+              misconceptionMap: {
+                1: 'Assuming metals remain strictly elastic regardless of applied force magnitude',
+                2: 'Confusing mechanical shear stress with thermal expansion gradients',
+                3: 'Believing FEA stress concentrations disperse without geometric redesign'
+              }
+            }
+          ]
+        }
+      ]
+    };
+  }
+
+  // Web Dev / Systems track
+  return {
+    timeline: [
+      {
+        id: 'timeline_web_1',
+        timeOffset: '04:15',
+        conceptId: 'web_apache_docroot',
+        conceptName: 'Apache DocumentRoot & File Hierarchy',
+        summary: 'Mapping URI paths to server document root vs local user desktop directories.',
+        questions: [
+          {
+            id: 'q_docroot_1',
+            conceptId: 'web_apache_docroot',
+            conceptName: 'Apache DocumentRoot & File Hierarchy',
+            question: 'When Apache is configured with DocumentRoot "C:/xampp/htdocs", why does a browser request to "http://localhost/index.html" fail with 404 if the file is saved at "C:/Users/Student/Desktop/index.html"?',
+            options: [
+              'Apache only looks inside DocumentRoot (C:/xampp/htdocs) and rejects access outside for security and path mapping',
+              'Apache does not support HTML files saved with Windows line endings',
+              'The browser requires port 8080 explicitly to read Desktop files',
+              'Desktop files are automatically encrypted by the operating system kernel'
+            ],
+            correctIndex: 0,
+            explanation: 'DocumentRoot defines the root of the server filesystem exposed over HTTP. Files outside are unreachable by the daemon.',
+            misconceptionMap: {
+              1: 'Confused line endings with file path accessibility',
+              2: 'Assumed changing port number allows web server to escape its DocumentRoot boundary',
+              3: 'Attributed path resolution errors to OS file encryption'
+            }
+          },
+          {
+            id: 'q_docroot_2',
+            conceptId: 'web_apache_docroot',
+            conceptName: 'Apache DocumentRoot & File Hierarchy',
+            question: 'To serve a file at "http://localhost/courses/catalog.php", where must the PHP script physically reside in the virtual environment?',
+            options: [
+              'C:\\xampp\\htdocs\\courses\\catalog.php',
+              'C:\\xampp\\courses\\catalog.php',
+              'C:\\Users\\Student\\courses\\catalog.php',
+              'C:\\Windows\\System32\\courses\\catalog.php'
+            ],
+            correctIndex: 0,
+            explanation: 'The request path "/courses/catalog.php" is appended directly onto DocumentRoot: C:\\xampp\\htdocs + \\courses\\catalog.php.',
+            misconceptionMap: {
+              1: 'Omitted the mandatory "htdocs" subfolder, saving in parent xampp folder',
+              2: 'Saved under personal user home directory instead of Apache DocumentRoot',
+              3: 'Confused web server directory with Windows system executable folder'
+            }
+          }
+        ]
+      },
+      {
+        id: 'timeline_web_2',
+        timeOffset: '16:40',
+        conceptId: 'pdo_mysql_port',
+        conceptName: 'PDO MySQL Connection & Port Architecture',
+        summary: 'Database daemon ports (3306 vs 80) and DSN string configuration.',
+        questions: [
+          {
+            id: 'q_port_1',
+            conceptId: 'pdo_mysql_port',
+            conceptName: 'PDO MySQL Connection & Port Architecture',
+            question: 'A student writes `new PDO("mysql:host=localhost;port=80;dbname=courses", "root", "")` and gets "Connection Refused". What is the root cause?',
+            options: [
+              'Port 80 is the HTTP web server port, whereas MySQL daemon listens on port 3306 by default',
+              'MySQL requires port 8080 when connecting via PDO',
+              'The PDO constructor does not accept a port parameter in the DSN',
+              'The password parameter cannot be an empty string in local development'
+            ],
+            correctIndex: 0,
+            explanation: 'MySQL runs on TCP port 3306. Port 80 is reserved for Apache HTTP. Connecting a database client to an HTTP socket results in connection failure.',
+            misconceptionMap: {
+              1: 'Confused proxy port 8080 with database daemon socket port',
+              2: 'Mistakenly believed PDO DSN syntax forbids the port parameter',
+              3: 'Assumed credential formatting was rejected rather than socket refusal'
+            }
+          },
+          {
+            id: 'q_port_2',
+            conceptId: 'pdo_mysql_port',
+            conceptName: 'PDO MySQL Connection & Port Architecture',
+            question: 'What is the correct PDO Data Source Name (DSN) to connect to a local MySQL database named "students" running on standard port?',
+            options: [
+              'mysql:host=localhost;port=3306;dbname=students;charset=utf8mb4',
+              'http://localhost:3306/students',
+              'sql://root@localhost:80/students',
+              'pdo://mysql/localhost/students'
+            ],
+            correctIndex: 0,
+            explanation: 'PDO DSN for MySQL starts with "mysql:host=...;port=...;dbname=...".',
+            misconceptionMap: {
+              1: 'Used HTTP URL scheme instead of database DSN string format',
+              2: 'Confused database connection URI with web server port 80',
+              3: 'Invented non-standard "pdo://" protocol prefix'
+            }
+          }
+        ]
+      },
+      {
+        id: 'timeline_web_3',
+        timeOffset: '28:10',
+        conceptId: 'sql_injection_defense',
+        conceptName: 'Prepared Statements & SQL Injection Defense',
+        summary: 'Parameterized query compilation vs string concatenation vulnerability.',
+        questions: [
+          {
+            id: 'q_sql_1',
+            conceptId: 'sql_injection_defense',
+            conceptName: 'Prepared Statements & SQL Injection Defense',
+            question: 'Why does `$stmt = $pdo->prepare("SELECT * FROM courses WHERE code = :code"); $stmt->execute([":code" => $input]);` prevent SQL injection?',
+            options: [
+              'The SQL statement is pre-compiled by the database engine, treating user input purely as literal data rather than executable tokens',
+              'It automatically removes all single quotes and spaces from the input string',
+              'It forces the query to execute inside an isolated sandbox thread',
+              'PDO automatically encrypts the table before performing the select query'
+            ],
+            correctIndex: 0,
+            explanation: 'Parameterized queries separate the query structure/AST from values. Values are never parsed as SQL code regardless of characters.',
+            misconceptionMap: {
+              1: 'Believing prepared statements rely on naive character stripping or regex escaping',
+              2: 'Confusing query parameterization with OS thread sandboxing',
+              3: 'Believing query security involves on-the-fly table encryption'
+            }
+          },
+          {
+            id: 'q_sql_2',
+            conceptId: 'sql_injection_defense',
+            conceptName: 'Prepared Statements & SQL Injection Defense',
+            question: 'What vulnerability exists in `$sql = "SELECT * FROM students WHERE name = \'" . $_GET["name"] . "\'";`?',
+            options: [
+              'SQL Injection: An attacker can pass `\' OR 1=1 --` to alter query semantics and dump the entire table',
+              'Cross-Site Scripting (XSS): The browser will execute injected JavaScript directly inside the database',
+              'Buffer Overflow: The string concatenation crashes the Apache daemon memory stack',
+              'No vulnerability: As long as the table has an index on name, it is secure'
+            ],
+            correctIndex: 0,
+            explanation: 'Direct string concatenation allows user input to escape the string literal and inject malicious SQL syntax clauses.',
+            misconceptionMap: {
+              1: 'Confused backend SQL Injection with frontend browser Cross-Site Scripting (XSS)',
+              2: 'Confused high-level interpreted query syntax with low-level C buffer overflow',
+              3: 'Believed database indexes provide security protection against syntax manipulation'
+            }
+          }
+        ]
+      }
+    ]
+  };
+}
+
+export function getInterventionSuggestionsFallback(students: any[], dkmNodes?: any[]) {
+  const atRiskStudents = students.filter(s => {
+    const redCount = Object.values(s.topic_mastery || {}).filter((v: any) => Number(v) < 0.5).length;
+    const isAlex = s.student_id === 'CSE_STU_9021' || (s.overall_mastery || 0) < 0.35;
+    return redCount >= 3 || isAlex;
+  });
+
+  const targetStudents = atRiskStudents.length > 0 ? atRiskStudents : students.slice(0, 2);
+
+  return [
+    {
+      id: `int_sug_${Date.now()}_1`,
+      studentId: targetStudents[0]?.student_id || 'CSE_STU_9021',
+      studentName: targetStudents[0]?.name || 'Alex Rivera',
+      conceptId: 'web_apache_docroot',
+      conceptName: 'Apache DocumentRoot & File Hierarchy',
+      severity: 'high' as const,
+      issueType: 'REPEATED_DIRECTORY_TRAP',
+      suggestedAction: 'Assign targeted 10-minute micro-lab in Web Dev Practical Lab with proactive Tier 1 path visualization.',
+      rationale: 'Student repeatedly saved project files into C:/Users/Student/Desktop rather than C:/xampp/htdocs, leading to repeated 404s and pL stall at 0.28.',
+      tutorMessage: 'Let’s master web server file layout: When Apache receives a request for /index.html, it only looks inside C:/xampp/htdocs. Try creating your files directly in that directory.',
+      socraticQuestion: 'If you want to view a page at http://localhost/lab/test.php, in which exact folder inside C:/xampp/htdocs must test.php be saved?',
+      status: 'pending' as const,
+      outcome: 'pending' as const,
+      createdAt: new Date().toISOString()
+    },
+    {
+      id: `int_sug_${Date.now()}_2`,
+      studentId: targetStudents[0]?.student_id || 'CSE_STU_9021',
+      studentName: targetStudents[0]?.name || 'Alex Rivera',
+      conceptId: 'pdo_mysql_port',
+      conceptName: 'PDO MySQL Connection & Port Architecture',
+      severity: 'medium' as const,
+      issueType: 'DAEMON_PORT_CONFUSION',
+      suggestedAction: 'Deploy interactive socket diagram comparing HTTP Port 80 daemon vs MySQL Port 3306 daemon.',
+      rationale: 'Telemetry indicates 3 consecutive connection failures using port 80 in MySQL DSN string.',
+      tutorMessage: 'Remember that network services listen on dedicated TCP ports. Port 80 is for HTTP web traffic, while MySQL listens on port 3306.',
+      socraticQuestion: 'What error code does the operating system return when you attempt to connect a database driver to a port where no database service is listening?',
+      status: 'pending' as const,
+      outcome: 'pending' as const,
+      createdAt: new Date().toISOString()
+    }
+  ];
+}
+

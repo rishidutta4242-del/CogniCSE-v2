@@ -3,6 +3,31 @@ import { DKMNode } from "../types";
 export const CSE_APP_NODES: DKMNode[] = [
   // --- TRACK: Web Application Development ---
   {
+    id: 'web_apache_docroot',
+    name: 'Apache DocumentRoot & File Hierarchy',
+    domain: 'cse',
+    track: 'Web Application Development',
+    category: 'Server Configuration',
+    description: 'Understanding Apache DocumentRoot mapping: requests to http://localhost/ map directly to C:\\xampp\\htdocs.',
+    keyConcept: 'Apache only serves web assets located inside DocumentRoot (C:\\xampp\\htdocs). Saving to Desktop or user folders triggers 404 Not Found or unserved files.',
+    typicalTrap: 'Saving index.html to Desktop or Documents and wondering why http://localhost/ does not find the page.',
+    codeLanguage: 'html',
+    starterCodeSnippet: `<!DOCTYPE html>
+<html>
+<head><title>My Student Web App</title></head>
+<body>
+  <h1>Welcome to CogniCSE Web Lab</h1>
+  <p>Status: Document root verification required.</p>
+</body>
+</html>`,
+    starterErrorLog: 'HTTP 404 Not Found: The requested URL /index.html was not found on this server. DocumentRoot checked: C:\\xampp\\htdocs',
+    prerequisites: ['Web Server Architecture', 'Filesystem Hierarchies'],
+    status: 'RED',
+    mastery: 0.25,
+    errorCount: 2,
+    solvedCount: 0,
+  },
+  {
     id: 'pdo_mysql_port',
     name: 'PHP PDO & MySQL Port Configuration',
     domain: 'cse',
