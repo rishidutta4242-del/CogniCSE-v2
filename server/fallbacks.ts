@@ -15,8 +15,8 @@ export function getTutoringFallback(tutorReq: any) {
       scaffolding_response: {
         current_tier: 1,
         refusal_reason: '',
-        tutor_message: "Hello! I am your CogniCSE Technical Tutor. How can I help you master Computer Science & Engineering today?\n\nWe can explore core topics like:\n• Data Structures & Algorithms (Trees, Graphs, Dijkstra, Dynamic Programming)\n• Computer Systems & OS (Pointers, Memory Allocation, Caching, Concurrency)\n• Computer Networks (Sockets, OSI Layers, TCP Handshake, Ports)\n• Or debug your current program in the Code Sandbox!",
-        socratic_question: 'Which CSE track or concept would you like to explore first?',
+        tutor_message: "Hello! I am your CogniCSE Technical Tutor. How can I help you master Computer Science or Mechanical Engineering today?\n\nWe can explore core tracks like:\n• Mechanical Engineering (CAD) (2D Sketch DOF, Constraints, Hub/Bore Concentricity, Mass Evaluation, FOS >= 2.0)\n• Data Structures & Algorithms (Trees, Graphs, Dijkstra, Dynamic Programming)\n• Computer Systems & OS (Pointers, Memory Allocation, Caching, Concurrency)\n• Computer Networks (Sockets, OSI Layers, TCP Handshake, Ports)\n• Or debug your current code/model in the Polyglot Sandbox!",
+        socratic_question: 'Which engineering track or concept would you like to explore first?',
       },
       visualizer_data: {
         mode: 'Text Response',
@@ -81,6 +81,91 @@ export function getTutoringFallback(tutorReq: any) {
       tutorMessage = "In languages with manual memory management like C/C++, `malloc()` reserves heap chunks from the OS. If the pointer referencing that address goes out of scope before `free()` is called, the memory remains allocated yet unreferenced — creating a memory leak.";
       socraticQuestion = "How do modern C++ RAII smart pointers like `std::unique_ptr` eliminate memory leaks automatically?";
       effectiveMode = visualizer_mode === 'Text Response' ? 'Text Response' : 'Simulator';
+    } else if (q.includes('blue') || q.includes('dof') || q.includes('under-constrained') || q.includes('degree of freedom') || q.includes('degrees of freedom')) {
+      identifiedGap = 'Under-constrained 2D sketch with free degrees of freedom (blue geometry)';
+      issueType = 'cad_constraint_error';
+      effectiveMode = 'Diagrams';
+      if (currentTier === 1) {
+        tutorMessage = "In parametric CAD modeling, entity color directly communicates constraint status. Notice how the solver highlights entities that still have free movement.";
+        socraticQuestion = "In parametric sketchers like Fusion 360 or SolidWorks, what does a blue line signify regarding its remaining degrees of freedom?";
+      } else if (currentTier === 2) {
+        tutorMessage = "A 2D planar point has 2 translational degrees of freedom (X and Y). Fully constrained sketch entities have 0 degrees of freedom and turn black. Extruding blue sketches is a common trap (82% frequency) that causes downstream parametric drift.";
+        socraticQuestion = "What geometric constraint or datum reference can anchor the floating endpoint to eliminate its translational freedom?";
+      } else if (currentTier === 3) {
+        tutorMessage = "Socratic Micro-Drill: If you click and drag any vertex of this blue sketch line in your viewport, you observe it stretching along the plane because its coordinates are not uniquely determined by solver equations.";
+        socraticQuestion = "Does this entity require a positional constraint (like Coincident to origin) or a dimensional constraint (like length/distance)?";
+      } else {
+        tutorMessage = "Direct Line Guidance: Your sketch profile endpoint has free translational degrees of freedom because it lacks an anchor to the sketch origin or coordinate axes. Select the endpoint and the origin point to apply a Coincident constraint, then verify all sketch lines turn black.";
+        socraticQuestion = "Apply the Coincident constraint to the sketch origin and verify whether all curves turn black.";
+      }
+    } else if (q.includes('tangent') || q.includes('concentric') || q.includes('symmetric') || q.includes('coincident') || q.includes('constraint')) {
+      identifiedGap = 'Geometric relationship constraint definition (tangency, concentricity, or symmetry)';
+      issueType = 'cad_constraint_error';
+      effectiveMode = 'Flowchart';
+      if (currentTier === 1) {
+        tutorMessage = "Geometric constraints eliminate degrees of freedom through relational topology rather than numeric dimensions. Review the connection between your adjacent sketch entities.";
+        socraticQuestion = "What geometric relationship ensures smooth slope continuity (G1 tangency) between a linear edge and a circular arc without forming a sharp cusp?";
+      } else if (currentTier === 2) {
+        tutorMessage = "Coincident locks points together; Concentric aligns centerlines of revolving features; Tangent forces shared slope vectors (G1 continuity); Symmetric balances geometry across a mirror plane.";
+        socraticQuestion = "Why is applying a Tangent constraint preferable to manually dimensioning angles when creating an arc blend?";
+      } else if (currentTier === 3) {
+        tutorMessage = "Socratic Micro-Drill: Look closely at the vertex where your arc meets the linear wall. The solver detects a C0 positional junction with a slope discontinuity.";
+        socraticQuestion = "Which constraint forces the first derivative of both curves to be equal at that junction?";
+      } else {
+        tutorMessage = "Direct Line Guidance: The arc and linear profile meet at a sharp corner because the Tangent constraint is omitted between the two sketch entities. Select both curves and apply Tangent, avoiding redundant angle dimensions.";
+        socraticQuestion = "Apply the Tangent constraint to the arc-line junction to achieve G1 continuity.";
+      }
+    } else if (q.includes('fos') || q.includes('factor of safety') || q.includes('stress') || q.includes('yield') || q.includes('von mises')) {
+      identifiedGap = 'Factor of Safety evaluation below structural threshold (target FOS >= 2.0)';
+      issueType = 'cad_tolerance_mismatch';
+      effectiveMode = 'Charts & Graphs';
+      if (currentTier === 1) {
+        tutorMessage = "In mechanical design, the Factor of Safety (FOS) represents your structural margin against material yielding under rated load.";
+        socraticQuestion = "How is Factor of Safety calculated in terms of material yield strength and maximum equivalent stress?";
+      } else if (currentTier === 2) {
+        tutorMessage = "FOS = yield_strength / max_stress. Structural engineering standards mandate a target FOS >= 2.0 for ductile static equipment. Assuming FOS ~ 1.1 is acceptable is a severe misconception because it leaves zero margin for dynamic shock, fatigue, or tool marks.";
+        socraticQuestion = "If finite element analysis reveals localized peak stress concentrated at a sharp 90-degree internal corner, what geometric feature can you add to lower that stress concentration?";
+      } else if (currentTier === 3) {
+        tutorMessage = "Socratic Micro-Drill: Peterson's Stress Concentration analysis shows sharp re-entrant corners create theoretical infinite stress notches (Kt -> inf).";
+        socraticQuestion = "How does increasing the internal fillet radius redistribute load streamlines and raise the calculated FOS?";
+      } else {
+        tutorMessage = "Direct Line Guidance: Your component exhibits high localized Von Mises stress at the internal sharp shoulder, pulling FOS below 2.0. Adding an internal transition fillet radius (R >= 3mm) will smooth out the stress notch and bring the design above the FOS >= 2.0 threshold.";
+        socraticQuestion = "Insert a transition fillet on the internal shoulder and re-evaluate the maximum stress tensor.";
+      }
+    } else if (q.includes('mass') || q.includes('density') || q.includes('volume') || q.includes('g/cm3') || q.includes('weight')) {
+      identifiedGap = 'Confusing geometric volume with physical mass and metric density conversion';
+      issueType = 'cad_tolerance_mismatch';
+      effectiveMode = 'Simulator';
+      if (currentTier === 1) {
+        tutorMessage = "Consider the fundamental physical relationship between the space an object occupies and its gravitational mass.";
+        socraticQuestion = "What physical property connects an object's geometric volume to its total mass?";
+      } else if (currentTier === 2) {
+        tutorMessage = "Mass equals density multiplied by volume (m = rho * V). Confusing volume with mass is a common trap. Two parts with identical 500 cm³ volumes will have vastly different masses if one is 1018 Steel (7.85 g/cm³) and the other is 6061 Aluminum (2.70 g/cm³). Also recall that 1 cm³ = 1000 mm³.";
+        socraticQuestion = "If volume is measured in mm³, what conversion factor must be applied before multiplying by density in g/cm³?";
+      } else if (currentTier === 3) {
+        tutorMessage = "Socratic Micro-Drill: If a part has volume = 200,000 mm³ and density = 2.70 g/cm³, converting volume to cm³ yields 200 cm³.";
+        socraticQuestion = "What is the resulting mass in kilograms (200 * 2.70 = 540 grams)?";
+      } else {
+        tutorMessage = "Direct Line Guidance: The mass evaluation failed because volume in cubic millimeters was directly multiplied by density in g/cm³ without dividing by 1,000, creating a 1000x calculation error. Convert mm³ to cm³ first, then multiply by the material density.";
+        socraticQuestion = "Divide volume by 1000 cm³/mm³ before multiplying by density to obtain the correct mass.";
+      }
+    } else if (q.includes('hub') || q.includes('bore') || q.includes('runout') || q.includes('concentricity') || q.includes('coaxial')) {
+      identifiedGap = 'Hub/bore coaxial datum alignment and concentricity runout tolerance';
+      issueType = 'cad_tolerance_mismatch';
+      effectiveMode = 'Diagrams';
+      if (currentTier === 1) {
+        tutorMessage = "In rotating machinery, alignment of shaft and housing centerlines is critical for dynamic balance.";
+        socraticQuestion = "What assembly constraint or geometric datum alignment ensures two revolving cylindrical features share a common centerline?";
+      } else if (currentTier === 2) {
+        tutorMessage = "Coaxial and Concentric constraints align rotational axes (Datum A). Radial eccentricity causes centrifugal unbalance force (F = m * e * omega^2) that escalates with the square of rotational speed.";
+        socraticQuestion = "Why does radial runout between a shaft and bore cause severe vibration at high RPM?";
+      } else if (currentTier === 3) {
+        tutorMessage = "Socratic Micro-Drill: Mating two cylindrical components using planar face contacts alone leaves the radial degrees of freedom unconstrained.";
+        socraticQuestion = "Which constraint type explicitly locks the cylindrical axis of the shaft to the cylindrical axis of the bore?";
+      } else {
+        tutorMessage = "Direct Line Guidance: The shaft is exhibiting eccentric runout because it was assembled using planar edge contact rather than a coaxial cylindrical mate. Apply a Concentric/Coaxial mate between the outer shaft cylinder and the inner bore cylinder.";
+        socraticQuestion = "Select both cylindrical faces and apply the Concentric constraint to align their datum axes.";
+      }
     } else if (q.includes('tcp') || q.includes('handshake') || q.includes('osi') || q.includes('syn') || q.includes('ack')) {
       identifiedGap = 'Layer 4 Transport Handshake & Service Port Assignment';
       issueType = 'CONCEPTUAL_GAP';

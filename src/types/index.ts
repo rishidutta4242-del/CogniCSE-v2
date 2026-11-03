@@ -1,4 +1,11 @@
-export type IssueType = 'CONCEPTUAL_GAP' | 'MISCONCEPTION' | 'PRACTICAL_EXECUTION_ERROR';
+export type IssueType =
+  | 'CONCEPTUAL_GAP'
+  | 'MISCONCEPTION'
+  | 'PRACTICAL_EXECUTION_ERROR'
+  | 'cad_constraint_error'
+  | 'cad_tolerance_mismatch';
+
+export type Domain = 'cse' | 'mech';
 
 export type NodeStatus = 'GREEN' | 'YELLOW' | 'RED';
 
@@ -43,6 +50,7 @@ export interface UserProfile {
   testsCompleted: number;
   overallMastery: number;
   theme: 'dark' | 'light';
+  domain?: Domain;
 }
 
 export interface ChatMessage {
@@ -128,10 +136,18 @@ export interface ObservationInput {
   score?: number; // 0-100 override if applicable
 }
 
+export type DKMTrack =
+  | 'Data Structures & Algorithms'
+  | 'Web Application Development'
+  | 'Operating Systems'
+  | 'Computer Networks'
+  | 'Mechanical Engineering (CAD)';
+
 export interface DKMNode {
   id: string;
   name: string;
-  track: 'Data Structures & Algorithms' | 'Web Application Development' | 'Operating Systems' | 'Computer Networks';
+  track: DKMTrack;
+  domain?: Domain;
   category: string;
   description: string;
   keyConcept: string;
@@ -147,6 +163,7 @@ export interface DKMNode {
   bktTrace?: BKTTrace[];
   evidenceLabel?: EvidenceLabel;
   compositeMastery?: CompositeMasteryBreakdown;
+  diagnosticQuestions?: MockTestQuestion[];
 }
 
 export interface ISLMProfile {
@@ -155,6 +172,7 @@ export interface ISLMProfile {
   email: string;
   role: 'student' | 'teacher';
   course_track: string;
+  domain?: Domain;
   overall_mastery: number; // 0.0 to 1.0
   topic_mastery: Record<string, number>;
   recent_misconceptions: string[];

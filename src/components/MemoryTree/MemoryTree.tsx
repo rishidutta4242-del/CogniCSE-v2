@@ -85,7 +85,7 @@ export const MemoryTree: React.FC = () => {
         <div className="mt-6 pt-5 border-t border-slate-800 flex flex-col md:flex-row gap-3 items-center justify-between">
           {/* Track selector */}
           <div className="flex items-center gap-1.5 overflow-x-auto w-full md:w-auto pb-1 md:pb-0">
-            {['All Tracks', 'Web Application Development', 'Data Structures & Algorithms', 'Operating Systems', 'Computer Networks'].map(track => (
+            {['All Tracks', 'Mechanical Engineering (CAD)', 'Web Application Development', 'Data Structures & Algorithms', 'Operating Systems', 'Computer Networks'].map(track => (
               <button
                 key={track}
                 onClick={() => setActiveTrack(track)}
