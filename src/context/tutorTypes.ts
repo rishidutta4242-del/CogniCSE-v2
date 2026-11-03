@@ -60,6 +60,7 @@ export interface TutorContextType {
     executionLogs?: string,
     workflow?: 'CODE_SANDBOX_TUTORING' | 'CHATS' | 'CAD_LAB_TUTORING'
   ) => Promise<TutoringResponse | null>;
+  verifyIndependentFix: (fixedCode: string) => Promise<{ success: boolean; message: string }>;
   recordAttempt: (params: {
     conceptId: string;
     kind: AttemptKind;

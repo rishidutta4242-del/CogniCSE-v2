@@ -46,12 +46,22 @@ export interface StoreData {
   attempts: Array<{
     id: string;
     studentId: string;
-    timestamp: string;
+    conceptId?: string;
+    kind?: string;
+    passed?: boolean;
+    tierUsed?: number;
+    hintsRequested?: number;
+    durationSec?: number;
+    errorCategory?: string;
+    repeatedError?: boolean;
+    ts?: string;
+    timestamp?: string;
     codeSnippet?: string;
     language?: string;
-    isSuccess: boolean;
+    isSuccess?: boolean;
     errorLog?: string;
     topicId?: string;
+    details?: any;
   }>;
   interventions: Array<{
     id: string;

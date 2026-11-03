@@ -328,6 +328,8 @@ app.post('/api/attempts', async (req: Request, res: Response) => {
       errorCategory: attemptData.errorCategory,
       repeatedError: isRepeated,
       ts: attemptData.ts || new Date().toISOString(),
+      timestamp: attemptData.ts || new Date().toISOString(),
+      isSuccess: Boolean(attemptData.passed),
       codeSnippet: attemptData.codeSnippet,
       language: attemptData.language,
       details: attemptData.details,

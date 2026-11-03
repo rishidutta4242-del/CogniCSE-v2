@@ -407,6 +407,108 @@ export const TutorProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     });
   };
 
+  const recordAttempt = async (params: {
+    conceptId: string;
+    kind: AttemptKind;
+    passed: boolean;
+    tierUsed: number;
+    hintsRequested: number;
+    durationSec: number;
+    errorCategory?: string;
+    codeSnippet?: string;
+    language?: string;
+    details?: string;
+  }): Promise<EvaluationOutcome> => {
+    const isRepeated = isRepeatedError(attempts, params.conceptId, params.errorCategory);
+    const newAttempt: AttemptRecord = {
+      id: `att_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
+      studentId: userProfile.id,
+      conceptId: params.conceptId,
+      kind: params.kind,
+      passed: params.passed,
+      tierUsed: params.tierUsed,
+      hintsRequested: params.hintsRequested,
+      durationSec: params.durationSec,
+      errorCategory: params.errorCategory,
+      repeatedError: isRepeated,
+      ts: new Date().toISOString(),
+      codeSnippet: params.codeSnippet,
+      language: params.language,
+      details: params.details,
+    };
+
+    setAttempts(prev => [...prev, newAttempt]);
+
+    const targetNode = dkmNodes.find(n => n.id === params.conceptId) || selectedNode;
+    const priorPL = targetNode.mastery;
+    const { updatedNode } = recordObservation({
+      conceptId: params.conceptId,
+      isCorrect: params.passed,
+      isIndependent: params.tierUsed === 1,
+      source: params.kind === 'cad_lab' ? 'cad-lab' : 'sandbox',
+      tierUsed: params.tierUsed,
+      errorCategory: params.errorCategory,
+    });
+    const posteriorPL = updatedNode.mastery;
+    const nextAttempts = [...attempts, newAttempt];
+    const unlocked = isTransferTaskUnlocked(nextAttempts.filter(a => a.conceptId === params.conceptId));
+    const nextTier = params.passed ? Math.max(1, params.tierUsed - 1) : Math.min(4, params.tierUsed + 1);
+
+    fetch('/api/attempts', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newAttempt),
+    }).catch(err => console.warn('Failed to post attempt to server:', err));
+
+    return {
+      attempt: newAttempt,
+      priorPL,
+      posteriorPL,
+      deltaPL: +(posteriorPL - priorPL).toFixed(4),
+      passed: params.passed,
+      tierUsed: params.tierUsed,
+      repeatedError: isRepeated,
+      nextTier,
+      isTransferUnlocked: unlocked,
+      message: params.passed ? 'Attempt passed successfully.' : 'Attempt recorded with error diagnostics.',
+    };
+  };
+
+  const fetchVariantTask = async (
+    conceptId: string,
+    track?: string,
+    language?: string
+  ): Promise<VariantTask> => {
+    try {
+      const targetNode = dkmNodes.find(n => n.id === conceptId) || selectedNode;
+      const res = await fetch('/api/variant', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          conceptId,
+          conceptName: targetNode.name,
+          track: track || activeTrack,
+          language: language || 'javascript',
+        }),
+      });
+      if (res.ok) {
+        return await res.json();
+      }
+    } catch (err) {
+      console.warn('Failed to fetch variant task from server:', err);
+    }
+    return {
+      id: `var_${Date.now()}`,
+      conceptId,
+      conceptName: 'Transfer Task',
+      title: 'Independent Variant Problem',
+      prompt: 'Solve the transfer problem independently to confirm concept mastery.',
+      description: 'Transfer evaluation task targeting the same underlying concept with distinct test vectors.',
+      code: '// Write your independent solution here\n',
+      language: (language as any) || 'javascript',
+    };
+  };
+
   const exportOfflinePack = () => {
     exportOfflinePackFile(userProfile, islm, dkmNodes);
   };
@@ -432,6 +534,7 @@ export const TutorProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         activeReviewQuestions,
         activeDrawerNode,
         isWhyDrawerOpen,
+        attempts,
         setActiveReviewQuestions,
         setActiveTrack,
         setSelectedNode,
@@ -440,6 +543,8 @@ export const TutorProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         setActiveVideoStoryboard,
         executeTutoring,
         verifyIndependentFix,
+        recordAttempt,
+        fetchVariantTask,
         switchRole,
         updateNodeStatus,
         recordObservation,
